@@ -1,7 +1,33 @@
 {% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
 {% block body %}
 
-    <h1> {{ title }}</h1>
+{#    {{ form_label(form.field, 'label', { 'attr': {'class': 'foo'} }) }}#}
+{#    {{ form_widget(form.field, { 'attr': {'class': 'bar'} }) }}#}
 
-    {{ form(form) }}
+
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h1 class="display-4">
+                    {{ title }}
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center">
+            <div class="col-12 col-lg-4 col-md-4">
+                <div class="form-login">
+                    {{ form_widget(form, { 'attr': {'class': 'row form-control'}}) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

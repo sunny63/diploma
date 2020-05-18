@@ -1,15 +1,29 @@
 {% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
 {% block body %}
 
-    <h1> {{ title }}</h1>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h2>Список пользователей</h2>
+                <ul>
+                    {% for user in users %}
+                        <li>{{ user.email }}, {{ user.roles | json_encode }}</li>
+                    {% endfor %}
+                </ul>
 
-    <a href="{{ path('admin_user_create') }}">Создать пользователя</a>
+            </div>
+        </div>
+    </div>
 
-    <h2>Список пользователей</h2>
-    <ul>
-        {% for user in users %}
-        <li>{{ user.email }}, {{ user.roles | json_encode }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать пользователя</a>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
