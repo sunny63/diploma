@@ -29,7 +29,11 @@
             </ul>
             <form class="form-inline">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('admin_home') }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Админ панель</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin_home') }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Админ панель</a>
+                    {% else %}
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-danger my-2 my-sm-0 ml-2" type="submit">Выход</a>
+                    {% endif %}
                 {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти</a>
                 {% endif %}

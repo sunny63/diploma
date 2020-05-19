@@ -56,7 +56,7 @@ class AdminUserController extends AdminBaseController
         }
 
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Форма создания пользователя';
+        $forRender['title'] = 'Создание нового администратора';
         $forRender['form'] = $form->createView();
         return $this->render("admin/user/form.html.twig", $forRender);
     }

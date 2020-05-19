@@ -1,4 +1,4 @@
-{% extends 'admin/adminbase.html.twig' %}
+{% extends 'main/base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -10,8 +10,8 @@
                 <div class="form-login">
                     <form method="post">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        <h1 class="h3 mb-3 font-weight-normal text-center">Создание нового администратора</h1>
-{#                                                {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+                        <h1 class="h3 mb-3 font-weight-normal text-center">Регистрация пользователя</h1>
+{#                        {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
 
                         {{ form_start(form) }}
 
