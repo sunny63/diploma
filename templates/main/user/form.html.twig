@@ -9,10 +9,11 @@
             <div class="col-12 col-lg-4 col-md-4">
                 <div class="form-login">
                     <form method="post">
+
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                         <h1 class="h3 mb-3 font-weight-normal text-center">Регистрация пользователя</h1>
 {#                        {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
-
                         {{ form_start(form) }}
 
                         {{ form_label(form.email) }}
@@ -27,7 +28,6 @@
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
 
                         {{ form_end(form) }}
-
                     </form>
                 </div>
             </div>

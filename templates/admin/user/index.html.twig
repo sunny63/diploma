@@ -4,24 +4,21 @@
 
 {% block body %}
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="row no-gutters">
-            <div class="col-12">
-                <h2>Список пользователей</h2>
-                <ul>
+            <div class="col-12 col-lg-4 col-md-4">
+                <h1 class="h2 mb-3 font-weight-normal">Список всех пользователей</h1>
+                <ul class="pl-0 w-100">
                     {% for user in users %}
-                        <li>{{ user.email }}, {{ user.roles | json_encode }}</li>
+                        {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}
+                            <li class="list-group-item p-1">Пользователь: {{ user.email }}</li>
+                        {% else %}
+                            <li class="list-group-item list-group-item-success p-1">Администратор: {{ user.email }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
 
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-12">
-                <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать пользователя</a>
+                <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать администратора</a>
             </div>
         </div>
     </div>

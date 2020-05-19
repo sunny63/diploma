@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 class AdminUserController extends AdminBaseController
 {
     /**
-     * @Route("/admin/user", name="admin_user")
+     * @Route("/admin/users", name="admin_users")
      * @return Response
      */
 
@@ -52,7 +52,7 @@ class AdminUserController extends AdminBaseController
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute("admin_user");
+            return $this->redirectToRoute("admin_users");
         }
 
         $forRender = parent::renderDefault();
