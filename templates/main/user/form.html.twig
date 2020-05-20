@@ -14,20 +14,31 @@
 
                         <h1 class="h3 mb-3 font-weight-normal text-center">Регистрация пользователя</h1>
 {#                        {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+
+                        {% if not form.vars.valid %}
+                            {% for error in form.vars.errors.form.getErrors(true) %}
+                                <div class="alert alert-warning" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                        {% endif %}
+
                         {{ form_start(form) }}
 
+                        {{ form_label(form.nickname) }}
+                        {{ form_widget(form.nickname, { 'attr': {'class': 'form-control mb-1'} }) }}
+
                         {{ form_label(form.email) }}
-                        {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control mb-1'} }) }}
 
                         {{ form_label(form.plainPassword.first) }}
-                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control mb-1'} }) }}
 
                         {{ form_label(form.plainPassword.second) }}
-                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control mb-1'} }) }}
 
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
 
                         {{ form_end(form) }}
+
                     </form>
                 </div>
             </div>

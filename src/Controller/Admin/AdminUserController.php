@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AdminUserController extends AdminBaseController
 {
@@ -43,6 +44,7 @@ class AdminUserController extends AdminBaseController
         $form = $this->createForm(UserType::class, $user);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
+
 
         if (($form->isSubmitted()) && ($form->isValid()))
         {

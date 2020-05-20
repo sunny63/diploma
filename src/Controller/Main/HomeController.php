@@ -5,10 +5,12 @@ namespace App\Controller\Main;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Symfony\Component\ErrorHandler\ErrorHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class HomeController extends BaseController
 {
@@ -29,12 +31,20 @@ class HomeController extends BaseController
      *
      */
 
-    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder, ValidatorInterface $validator) : Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
+
+      //  ErrorHandler::
+
+//
+//        $errors = $validator->validate($user);
+//        if (count($errors) > 0) {
+//            return new Response((string) $errors, 400);
+//        }
 
         if (($form->isSubmitted()) && ($form->isValid()))
         {

@@ -4,10 +4,21 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="Пользователь с таким email уже зарегистрирован"
+ * )
+ * @UniqueEntity(
+ *     fields={"nickname"},
+ *     errorPath="nickname",
+ *     message="Пользователь с таким никнеймом уже зарегистрирован"
+ * )
  */
 class User implements UserInterface
 {
@@ -35,6 +46,11 @@ class User implements UserInterface
     private $password;
 
     private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=50, unique=true)
+     */
+    private $nickname;
 
     public function getId(): ?int
     {
@@ -124,5 +140,17 @@ class User implements UserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
+
+        return $this;
     }
 }
