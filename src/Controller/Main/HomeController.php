@@ -38,14 +38,6 @@ class HomeController extends BaseController
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
-      //  ErrorHandler::
-
-//
-//        $errors = $validator->validate($user);
-//        if (count($errors) > 0) {
-//            return new Response((string) $errors, 400);
-//        }
-
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $password = $passwordEncoder->encodePassword($user,  $user->getPlainPassword());

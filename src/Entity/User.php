@@ -6,18 +6,20 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
- *     fields={"email"},
- *     errorPath="email",
- *     message="Пользователь с таким email уже зарегистрирован"
- * )
- * @UniqueEntity(
  *     fields={"nickname"},
  *     errorPath="nickname",
  *     message="Пользователь с таким никнеймом уже зарегистрирован"
+ * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="Пользователь с таким email уже зарегистрирован"
  * )
  */
 class User implements UserInterface
@@ -42,13 +44,32 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
      */
     private $password;
 
+    /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 40,
+     *      minMessage = "Пароль не может быть короче {{ limit }} символов",
+     *      maxMessage = "Пароль не может быть длиннее {{ limit }} символов",
+     * )
+     * @Assert\NotBlank( message="Пароль не может быть пустым")
+     * @Assert\NotCompromisedPassword( message="Этот пароль утек в реазультате взлома. Пожалуйста попробуйте другой пароль.")
+     */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 40,
+     *      minMessage = "Никнейм не может быть короче {{ limit }} символов",
+     *      maxMessage = "Никнейм не может быть длиннее {{ limit }} символов",
+     *     )
+     * @Assert\NotBlank( message="Никнейм не может быть пустым")
+     *
      */
     private $nickname;
 
