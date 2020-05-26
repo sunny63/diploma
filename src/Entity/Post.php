@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    private const PUBLISHED = 1;
+    private const DRAFT = 0;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -100,6 +103,11 @@ class Post
         return $this;
     }
 
+    public function setCreateAtValue()
+    {
+        $this->create_at = new \DateTime();
+    }
+
     public function getUpdateAt(): ?\DateTimeInterface
     {
         return $this->update_at;
@@ -112,15 +120,23 @@ class Post
         return $this;
     }
 
-    public function getIsPublised(): ?bool
+    public function setUpdateAtValue()
+    {
+        $this->create_at = new \DateTime();
+    }
+
+    public function getIsPublished(): ?bool
     {
         return $this->is_publised;
     }
 
-    public function setIsPublised(bool $is_publised): self
+    public function setIsPublished()
     {
-        $this->is_publised = $is_publised;
+        $this->is_publised = self::PUBLISHED;
+    }
 
-        return $this;
+    public function setIsDraft()
+    {
+        $this->is_publised = self::DRAFT;
     }
 }

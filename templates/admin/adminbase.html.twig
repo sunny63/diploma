@@ -6,7 +6,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v1') }}">{% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v4') }}">{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,6 +25,9 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('admin_users') }}">Пользователи</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_stocks') }}">Акции</a>
             </li>
 
         </ul>
