@@ -6,18 +6,14 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v4') }}">{% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v6') }}">
+    {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('admin_home') }}">
-        Административная панель
+    <a class="navbar-brand" href="{{ path('admin_home') }}">Административная панель
         <i class="fa fa-microchip ml-2 mr-4" aria-hidden="true"></i>
-
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -29,7 +25,12 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('admin_stocks') }}">Акции</a>
             </li>
-
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_categories') }}">Категории</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_posts') }}">Посты</a>
+            </li>
         </ul>
         <form class="form-inline">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -40,8 +41,28 @@
     </div>
 </nav>
 
+<div class="container-fluid mt-3">
+    <div class="row no-gutters ml-2">
+        <div class="col-12">
+            <h1 class="h2 font-weight-normal">{% block h1 %}{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+
 {% block body %}{% endblock %}
 
+
+<div class="container-fluid">
+    <div class="row no-gutters justify-content-center">
+        <div class="col-12 col-lg-4 col-md-4">
+            <div class="form-login">
+                <h1 class="h3 mb-3 font-weight-normal text-center">{% block title_form %}{% endblock %}</h1>
+                    {% block form %}
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

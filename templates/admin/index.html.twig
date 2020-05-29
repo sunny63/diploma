@@ -1,14 +1,17 @@
 {% extends 'admin/adminbase.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row no-gutters">
+
+    <div class="container-fluid mt-3">
+        <div class="row no-gutters ml-2">
             <div class="col-12">
-                <h1 class="display-4">
-                    {{ title }}
-                </h1>
+                <a href="{{ path('admin_user_create') }}" class="btn btn-success">Добавить администратора</a>
+                <a href="{{ path('admin_stock_create') }}" class="btn btn-success">Добавить акцию</a>
+                <a href="{{ path('admin_category_create') }}" class="btn btn-success">Добавить категорию</a>
+                <a href="{{ path('admin_post_create') }}" class="btn btn-success">Добавить пост</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,70 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-3 font-weight-normal text-center">{{ title }}</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+
+
+    {#    <div class="container-fluid">#}
+{#        <div class="row no-gutters justify-content-center">#}
+{#            <div class="col-12 col-lg-4 col-md-4">#}
+{#                <div class="form-login">#}
+{#                    <form method="post">#}
+{#                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">#}
+{#                        <h1 class="h3 mb-3 font-weight-normal text-center">Добавление новой акции</h1>#}
+{#                      {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+
+{#                        {% if not form.vars.valid %}#}
+{#                            {% for error in form.vars.errors.form.getErrors(true) %}#}
+{#                                <div class="alert alert-warning" role="alert">{{ error.message }}</div>#}
+{#                            {% endfor %}#}
+{#                        {% endif %}#}
+
+{#                        {{ form_start(form) }}#}
+
+{#                        {{ form_label(form.title) }}#}
+{#                        {{ form_widget(form.title, { 'attr': {'class': 'form-control mb-1'} }) }}#}
+
+{#                        {{ form_label(form.description) }}#}
+{#                        {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1'} }) }}#}
+
+{#                        {{ form_label(form.dateStart) }}#}
+{#                        <div class="form-row no-gutters justify-content-center">#}
+{#                            {{ form_widget(form.dateStart.day,  { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                            {{ form_widget(form.dateStart.month, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                            {{ form_widget(form.dateStart.year, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                        </div>#}
+
+{#                        {{ form_label(form.dateEnd) }}#}
+{#                        <div class="form-row no-gutters justify-content-center">#}
+{#                            {{ form_widget(form.dateEnd.day,  { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                            {{ form_widget(form.dateEnd.month, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                            {{ form_widget(form.dateEnd.year, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}#}
+{#                        </div>#}
+
+{#                        {{ form_label(form.image) }}<br>#}
+{#                        {{ form_widget(form.image, { 'attr': {'class': 'mb-1'} }) }}#}
+
+{#                        < a href= " {{ asset('uploads/brochures/' ~ stock.image) }} " > > View brochure (PDF)< / a>#}
+
+{#                        {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}#}
+
+{#                        {{ form_end(form) }}#}
+
+{#                    </form>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{% endblock %}

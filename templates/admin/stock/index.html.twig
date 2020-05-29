@@ -1,27 +1,26 @@
 {% extends 'admin/adminbase.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
 
     <div class="container-fluid mt-3">
         <div class="row no-gutters">
             <div class="col-12 col-lg-4 col-md-4">
-                <h1 class="h2 mb-3 font-weight-normal">Список всех акций</h1>
                 <ul class="pl-0 w-100">
                     {% for stock in stocks %}
                         <li class="list-group-item p-1">
                             Акция: {{ stock.title }}<br>
                             Описание акции: {{ stock.description }}<br>
-                            Сроки акции: c {{ stock.dateStart|date('Y-m-d') }} по {{ stock.dateEnd|date('Y-m-d')  }}<br>
-                            Дата создания: {{ stock.createAt|date('Y-m-d') }}<br>
+                            Сроки акции: c {{ stock.dateStart|date('d.m.Y') }} по {{ stock.dateEnd|date('d.m.Y')  }}<br>
+                            Дата создания: {{ stock.createAt|date('d.m.Y в H:i') }}<br>
                             {% if (stock.updateAt != NULL) %}
-                                Дата изменения: {{ stock.updateAt|date('Y-m-d') }}<br>
+                                Дата изменения: {{ stock.updateAt|date('d.m.Y в H:i') }}<br>
                             {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
-
                 <a href="{{ path('admin_stock_create') }}" class="btn btn-success">Добавить акцию</a>
             </div>
         </div>

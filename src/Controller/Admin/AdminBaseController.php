@@ -10,7 +10,8 @@ class AdminBaseController extends AbstractController
     public function renderDefault()
     {
         return [
-            'title' => 'Административная панель'
+            'title' => 'Административная панель',
+            'h1' => 'Что можно сделать с помощью админ панели?'
         ];
     }
 }

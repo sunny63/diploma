@@ -1,13 +1,13 @@
 {% extends 'admin/adminbase.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
 
     <div class="container-fluid mt-3">
         <div class="row no-gutters">
             <div class="col-12 col-lg-4 col-md-4">
-                <h1 class="h2 mb-3 font-weight-normal">Список всех пользователей</h1>
                 <ul class="pl-0 w-100">
                     {% for user in users %}
                         {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}

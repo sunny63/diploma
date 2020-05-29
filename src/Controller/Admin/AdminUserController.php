@@ -24,6 +24,7 @@ class AdminUserController extends AdminBaseController
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Пользователи';
+        $forRender['h1'] = 'Список всех пользователей';
         $forRender['users'] = $users;
         return $this->render("admin/user/index.html.twig", $forRender);
     }
