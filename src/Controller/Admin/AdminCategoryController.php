@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +32,7 @@ class AdminCategoryController extends AdminBaseController
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function create(Request $request)
+    public function create(Request $request, FileUploader $fileUploader)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -41,6 +43,13 @@ class AdminCategoryController extends AdminBaseController
         {
             $category->setCreateAtValue();
             $category->setIsPublished();
+
+            /** @var UploadedFile $image */
+            $image = $form['image']->getData();
+            if ($image) {
+                $brochureFileName = $fileUploader->upload($image);
+                $category->setImage($brochureFileName);
+            }
 
             $em->persist($category);
             $em->flush();
@@ -60,7 +69,7 @@ class AdminCategoryController extends AdminBaseController
      * @param int $id
      * @param Request $request
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request, FileUploader $fileUploader)
     {
         $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
         $form = $this->createForm(CategoryType::class, $category);
@@ -71,16 +80,13 @@ class AdminCategoryController extends AdminBaseController
         {
             $category->setUpdateAtValue();
 
-            $image = $category->getImage();
-            $category->setImage($image); // Store the current value from the DB before overwriting below
-            if ($image instanceof UploadedFile) {
-                $fileName = md5(uniqid()).'.'.$image->guessExtension();
-                $image->move(
-                    $this->getParameter('profile.picture.attachment.dir'),
-                    $fileName
-                );
-                $category->setImage($fileName);
+            /** @var UploadedFile $image */
+            $image = $form['image']->getData();
+            if ($image) {
+                $imageFileName = $fileUploader->upload($image);
+                $category->setImage($imageFileName);
             }
+
             $em->persist($category);
             $this->addFlash('success', 'Категория обновлена');
             $em->flush();

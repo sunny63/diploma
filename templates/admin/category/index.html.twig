@@ -17,6 +17,8 @@
     <ul class="pl-0 w-100">
         {% for category in categories %}
             <li class="list-group-item p-2 pl-3 pb-3">
+                <img src="{{ asset('uploads/images/' ~ category.image) }}" class="mr-3 rounded" alt="Главное фото"
+                     width="300">
                 <b>Категория: </b>{{ category.title }}<br>
                 <b>Описание категории: </b>{{ category.description }}<br>
                 <b>Дата создания: </b>{{ category.createAt|date('d.m.Y в H:i') }}<br>

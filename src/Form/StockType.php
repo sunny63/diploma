@@ -27,6 +27,8 @@ class StockType extends AbstractType
             ))
             ->add('image', FileType::class, array(
                 'label' => 'Картинка',
+                'required' => false,
+                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

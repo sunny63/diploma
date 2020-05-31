@@ -6,14 +6,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\Stock;
 use App\Form\StockType;
+use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class AdminStockController extends AdminBaseController
@@ -22,7 +20,6 @@ class AdminStockController extends AdminBaseController
      * @Route("/admin/stocks", name="admin_stocks")
      * @return Response
      */
-
     public function index()
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAll();
@@ -40,8 +37,7 @@ class AdminStockController extends AdminBaseController
      * @return RedirectResponse|Response
      *
      */
-
-    public function create(Request $request)
+    public function create(Request $request, FileUploader $fileUploader)
     {
         $stock = new Stock();
         $form = $this->createForm(StockType::class, $stock);
@@ -54,46 +50,11 @@ class AdminStockController extends AdminBaseController
             $stock->setCreateAtValue();
 
             /** @var UploadedFile $image */
-            $image = $form->get('image')->getData();
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
-
-//                $newFilename = $originalFilename . '-' . uniqid() . '.' . $image->guessExtension();
-                // Move the file to the directory where brochures are stored
-                try {
-                    $image->move(
-                        $this->getParameter('brochures_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $stock->setImage($newFilename);
-
-
-//            /** @var UploadedFile $file */
-//            $file = $form->get('image')->getData();
-//
-//            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-//
-//            // перемещает файл в каталог, где хранятся брошюры
-//            $file->move(
-//                $this->getParameter('brochures_directory'),
-//                $fileName
-//            );
-//
-//            // обновляет свойство 'brochure', чтобы сохранить имя файла PDF
-//            // вместо его содержаиия
-//            $stock->setImage($fileName);
-
+            $image = $form['image']->getData();
+            if ($image) {
+                $brochureFileName = $fileUploader->upload($image);
+                $stock->setImage($brochureFileName);
+            }
 
             $em->persist($stock);
             $em->flush();
@@ -122,16 +83,25 @@ class AdminStockController extends AdminBaseController
      * @param int $id
      * @param Request $request
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request, FileUploader $fileUploader)
     {
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
         $form = $this->createForm(StockType::class, $stock);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
+
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $stock->setUpdateAtValue();
+
+            /** @var UploadedFile $image */
+            $image = $form['image']->getData();
+            if ($image) {
+                $imageFileName = $fileUploader->upload($image);
+                $stock->setImage($imageFileName);
+            }
+
             $this->addFlash('success', 'Акция обновлена');
             $em->flush();
 

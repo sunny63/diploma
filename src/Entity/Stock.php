@@ -30,7 +30,7 @@ class Stock
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $image;
 
