@@ -39,12 +39,6 @@ class CategoryType extends AbstractType
                     'class' => 'btn btn-success'
                 ]
             ))
-            ->add('delete', SubmitType::class, array(
-                'label' => 'Удалить',
-                'attr' => [
-                    'class' => 'btn btn-danger'
-                ]
-            ))
         ;
     }
 

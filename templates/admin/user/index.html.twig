@@ -3,24 +3,18 @@
 {% block title %}{{ title }}{% endblock %}
 {% block h1 %}{{ h1 }}{% endblock %}
 
-{% block body %}
+{% block entity_list %}
 
-    <div class="container-fluid mt-3">
-        <div class="row no-gutters">
-            <div class="col-12 col-lg-4 col-md-4">
-                <ul class="pl-0 w-100">
-                    {% for user in users %}
-                        {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}
-                            <li class="list-group-item p-1">Пользователь: {{ user.email }}</li>
-                        {% else %}
-                            <li class="list-group-item list-group-item-success p-1">Администратор: {{ user.email }}</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+    <ul class="pl-0 w-100">
+        {% for user in users %}
+            {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}
+                <li class="list-group-item p-1">Пользователь: {{ user.email }}</li>
+            {% else %}
+                <li class="list-group-item list-group-item-success p-1">Администратор: {{ user.email }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
-                <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать администратора</a>
-            </div>
-        </div>
-    </div>
+    <a href="{{ path('admin_user_create') }}" class="btn btn-success">Создать администратора</a>
 
 {% endblock %}

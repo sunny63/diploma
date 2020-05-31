@@ -88,7 +88,7 @@ class Comment
 
     public function setCreateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->create_at = (new \DateTime())->modify('+7 hour');
     }
 
     public function getUpdateAt(): ?\DateTimeInterface
@@ -105,7 +105,7 @@ class Comment
 
     public function setUpdateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->update_at = (new \DateTime())->modify('+7 hour');
     }
 
     public function getIsPublished(): ?bool

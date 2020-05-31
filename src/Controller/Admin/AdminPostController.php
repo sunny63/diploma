@@ -20,7 +20,6 @@ class AdminPostController extends AdminBaseController
     public function index()
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findAll();
-
         $checkCategory = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
 

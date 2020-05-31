@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Admin;
-
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -42,12 +40,11 @@ class AdminCategoryController extends AdminBaseController
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $category->setCreateAtValue();
-            $category->setUpdateAtValue();
             $category->setIsPublished();
 
             $em->persist($category);
             $em->flush();
-            $this->addFlash('success', 'Категория доабвлена');
+            $this->addFlash('success', 'Категория добавлена');
 
             return $this->redirectToRoute('admin_categories');
         }
@@ -72,17 +69,20 @@ class AdminCategoryController extends AdminBaseController
 
         if (($form->isSubmitted()) && ($form->isValid()))
         {
-            if ($form->get('save')->isClicked())
-            {
-                $category->setUpdateAtValue();
-                $this->addFlash('success', 'Категория обновлена');
-            }
-            if ($form->get('delete')->isClicked())
-            {
-                $em->remove($category);
-                $this->addFlash('success', 'Категория удалена');
-            }
+            $category->setUpdateAtValue();
 
+            $image = $category->getImage();
+            $category->setImage($image); // Store the current value from the DB before overwriting below
+            if ($image instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$image->guessExtension();
+                $image->move(
+                    $this->getParameter('profile.picture.attachment.dir'),
+                    $fileName
+                );
+                $category->setImage($fileName);
+            }
+            $em->persist($category);
+            $this->addFlash('success', 'Категория обновлена');
             $em->flush();
 
             return $this->redirectToRoute('admin_categories');
@@ -94,4 +94,20 @@ class AdminCategoryController extends AdminBaseController
         return $this->render("admin/category/form.html.twig", $forRender);
     }
 
+    /**
+     * @Route("/admin/category/delete/{id}", name="admin_category_delete")
+     * @param int $id
+     * @param Request $request
+     */
+    public function delete(int $id, Request $request)
+    {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($category);
+        $this->addFlash('success', 'Категория удалена');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_categories');
+    }
 }

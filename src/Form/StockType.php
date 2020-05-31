@@ -39,10 +39,10 @@ class StockType extends AbstractType
                         'mimeTypesMessage' => 'Доступны форматы JPEG, PNG, TIFF',
                     ])]
             ))
-            ->add('dateStart', DateType::class, array(
+            ->add('date_start', DateType::class, array(
                 'label' => 'Дата начала акции'
             ))
-            ->add('dateEnd', DateType::class, array(
+            ->add('date_end', DateType::class, array(
                 'label' => 'Дата конца акции'
             ))
             ->add('save', SubmitType::class, array(

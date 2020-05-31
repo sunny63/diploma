@@ -28,7 +28,7 @@ class Post
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
@@ -73,14 +73,14 @@ class Post
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getDescription(): ?string
     {
-        return $this->content;
+        return $this->description;
     }
 
-    public function setContent(string $content): self
+    public function setDescription(string $description): self
     {
-        $this->content = $content;
+        $this->description = $description;
 
         return $this;
     }
@@ -111,7 +111,7 @@ class Post
 
     public function setCreateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->create_at = (new \DateTime())->modify('+7 hour');
     }
 
     public function getUpdateAt(): ?\DateTimeInterface
@@ -128,7 +128,7 @@ class Post
 
     public function setUpdateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->update_at = (new \DateTime())->modify('+7 hour');
     }
 
     public function getIsPublished(): ?bool

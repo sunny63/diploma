@@ -3,27 +3,41 @@
 {% block title %}{{ title }}{% endblock %}
 {% block h1 %}{{ h1 }}{% endblock %}
 
-{% block body %}
+{% block entity_list %}
 
-    <div class="container-fluid mt-3">
-        <div class="row no-gutters">
-            <div class="col-12 col-lg-4 col-md-4">
-                <ul class="pl-0 w-100">
-                    {% for stock in stocks %}
-                        <li class="list-group-item p-1">
-                            Акция: {{ stock.title }}<br>
-                            Описание акции: {{ stock.description }}<br>
-                            Сроки акции: c {{ stock.dateStart|date('d.m.Y') }} по {{ stock.dateEnd|date('d.m.Y')  }}<br>
-                            Дата создания: {{ stock.createAt|date('d.m.Y в H:i') }}<br>
-                            {% if (stock.updateAt != NULL) %}
-                                Дата изменения: {{ stock.updateAt|date('d.m.Y в H:i') }}<br>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-                <a href="{{ path('admin_stock_create') }}" class="btn btn-success">Добавить акцию</a>
-            </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </div>
+    {% endfor %}
 
+    <ul class="pl-0">
+        {% for stock in stocks %}
+            <li class="list-group-item p-3">
+                <div class="media">
+                    <img src="{{ asset('uploads/brochures/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото"
+                         width="300">
+                    <div class="media-body">
+
+                        <b>Акция:</b> {{ stock.title }}<br>
+                        <b>Описание акции:</b> {{ stock.description }}<br>
+                        <b>Сроки акции:</b> c {{ stock.dateStart|date('d.m.Y') }} по {{ stock.dateEnd|date('d.m.Y') }}
+                        <br>
+                        <b>Дата создания:</b> {{ stock.createAt|date('d.m.Y в H:i') }}<br>
+                        {% if (stock.updateAt != NULL) %}
+                            <b>Дата изменения:</b> {{ stock.updateAt|date('d.m.Y в H:i') }}<br>
+                        {% endif %}
+
+                        <a href="{{ path('admin_stock_update', {'id': stock.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
+                        <a href="{{ path('admin_stock_delete', {'id': stock.id}) }}" class="btn btn-danger mt-2">Удалить</a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('admin_stock_create') }}" class="btn btn-success">Добавить акцию</a>
 {% endblock %}

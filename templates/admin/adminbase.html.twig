@@ -51,6 +51,13 @@
 
 {% block body %}{% endblock %}
 
+<div class="container-fluid mt-3">
+    <div class="row no-gutters ml-2">
+        <div class="col-12 col-lg-8 col-md-8">
+            {% block entity_list %}{% endblock %}
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row no-gutters justify-content-center">
@@ -63,6 +70,7 @@
         </div>
     </div>
 </div>
+
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

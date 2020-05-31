@@ -93,7 +93,7 @@ class Category
 
     public function setCreateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->create_at = (new \DateTime())->modify('+7 hour');
     }
 
 
@@ -108,17 +108,16 @@ class Category
 
         return $this;
     }
+
     public function setUpdateAtValue()
     {
-        $this->create_at = new \DateTime();
+        $this->update_at = (new \DateTime())->modify('+7 hour');
     }
-
 
     public function getIsPublished(): ?bool
     {
         return $this->is_published;
     }
-
 
     public function setIsPublished()
     {

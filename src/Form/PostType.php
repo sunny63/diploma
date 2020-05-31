@@ -29,7 +29,7 @@ class PostType extends AbstractType
                     'placeholder' => 'Введите текст'
                 ]
             ))
-            ->add('content', TextareaType::class, array(
+            ->add('description', TextareaType::class, array(
                 'label' => 'Описание поста',
                 'attr' => [
                     'placeholder' => 'Введите описание'
@@ -46,13 +46,6 @@ class PostType extends AbstractType
                     'class' => 'btn btn-success'
                 ]
             ))
-            ->add('delete', SubmitType::class, array(
-                'label' => 'Удалить',
-                'attr' => [
-                    'class' => 'btn btn-danger'
-                ]
-            ))
-
         ;
     }
 

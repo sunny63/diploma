@@ -38,22 +38,22 @@ class Stock
      * @ORM\Column(type="datetime")
      */
 
-    private $dateStart;
+    private $date_start;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateEnd;
+    private $date_end;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createAt;
+    private $create_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updateAt;
+    private $update_at;
 
     /**
      * @ORM\OneToMany(targetEntity=Child::class, mappedBy="stock")
@@ -108,50 +108,60 @@ class Stock
 
     public function getDateStart(): ?\DateTimeInterface
     {
-        return $this->dateStart;
+        return $this->date_start;
     }
 
-    public function setDateStart(\DateTimeInterface $dateStart): self
+    public function setDateStart(\DateTimeInterface $date_start): self
     {
-        $this->dateStart = $dateStart;
+        $this->date_start = $date_start;
 
         return $this;
     }
 
     public function getDateEnd(): ?\DateTimeInterface
     {
-        return $this->dateEnd;
+        return $this->date_end;
     }
 
-    public function setDateEnd(\DateTimeInterface $dateEnd): self
+    public function setDateEnd(\DateTimeInterface $date_end): self
     {
-        $this->dateEnd = $dateEnd;
+        $this->date_end = $date_end;
 
         return $this;
     }
 
     public function getCreateAt(): ?\DateTimeInterface
     {
-        return $this->createAt;
+        return $this->create_at;
     }
 
-    public function setCreateAt(\DateTimeInterface $createAt): self
+    public function setCreateAt(\DateTimeInterface $create_at): self
     {
-        $this->createAt = $createAt;
+        $this->create_at = $create_at;
 
         return $this;
+    }
+
+    public function setCreateAtValue()
+    {
+        $this->create_at = (new \DateTime())->modify('+7 hour');
     }
 
     public function getUpdateAt(): ?\DateTimeInterface
     {
-        return $this->updateAt;
+        return $this->update_at;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    public function setUpdateAt(\DateTimeInterface $update_at): self
     {
-        $this->updateAt = $updateAt;
+        $this->update_at = $update_at;
 
         return $this;
+    }
+
+    public function setUpdateAtValue()
+    {
+        $this->update_at = (new \DateTime())->modify('+7 hour');
     }
 
     /**
