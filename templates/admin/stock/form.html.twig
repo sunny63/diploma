@@ -5,9 +5,6 @@
 
 {% block form %}
 
-{#    <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">#}
-{#    {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
-
     {% if not form.vars.valid %}
         {% for error in form.vars.errors.form.getErrors(true) %}
             <div class="alert alert-warning" role="alert">{{ error.message }}</div>
@@ -18,28 +15,33 @@
 
     {{ form_label(form.title) }}
     {{ form_widget(form.title, { 'attr': {'class': 'form-control mb-1'} }) }}
-
     {{ form_label(form.description) }}
-    {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1'} }) }}
+    {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1 row-min'} }) }}
 
-    {{ form_label(form.date_start) }}
-    <div class="form-row no-gutters justify-content-center">
-        {{ form_widget(form.date_start.day,  { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
-        {{ form_widget(form.date_start.month, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
-        {{ form_widget(form.date_start.year, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
+    <div class="row">
+        <div class="col-6 ml-0">{{ form_label(form.date_start) }}</div>
+        <div class="col-6">{{ form_label(form.date_end) }}</div>
     </div>
 
-    {{ form_label(form.date_end) }}
-    <div class="form-row no-gutters justify-content-center">
-        {{ form_widget(form.date_end.day,  { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
-        {{ form_widget(form.date_end.month, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
-        {{ form_widget(form.date_end.year, { 'attr': {'class': 'form-control mb-1 data-stock'} }) }}
+    <div class="form-row no-gutters justify-content-left">
+        <div class="col-6">
+            <div class="row mb-1 ml-0">
+                {{ form_widget(form.date_start.day,  { 'attr': {'class': 'form-control data-stock'} })  }}
+                {{ form_widget(form.date_start.month, { 'attr': {'class': 'form-control data-stock'} }) }}
+                {{ form_widget(form.date_start.year, { 'attr': {'class': 'form-control data-stock'} }) }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row mb-1 ml-2">
+                {{ form_widget(form.date_end.day,  { 'attr': {'class': 'form-control data-stock'} }) }}
+                {{ form_widget(form.date_end.month, { 'attr': {'class': 'form-control data-stock'} }) }}
+                {{ form_widget(form.date_end.year, { 'attr': {'class': 'form-control data-stock'} }) }}
+            </div>
+        </div>
     </div>
 
     {{ form_label(form.image) }}<br>
     {{ form_widget(form.image, { 'attr': {'class': 'mb-1'} }) }}
-
-
 
     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
 

@@ -5,12 +5,12 @@
 
 {% block entity_list %}
 
-    <ul class="pl-0 rounded">
+    <ul class="pl-0">
         {% for user in users %}
             {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}
-                <li class="list-group-item p-1">Пользователь: {{ user.email }}</li>
+                <li class="list-group-item p-1 rounded mb-1 border">Пользователь: {{ user.email }}</li>
             {% else %}
-                <li class="list-group-item list-group-item-success p-1">Администратор: {{ user.email }}</li>
+                <li class="list-group-item list-group-item-success p-1 rounded mb-1 border">Администратор: {{ user.email }}</li>
             {% endif %}
         {% endfor %}
     </ul>

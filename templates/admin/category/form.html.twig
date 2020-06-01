@@ -5,9 +5,6 @@
 
 {% block form %}
 
-    {#    <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">#}
-    {#    {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
-
     {% if not form.vars.valid %}
         {% for error in form.vars.errors.form.getErrors(true) %}
             <div class="alert alert-warning" role="alert">{{ error.message }}</div>
@@ -20,12 +17,10 @@
     {{ form_widget(form.title, { 'attr': {'class': 'form-control mb-1'} }) }}
 
     {{ form_label(form.description) }}
-    {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1'} }) }}
+    {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1 row-min'} }) }}
 
     {{ form_label(form.image) }}<br>
     {{ form_widget(form.image, { 'attr': {'class': 'mb-1'} }) }}
-
-    {#    <a href= " {{ asset('uploads/brochures/' ~ stock.image) }} "> View brochure (PDF)</a>#}
 
     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
 

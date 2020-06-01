@@ -14,15 +14,15 @@
         </div>
     {% endfor %}
 
-    <ul class="pl-0 w-100 rounded">
+    <ul class="pl-0">
         {% for post in posts %}
-            <li class="list-group-item p-3">
+            <li class="list-group-item p-3 rounded mb-3 border">
                 <div class="media">
                     <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded" alt="Главное фото" width="300">
                     <div class="media-body">
                         <b>Заголовок поста: </b>{{ post.title }}<br>
-                        <b>Заголовок категории поста: </b>{{ post.category.title }}
-                        <p class="pre-wrap"><b>Описание поста: </b>{{ post.description }}</p>
+                        <b>Заголовок категории поста: </b>{{ post.category.title }}<br>
+                        <p class="pre-wrap"><b>Описание поста:</b><br>{{ post.description }}</p>
                         <b>Дата создания: </b>{{ post.createAt|date('d.m.Y в H:i') }}<br>
                         {% if (post.updateAt != NULL) %}
                             <b>Дата изменения: </b>{{ post.updateAt|date('d.m.Y в H:i') }}<br>

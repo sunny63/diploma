@@ -6,7 +6,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v7') }}">
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v15') }}">
     {% endblock %}
 </head>
 <body>
@@ -61,7 +61,7 @@
 
 <div class="container-fluid">
     <div class="row no-gutters justify-content-center">
-        <div class="col-12 col-lg-4 col-md-4">
+        <div class="col-12 col-lg-5 col-md-5">
             <div class="form-login">
                 <h1 class="h3 mb-3 font-weight-normal text-center">{% block title_form %}{% endblock %}</h1>
                     {% block form %}
@@ -70,7 +70,6 @@
         </div>
     </div>
 </div>
-
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

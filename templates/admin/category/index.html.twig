@@ -14,9 +14,9 @@
         </div>
     {% endfor %}
 
-    <ul class="pl-0 rounded">
+    <ul class="pl-0">
         {% for category in categories %}
-            <li class="list-group-item p-3">
+            <li class="list-group-item p-3 rounded mb-3 border">
                 <div class="media">
                     <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 rounded" alt="Главное фото" width="300">
                     <div class="media-body">
