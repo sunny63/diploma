@@ -41,7 +41,7 @@ class Post
     private $create_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $update_at;
 

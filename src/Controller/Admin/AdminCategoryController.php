@@ -47,8 +47,9 @@ class AdminCategoryController extends AdminBaseController
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
             if ($image) {
-                $brochureFileName = $fileUploader->upload($image);
-                $category->setImage($brochureFileName);
+                $nameEntity = "category";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
+                $category->setImage($imageFileName);
             }
 
             $em->persist($category);
@@ -83,7 +84,8 @@ class AdminCategoryController extends AdminBaseController
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
             if ($image) {
-                $imageFileName = $fileUploader->upload($image);
+                $nameEntity = "category";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
                 $category->setImage($imageFileName);
             }
 
@@ -99,6 +101,7 @@ class AdminCategoryController extends AdminBaseController
         $forRender['form'] = $form->createView();
         return $this->render("admin/category/form.html.twig", $forRender);
     }
+
 
     /**
      * @Route("/admin/category/delete/{id}", name="admin_category_delete")

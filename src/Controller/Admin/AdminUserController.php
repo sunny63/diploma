@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,11 +14,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminUserController extends AdminBaseController
 {
+
     /**
      * @Route("/admin/users", name="admin_users")
      * @return Response
      */
-
     public function index()
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
@@ -29,14 +30,13 @@ class AdminUserController extends AdminBaseController
         return $this->render("admin/user/index.html.twig", $forRender);
     }
 
+
     /**
      * @Route("/admin/user/create", name="admin_user_create")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     *
+     * @return RedirectResponse|Response
      */
-
     public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();

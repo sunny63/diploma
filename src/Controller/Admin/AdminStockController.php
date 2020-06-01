@@ -52,8 +52,9 @@ class AdminStockController extends AdminBaseController
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
             if ($image) {
-                $brochureFileName = $fileUploader->upload($image);
-                $stock->setImage($brochureFileName);
+                $nameEntity = "stock";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
+                $stock->setImage($imageFileName);
             }
 
             $em->persist($stock);
@@ -68,15 +69,6 @@ class AdminStockController extends AdminBaseController
         return $this->render("admin/stock/form.html.twig", $forRender);
     }
 
-    /**
-     * @return string
-     */
-    private function generateUniqueFileName()
-    {
-        // md5() уменьшает схожесть имён файлов, сгенерированных
-        // uniqid(), которые основанный на временных отметках
-        return md5(uniqid());
-    }
 
     /**
      * @Route("/admin/stock/update/{id}", name="admin_stock_update")
@@ -98,7 +90,8 @@ class AdminStockController extends AdminBaseController
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
             if ($image) {
-                $imageFileName = $fileUploader->upload($image);
+                $nameEntity = "stock";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
                 $stock->setImage($imageFileName);
             }
 

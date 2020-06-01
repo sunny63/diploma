@@ -7,6 +7,8 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +38,7 @@ class AdminPostController extends AdminBaseController
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function create(Request $request)
+    public function create(Request $request, FileUploader $fileUploader)
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -46,8 +48,15 @@ class AdminPostController extends AdminBaseController
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $post->setCreateAtValue();
-            $post->setUpdateAtValue();
             $post->setIsPublished();
+
+            /** @var UploadedFile $image */
+            $image = $form['image']->getData();
+            if ($image) {
+                $nameEntity = "post";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
+                $post->setImage($imageFileName);
+            }
 
             $em->persist($post);
             $em->flush();
@@ -61,5 +70,60 @@ class AdminPostController extends AdminBaseController
         $forRender['title'] = 'Создание поста';
         $forRender['form'] = $form->createView();
         return $this->render("admin/post/form.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/admin/post/update/{id}", name="admin_post_update")
+     * @param int $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function update(int $id, Request $request, FileUploader $fileUploader)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $form = $this->createForm(PostType::class, $post);
+        $em = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
+
+        if (($form->isSubmitted()) && ($form->isValid()))
+        {
+            $post->setUpdateAtValue();
+
+            /** @var UploadedFile $image */
+            $image = $form['image']->getData();
+            if ($image) {
+                $nameEntity = "post";
+                $imageFileName = $fileUploader->upload($image, $nameEntity);
+                $post->setImage($imageFileName);
+            }
+
+            $em->persist($post);
+            $this->addFlash('success', 'Пост обновлен');
+            $em->flush();
+
+            return $this->redirectToRoute('admin_posts');
+        }
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Создание поста';
+        $forRender['form'] = $form->createView();
+        return $this->render("admin/post/form.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/admin/post/delete/{id}", name="admin_post_delete")
+     * @param int $id
+     * @param Request $request
+     */
+    public function delete(int $id, Request $request)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($post);
+        $this->addFlash('success', 'Пост удален');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_posts');
     }
 }
