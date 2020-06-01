@@ -40,6 +40,9 @@
         </div>
     </div>
 
+    {{ form_label(form.rules) }}
+    {{ form_widget(form.rules, { 'attr': {'class': 'form-control mb-1 row-min'} }) }}
+
     {{ form_label(form.image) }}<br>
     {{ form_widget(form.image, { 'attr': {'class': 'mb-1'} }) }}
 

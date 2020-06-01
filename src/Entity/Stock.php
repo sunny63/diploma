@@ -20,7 +20,7 @@ class Stock
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=500)
      */
     private $title;
 
@@ -59,6 +59,11 @@ class Stock
      * @ORM\OneToMany(targetEntity=Child::class, mappedBy="stock")
      */
     private $children;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $rules;
 
     public function __construct()
     {
@@ -191,6 +196,18 @@ class Stock
                 $child->setStock(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRules(): ?string
+    {
+        return $this->rules;
+    }
+
+    public function setRules(?string $rules): self
+    {
+        $this->rules = $rules;
 
         return $this;
     }

@@ -3,9 +3,9 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Stock;
 use App\Entity\User;
 use App\Form\UserType;
-use Symfony\Component\ErrorHandler\ErrorHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +19,11 @@ class HomeController extends BaseController
      */
     public function index()
     {
+        $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAll();
+
         $forRender = parent::renderDefault();
+        $forRender['h1'] = 'Новости';
+        $forRender['stocks'] = $stocks;
         return $this->render("main/index.html.twig", $forRender);
     }
 

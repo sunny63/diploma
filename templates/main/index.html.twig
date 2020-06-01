@@ -1,15 +1,29 @@
 {% extends 'main/base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid">
-        <div class="row no-gutters justify-content-center mt-5">
-            <div class="col-12 col-lg-6 col-md-6">
-                <h1 class="display-4">
-                    {{ title }}
-                </h1>
+    <div class="container-fluid mt-2 main-content">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-10 col-md-10">
+                <div class="form">
+                    <ul class="justify-content-center">
+                        {% for stock in stocks %}
+                            <li class="list-group-item p-3 mb-3 border-0">
+                                <div class="media">
+                                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
+                                    <div class="media-body">
+                                        <h2>{{ stock.title }}</h2>
+                                        <b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b>
+                                        <p class="pre-wrap">{{ stock.description }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

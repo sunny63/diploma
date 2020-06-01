@@ -47,6 +47,9 @@ class StockType extends AbstractType
             ->add('date_end', DateType::class, array(
                 'label' => 'Дата конца акции'
             ))
+            ->add('rules', TextareaType::class, array(
+                'label' => 'Правила проведения акции'
+            ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Сохранить'
             ));

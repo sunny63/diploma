@@ -1,8 +1,28 @@
+.form {
+    width: 90%;
+    border-radius: 5px;
+    margin-top: 0px;
+}
 
+.navbar-current {
+    margin-top: 40px;
+    padding-left: 440px;
+    background: rgba(215, 35, 29, 0.91) !important;
+    height: 70px;
+}
+
+.main-content {
+    width: 90%;
+}
 .form-login {
     width: 90%;
     border-radius: 5px;
-    margin-top: 2%;
+    margin-top: 10%;
+}
+
+.nav-item {
+    font-size: large!important;
+    padding-right: 15px;
 }
 
 .data-stock {
@@ -11,6 +31,11 @@
 
 .pre-wrap {
     white-space: pre-wrap;
+}
+.logo {
+    position:absolute;
+    top: -40px;
+    left: 70px;
 }
 
 .row-min {

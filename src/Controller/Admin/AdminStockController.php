@@ -69,7 +69,6 @@ class AdminStockController extends AdminBaseController
         return $this->render("admin/stock/form.html.twig", $forRender);
     }
 
-
     /**
      * @Route("/admin/stock/update/{id}", name="admin_stock_update")
      * @param int $id
