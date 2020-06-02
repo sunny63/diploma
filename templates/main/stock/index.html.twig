@@ -5,33 +5,20 @@
 
 {% block body %}
 
-{#    {% for stockNOW in categoriesNow %}#}
-{#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
-{#    {% endfor %}#}
+    {#    {% for stockNOW in categoriesNow %}#}
+    {#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
+    {#    {% endfor %}#}
 
     <div class="container-fluid main-content">
-        <div class="row no-gutters">
+        <div class="row no-gutters mt-5">
             <div class="col-12 col-lg-10 col-md-10">
-                <div class="form">
-                    <ul class="justify-content-center">
-                        {% for stock in stocks %}
-                            <li class="list-group-item mb-3 border-0">
-                                <div class="media">
-                                    <div class="pt-2">
-                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
-                                    </div>
-                                    <div class="media-body">
-                                        <h2>{{ stock.title }}</h2>
-                                        <b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap">{{ stock.description }}</p>
-
-{#                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger mt-2">Подробнее</a>#}
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-
-                    </ul>
+                <div class="form ml-5">
+                            <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"
+                                 alt="Главное фото" width="600" align="left" vspace="15" hspace="0">
+                            <h1 class="mt-0">{{ stock.title }}</h1>
+                            <p><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
+                            <p class="pre-wrap">{{ stock.description }}</p>
+{#<a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger mt-2">Подробнее</a>#}
                 </div>
             </div>
         </div>
