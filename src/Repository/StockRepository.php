@@ -19,6 +19,25 @@ class StockRepository extends ServiceEntityRepository
         parent::__construct($registry, Stock::class);
     }
 
+    /**
+     * @return Stock[]
+     */
+    public function findAllPastStock($date_end): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\Stock s
+            WHERE s.date_end < :date_end
+            ORDER BY s.date_end ASC'
+        )->setParameter('date_end', $date_end);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
     // /**
     //  * @return Stock[] Returns an array of Stock objects
     //  */

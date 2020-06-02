@@ -5,27 +5,56 @@
 
 {% block body %}
 
-    <div class="container-fluid mt-2 main-content">
+{#    {% for stockNOW in categoriesNow %}#}
+{#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
+{#    {% endfor %}#}
+
+
+    <div class="container-fluid main-content">
         <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center">
+                        <h1 class="pl-5 pt-3">Новости</h1>
                         {% for stock in stocks %}
-                            <li class="list-group-item p-3 mb-3 border-0">
+                            <li class="list-group-item mb-2 border-0">
                                 <div class="media">
-                                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
-                                    <div class="media-body">
+                                    <div class="pt-2">
+                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
+                                    </div>
+                                    <div class="media-body pb-1">
                                         <h2>{{ stock.title }}</h2>
                                         <b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap">{{ stock.description }}</p>
+                                        <p class="pre-wrap part-description" id="23123123" title="3333">{{ stock.description }}</p>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger ">Подробнее</a>
                                     </div>
                                 </div>
                             </li>
                         {% endfor %}
+                        {% for post in posts %}
+                            <li class="list-group-item p-3 mb-3 border-0">
+                                <div class="media">
+                                    <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
+                                    <div class="media-body">
+                                        <h2>{{ post.title }}</h2>
+                                        <p class="pre-wrap part-description">{{ post.description }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+
                     </ul>
                 </div>
             </div>
+            <div id="parent-id">
+                <p>hello word1</p>
+                <p class="test">hello word2</p>
+                <p >hello word3</p>
+                <p>hello word4</p>
+            </div>
+
         </div>
     </div>
-
 {% endblock %}
+

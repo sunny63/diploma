@@ -65,6 +65,7 @@ class Stock
      */
     private $rules;
 
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -211,4 +212,5 @@ class Stock
 
         return $this;
     }
+
 }

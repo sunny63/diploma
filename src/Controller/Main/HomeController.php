@@ -3,6 +3,8 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Category;
+use App\Entity\Post;
 use App\Entity\Stock;
 use App\Entity\User;
 use App\Form\UserType;
@@ -20,10 +22,21 @@ class HomeController extends BaseController
     public function index()
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAll();
+        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        $date = new \DateTime('now');
+
+        $categoriesNow = $this->getDoctrine()
+            ->getRepository(Stock::class)
+            ->findAllPastStock($date);
 
         $forRender = parent::renderDefault();
         $forRender['h1'] = 'Новости';
         $forRender['stocks'] = $stocks;
+        $forRender['posts'] = $posts;
+        $forRender['categories'] = $categories;
+        $forRender['categoriesNow'] = $categoriesNow;
         return $this->render("main/index.html.twig", $forRender);
     }
 
