@@ -31,6 +31,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('admin_posts') }}">Посты</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('admin_children') }}">Дети</a>
+            </li>
         </ul>
         <form class="form-inline">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -53,7 +56,7 @@
 
 <div class="container-fluid mt-3">
     <div class="row no-gutters ml-2">
-        <div class="col-12 col-lg-6 col-md-6">
+        <div class="col-12 col-lg-12 col-md-12">
             {% block entity_list %}{% endblock %}
         </div>
     </div>

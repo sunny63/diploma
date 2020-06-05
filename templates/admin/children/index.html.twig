@@ -1,0 +1,36 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
+
+{% block entity_list %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% if children is empty %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Список детей пока что пуст. Добавте первого ребенка!
+        </div>
+    {% endif %}
+
+    <ul class="pl-0">
+        {% for child in children %}
+            <li class="list-group-item rounded mb-1 border p-2">
+                <b>Акция:</b> {{ child.stock.title }}<br>
+                <b>Информация о ребенке:</b> {{ child.information }} ({{ child.institutionName}}{% if (child.groupName != NULL) %}, Группа «{{ child.groupName }}»{% endif %})<br>
+                <a href="{{ path('admin_child_update', {'id': child.id}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
+                <a href="{{ path('admin_child_delete', {'id': child.id}) }}" class="btn btn-danger btn-sm mt-1">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('admin_child_create') }}" class="btn btn-success">Добавить ребенка</a>
+
+{% endblock %}

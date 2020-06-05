@@ -65,7 +65,6 @@ class Stock
      */
     private $rules;
 
-
     public function __construct()
     {
         $this->children = new ArrayCollection();

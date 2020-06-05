@@ -25,8 +25,8 @@
                                     <div class="media-body pb-1">
                                         <h2>{{ stock.title }}</h2>
                                         <b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap part-description" id="23123123" title="3333">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger ">Подробнее</a>
+                                        <p class="pre-wrap part-description">{{ stock.description }}</p>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger">Подробнее</a>
                                     </div>
                                 </div>
                             </li>

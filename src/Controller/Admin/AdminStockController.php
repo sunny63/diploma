@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 
+use App\Entity\Child;
 use App\Entity\Stock;
 use App\Form\StockType;
 use App\Service\FileUploader;
@@ -121,5 +122,23 @@ class AdminStockController extends AdminBaseController
         $em->flush();
 
         return $this->redirectToRoute('admin_stocks');
+    }
+
+    /**
+     * @Route("/admin/stock/children/{id}", name="admin_stock_children")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showChildren(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $children = $stock->getChildren();
+        $em = $this->getDoctrine()->getManager();
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Список детей';
+        $forRender['h1'] = 'Список всех детей, для данной акции';
+        $forRender['children'] = $children;
+        return $this->render("admin/children/index.html.twig", $forRender);
     }
 }

@@ -3,10 +3,8 @@
 
 namespace App\Controller\Main;
 
-
-use App\Entity\Category;
-use App\Entity\Post;
 use App\Entity\Stock;
+use App\Entity\Child;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,9 +20,28 @@ class MainStockController extends BaseController
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
 
         $forRender = parent::renderDefault();
-        $forRender['h1'] = 'Новости';
+        $forRender['today'] = new \DateTime('now');
         $forRender['stock'] = $stock;
-//        $forRender['categoriesNow'] = $categoriesNow;
         return $this->render("main/stock/index.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/main/stock/{id}/children", name="main_stock_children")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showChildrens(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $children = $stock->getChildren();
+        $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
+        $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
+
+        $forRender = parent::renderDefault();
+        $forRender['stock'] = $stock;
+        $forRender['children'] = $children;
+        $forRender['institution_names'] = $institution_names;
+        $forRender['group_names'] = $group_names;
+        return $this->render("main/stock/children/index.html.twig", $forRender);
     }
 }

@@ -30,6 +30,9 @@
 
                         <a href="{{ path('admin_stock_update', {'id': stock.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
                         <a href="{{ path('admin_stock_delete', {'id': stock.id}) }}" class="btn btn-danger mt-2">Удалить</a>
+
+                         <a href="{{ path('admin_stock_children', {'id': stock.id}) }}" class="btn btn-danger mt-2 ml-1">Показать список детей</a>
+
                     </div>
                 </div>
             </li>

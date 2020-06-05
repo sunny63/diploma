@@ -19,6 +19,55 @@ class ChildRepository extends ServiceEntityRepository
         parent::__construct($registry, Child::class);
     }
 
+    /**
+     * @return Child[]
+     */
+    public function findInstitutionNames($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT distinct s.institution_name
+            FROM App\Entity\Child s 
+            WHERE s.stock = :id'
+        )->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+    /**
+     * @return Child[]
+     */
+    public function findGroupNames($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT distinct s.group_name, s.institution_name
+            FROM App\Entity\Child s 
+            WHERE s.stock = :id'
+        )->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+//
+//    public function findOneByIdJoinedToCategory($productId)
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT p, c
+//        FROM App\Entity\Product p
+//        INNER JOIN p.category c
+//        WHERE p.id = :id'
+//        )->setParameter('id', $productId);
+//
+//        return $query->getOneOrNullResult();
+//    }
+
     // /**
     //  * @return Child[] Returns an array of Child objects
     //  */

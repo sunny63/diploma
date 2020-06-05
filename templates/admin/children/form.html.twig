@@ -1,0 +1,34 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block title_form %}Добавление записи ребенка{% endblock %}
+
+{% block form %}
+
+    {% if not form.vars.valid %}
+        {% for error in form.vars.errors.form.getErrors(true) %}
+            <div class="alert alert-warning" role="alert">{{ error.message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    {{ form_label(form.stock) }}
+    {{ form_widget(form.stock, { 'attr': {'class': 'form-control mb-1'} }) }}
+    {{ form_label(form.information) }}
+    {{ form_widget(form.information, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_label(form.institution_name) }}
+    {{ form_widget(form.institution_name, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_label(form.group_name) }}
+    {{ form_widget(form.group_name, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_label(form.serial_number) }}
+    {{ form_widget(form.serial_number, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

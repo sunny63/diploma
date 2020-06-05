@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Child
 {
+    private const GIFTED = 1;
+    private const NOTGIFTED = 0;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -51,7 +54,7 @@ class Child
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_girted;
+    private $is_gifted;
 
     public function getId(): ?int
     {
@@ -130,15 +133,18 @@ class Child
         return $this;
     }
 
-    public function getIsGirted(): ?bool
+    public function getIsGifted(): ?bool
     {
-        return $this->is_girted;
+        return $this->is_gifted;
     }
 
-    public function setIsGirted(bool $is_girted): self
+    public function setIsGifted()
     {
-        $this->is_girted = $is_girted;
+        $this->is_gifted = self::GIFTED;
+    }
 
-        return $this;
+    public function setIsNotGifted()
+    {
+        $this->is_gifted = self::NOTGIFTED;
     }
 }

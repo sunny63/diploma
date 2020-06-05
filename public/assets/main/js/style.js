@@ -17,3 +17,20 @@ for (let i = 0; i < l; i++) {
         test[i].textContent = newText + '...';
     }
 }
+
+function toggle(el) {
+    el.style.display = (el.style.display == 'none') ? '' : 'none'
+}
+
+
+
+// $().button('string')
+rule = document.getElementById('showRules');
+$(rule).button('complete');
+//
+// $('#showRules').on('click', function () {
+//     $(this).button('complete');
+// });
+// // $('#reset').on('click', function () {
+// //     $('#download').button('reset');
+// // });
