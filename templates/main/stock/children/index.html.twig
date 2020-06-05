@@ -45,10 +45,10 @@
                         {% else %}
                             <input type="button" onclick="toggle(id_group_{{ loop.index }})" class="btn btn-danger mb-2"
                                    value="{{ institution_n.institution_name }}" data-toggle="button"><br>
-                            <ol id="id_group_{{ loop.index }}" class="list-unstyled" style="display: none">
+                            <ol id="id_group_{{ loop.index }}" class="list-unstyled mb-0" style="display: none">
                         {% endif %}
                         {% for group_n in group_names %}
-                            {% if (group_n.institution_name == institution_n.institution_name) %}
+                            {% if (group_n.institution_name == institution_n.institution_name) and (group_n.group_name != '') %}
                                 {% if loop.index == 1 %}
                                     <li>
                                         <input type="button" onclick="toggle(id_group_children_{{ loop.index }})" class="btn btn-danger active mb-2 ml-3"
@@ -70,7 +70,16 @@
                                 {% endif %}
                             {% endfor %}
                         </ol>
-                        {% endif %}
+                            {% elseif (group_n.institution_name == institution_n.institution_name) %}
+                                {% for child in children %}
+                                    {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}
+                                        <li>
+                                            <input type="button" class="btn btn-dark mb-2 btn-sm ml-3" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ol>
+                            {% endif %}
                         {% endfor %}
                             </ol>
                     {% endfor %}
