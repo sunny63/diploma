@@ -1,6 +1,6 @@
 {% extends 'main/base.html.twig' %}
 
-{% block title %}{{ stock.title }} (списки детей){% endblock %}
+{% block title %}{{ photo_report.title }}{% endblock %}
 {% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
@@ -13,24 +13,27 @@
         <div class="row no-gutters mt-3">
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form ml-5">
-                    <h1>Акция «{{ stock.title }}» успешно завершилась!</h1>
-                    <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
-                    <p>Спасибо всем, кто учествовал в нашей акции! В этом году все дети получили подарки благодаря вам.
-                        Отдельное спасибо Наталье Быковой за создания сайта для удобного функционирования наших акций!!!
-                        Ура!!
-                    </p>
-
-                    {% for photo_report in photo_reports %}
                     <div class="media">
                         <div class="pt-0 ">
                             <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded"
+                                 alt="Главное фото" width="600" align="left" vspace="15" hspace="0">
+                        </div>
+                        <div class="media-body">
+                            <h1>«{{ photo_report.title }}»</h1>
+                            <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
+                            <p class="pre-wrap part-description">{{ photo_report.description }}</p>
+                        </div>
+                    </div>
+
+                    {% for photo in photos %}
+                    <div class="media">
+                        <div class="pt-0 ">
+                            <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="mr-3 rounded"
                                  alt="Главное фото" width="400" align="left" vspace="15" hspace="0">
                         </div>
                         <div class="media-body">
-                            <h2>{{ photo_report.title }}</h2>
-                            <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
-                            <p class="pre-wrap part-description">{{ photo_report.description }}</p>
-                            <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn btn-danger">Подробнее{{ photo_report.id }}</a>
+                            <p class="pre-wrap part-description">{{ photo.description }}</p>
+{#                            <a href="{{ path('main_stock', {'id': photo_report.id}) }}" class="btn btn-danger">Подробнее</a>#}
                         </div>
                     </div>
                     {% endfor %}

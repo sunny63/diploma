@@ -1,0 +1,51 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
+
+{% block entity_list %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% if photos is empty %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Список фотографий пока пуст!
+        </div>
+    {% endif %}
+
+    <ul class="pl-0">
+        {% for photo in photos %}
+            <li class="list-group-item p-3 rounded mb-3 border">
+                <div class="media">
+                    <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="mr-3 rounded" alt="Главное фото" width="300">
+                    <div class="media-body">
+                        <b>Название фотоотчета, к которой относится фотография:</b> {{ photo.photoReport.title }}<br>
+                        <b>Описание фотографии:</b> {{ photo.description }}<br>
+
+                        <a href="{{ path('admin_photo_update', {'id': photo.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
+                        <a href="{{ path('admin_photo_delete', {'id': photo.id}) }}" class="btn btn-danger mt-2">Удалить</a>
+
+                    </div>
+                </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    {% if check_photo_report is not empty %}
+        <a href="{{ path('admin_photo_create') }}" class="btn btn-success">Добавить фотографию</a>
+    {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Для добавления фотоотчета требуется создать акцию.
+        </div>
+        <a href="{{ path('admin_photo_report_create') }}" class="btn btn-success">Создать фотоотчет</a>
+    {% endif %}
+
+{% endblock %}

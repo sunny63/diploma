@@ -3,6 +3,8 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\PhotoReport;
+use App\Entity\Photo;
 use App\Entity\Stock;
 use App\Entity\Child;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,5 +63,23 @@ class MainStockController extends BaseController
         $forRender['stock'] = $stock;
         $forRender['photo_reports'] = $photoReports;
         return $this->render("main/stock/photoReports/index.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/main/stock/photoReports/{id}/photos", name="main_stock_photos")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showPhotos(int $id, Request $request)
+    {
+        $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
+        $photos = $photoReport->getPhotos();
+//        $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
+//        $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
+
+        $forRender = parent::renderDefault();
+        $forRender['photo_report'] = $photoReport;
+        $forRender['photos'] = $photos;
+        return $this->render("main/stock/photoReports/photo/index.html.twig", $forRender);
     }
 }

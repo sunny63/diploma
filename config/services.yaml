@@ -9,6 +9,7 @@ parameters:
     post_directory: '%images_directory%/post'
     category_directory: '%images_directory%/category'
     photo_report_directory: '%images_directory%/photoReport'
+    photo_directory: '%photo_report_directory%/photo'
 
 services:
     # default configuration for services in *this* file
@@ -35,6 +36,7 @@ services:
             $postDirectory: '%post_directory%'
             $categoryDirectory: '%category_directory%'
             $photoReportDirectory: '%photo_report_directory%'
+            $photoDirectory: '%photo_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
