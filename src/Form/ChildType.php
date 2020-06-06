@@ -20,7 +20,8 @@ class ChildType extends AbstractType
             ->add('stock', EntityType::class, array(
                 'label' => 'Заголовок акции',
                 'class' => Stock::class,
-                'choice_label' => 'title' // какое поле из акций будет отображаться
+                'choice_label' => 'title', // какое поле из акций будет отображаться
+                'disabled' => $options['is_stock_children']
             ))
             ->add('information', TextType::class, array(
                 'label' => 'Информация о ребенке'
@@ -45,6 +46,7 @@ class ChildType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Child::class,
+            'is_stock_children' => false
         ]);
     }
 }

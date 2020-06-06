@@ -48,9 +48,11 @@ class AdminChildrenController extends AdminBaseController
         {
             $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id_stock);
             $child->setStock($stock);
+            $form = $this->createForm(ChildType::class, $child, array('is_stock_children' => true));
         }
+        else
+            $form = $this->createForm(ChildType::class, $child);
 
-        $form = $this->createForm(ChildType::class, $child);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
@@ -62,7 +64,10 @@ class AdminChildrenController extends AdminBaseController
 
             $this->addFlash('success', 'Запись ребенка добавлена');
 
-            return $this->redirectToRoute('admin_children');
+            if ($id_stock)
+                return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
+            else
+                return $this->redirectToRoute('admin_children');
         }
 
         $forRender = parent::renderDefault();
@@ -91,10 +96,10 @@ class AdminChildrenController extends AdminBaseController
             $this->addFlash('success', 'Запись ребенка обновлена');
             $em->flush();
 
-            if (!$id_stock)
-                return $this->redirectToRoute('admin_children');
-            else
+            if ($id_stock)
                 return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
+            else
+                return $this->redirectToRoute('admin_children');
         }
 
         $forRender = parent::renderDefault();
@@ -118,9 +123,9 @@ class AdminChildrenController extends AdminBaseController
         $this->addFlash('success', 'Запись ребенка удалена');
         $em->flush();
 
-        if ($id_stock == 0)
-            return $this->redirectToRoute('admin_children');
-        else
+        if ($id_stock)
             return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_children');
     }
 }
