@@ -43,6 +43,13 @@ class AdminChildrenController extends AdminBaseController
     public function create(Request $request, int $id_stock)
     {
         $child = new Child();
+
+        if ($id_stock)
+        {
+            $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id_stock);
+            $child->setStock($stock);
+        }
+
         $form = $this->createForm(ChildType::class, $child);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
@@ -84,7 +91,7 @@ class AdminChildrenController extends AdminBaseController
             $this->addFlash('success', 'Запись ребенка обновлена');
             $em->flush();
 
-            if ($id_stock == 0)
+            if (!$id_stock)
                 return $this->redirectToRoute('admin_children');
             else
                 return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));

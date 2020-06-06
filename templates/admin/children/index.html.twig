@@ -26,7 +26,7 @@
                 <b>Акция:</b> {{ child.stock.title }}<br>
                 <b>Информация о ребенке:</b> {{ child.information }} ({{ child.institutionName}}{% if (child.groupName != NULL) %}, Группа «{{ child.groupName }}»{% endif %})<br>
                 {% if (id_stock) %}
-                    <a href="{{ path('admin_child_update', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать{{ child.id  }} {{ id_stock }} </a>
+                    <a href="{{ path('admin_child_update', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
                     <a href="{{ path('admin_child_delete', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-danger btn-sm mt-1">Удалить</a>
                 {% else %}
                     <a href="{{ path('admin_child_update', {'id': child.id}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
@@ -35,7 +35,10 @@
             </li>
         {% endfor %}
     </ul>
-
-    <a href="{{ path('admin_child_create') }}" class="btn btn-success">Добавить ребенка</a>
+    {% if (id_stock) %}
+        <a href="{{ path('admin_child_create', {'id_stock': id_stock}) }}" class="btn btn-success">Добавить ребенка</a>
+    {% else %}
+        <a href="{{ path('admin_child_create') }}" class="btn btn-success">Добавить ребенка</a>
+    {% endif %}
 
 {% endblock %}
