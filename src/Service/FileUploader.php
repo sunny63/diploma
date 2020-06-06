@@ -13,13 +13,15 @@ class FileUploader
     private $stockDirectory;
     private $categoryDirectory;
     private $postDirectory;
+    private $photoReportDirectory;
 
-    public function __construct($targetDirectory, $stockDirectory, $categoryDirectory, $postDirectory)
+    public function __construct($targetDirectory, $stockDirectory, $categoryDirectory, $postDirectory, $photoReportDirectory)
     {
         $this->targetDirectory = $targetDirectory;
         $this->stockDirectory = $stockDirectory;
         $this->categoryDirectory = $categoryDirectory;
         $this->postDirectory = $postDirectory;
+        $this->photoReportDirectory = $photoReportDirectory;
     }
 
     public function upload(UploadedFile $file, string $nameEntity)
@@ -38,6 +40,8 @@ class FileUploader
                 $file->move($this->getCategoryDirectory(), $fileName);
             elseif ($nameEntity == "post")
                 $file->move($this->getPostDirectory(), $fileName);
+            elseif ($nameEntity == "photoReport")
+                $file->move($this->getPhotoReportDirectory(), $fileName);
             else
                 $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
@@ -60,6 +64,11 @@ class FileUploader
     public function getPostDirectory()
     {
         return $this->postDirectory;
+    }
+
+    public function getPhotoReportDirectory()
+    {
+        return $this->photoReportDirectory;
     }
 
     public function getTargetDirectory()

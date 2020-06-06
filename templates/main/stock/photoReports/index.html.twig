@@ -1,0 +1,101 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ stock.title }} (списки детей){% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
+
+{% block body %}
+
+    {#    {% for stockNOW in categoriesNow %}#}
+    {#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
+    {#    {% endfor %}#}
+
+    <div class="container-fluid main-content">
+        <div class="row no-gutters mt-3">
+            <div class="col-12 col-lg-10 col-md-10">
+                <div class="form ml-5">
+                    <h1>Акция «{{ stock.title }}» успешно завершилась!</h1>
+                    <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
+                    <p>Спасибо всем, кто учествовал в нашей акции! В этом году все дети получили подарки благодаря вам.
+                        Отдельное спасибо Наталье Быковой за создания сайта для удобного функционирования наших акций!!!
+                        Ура!!
+                    </p>
+
+                    {% for photo_report in photo_reports %}
+                    <div class="media">
+                        <div class="pt-0 ">
+                            <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded"
+                                 alt="Главное фото" width="400" align="left" vspace="15" hspace="0">
+                        </div>
+                        <div class="media-body">
+                            <h2>{{ photo_report.title }}</h2>
+                            <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
+                            <p class="pre-wrap part-description">{{ photo_report.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {#                    <input id="showRules" data-string-text="Скрыть правила" type="button" onclick="toggle(rules_content)"#}
+{#                           class="btn btn-danger active mb-3 main-color" value="Правила" aria-pressed="true" data-toggle="button"><br>#}
+{#                    <p id="rules_content"  class="pre-wrap">{{ stock.rules }}</p>#}
+
+
+{#                    {% for institution_n in institution_names %}#}
+{#                        {% if loop.index == 1 %}#}
+{#                            <input type="button" onclick="toggle(id_group_{{ loop.index }})" class="btn btn-danger main-color active mb-2 mt-0"#}
+{#                                   value="{{ institution_n.institution_name }}" data-toggle="button" aria-pressed="true"><br>#}
+{#                             <ol id="id_group_{{ loop.index }}" class="list-unstyled mb-0">#}
+{#                        {% else %}#}
+{#                            <input type="button" onclick="toggle(id_group_{{ loop.index }})" class="btn btn-danger main-color mb-2"#}
+{#                                   value="{{ institution_n.institution_name }}" data-toggle="button"><br>#}
+{#                            <ol id="id_group_{{ loop.index }}" class="list-unstyled mb-0" style="display: none">#}
+{#                        {% endif %}#}
+{#                        {% for group_n in group_names %}#}
+{#                            {% if (group_n.institution_name == institution_n.institution_name) and (group_n.group_name != '') %}#}
+{#                                {% if loop.index == 1 %}#}
+{#                                    <li>#}
+{#                                        <input type="button" onclick="toggle(id_group_children_{{ loop.index }})" class="btn btn-danger main-color active mb-2 ml-3"#}
+{#                                               value="Группа «{{ group_n.group_name }}»" data-toggle="button" aria-pressed="true"><br>#}
+{#                                    </li>#}
+{#                                    <ol id="id_group_children_{{ loop.index }}" class="list-unstyled">#}
+{#                                {% else %}#}
+{#                                    <li>#}
+{#                                        <input type="button" onclick="toggle(id_group_children_{{ loop.index }})" class="btn btn-danger main-color mb-2 ml-3"#}
+{#                                              value="Группа «{{ group_n.group_name }}»" data-toggle="button"><br>#}
+{#                                    </li>#}
+{#                                    <ol id="id_group_children_{{ loop.index }}" class="list-unstyled" style="display: none">#}
+{#                                {% endif %}#}
+{#                            {% for child in children %}#}
+{#                                {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}#}
+{#                                    <li>#}
+{#                                        <input type="button" class="btn btn-dark mb-2 btn-sm ml-5" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>#}
+{#                                    </li>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </ol>#}
+{#                            {% elseif (group_n.institution_name == institution_n.institution_name) %}#}
+{#                                {% for child in children %}#}
+{#                                    {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}#}
+{#                                        <li>#}
+{#                                            <input type="button" class="btn btn-dark mb-2 btn-sm ml-3" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>#}
+{#                                        </li>#}
+{#                                    {% endif %}#}
+{#                                {% endfor %}#}
+{#                                </ol>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                            </ol>#}
+{#                    {% endfor %}#}
+
+{#                                class="list-unstyled">#}
+{#                    {% if (stock.dateEnd < today) %}#}
+{#                        <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>#}
+{#                        <a href="#" class="btn btn-danger mb-3">Перейти к фотоотчету</a>#}
+{#                    {% else %}#}
+{#                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>#}
+{#                    {% endif %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

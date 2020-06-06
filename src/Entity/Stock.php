@@ -65,9 +65,15 @@ class Stock
      */
     private $rules;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PhotoReport::class, mappedBy="stock")
+     */
+    private $photoReports;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->photoReports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +214,37 @@ class Stock
     public function setRules(?string $rules): self
     {
         $this->rules = $rules;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhotoReport[]
+     */
+    public function getPhotoReports(): Collection
+    {
+        return $this->photoReports;
+    }
+
+    public function addPhotoReport(PhotoReport $photoReport): self
+    {
+        if (!$this->photoReports->contains($photoReport)) {
+            $this->photoReports[] = $photoReport;
+            $photoReport->setStock($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotoReport(PhotoReport $photoReport): self
+    {
+        if ($this->photoReports->contains($photoReport)) {
+            $this->photoReports->removeElement($photoReport);
+            // set the owning side to null (unless already changed)
+            if ($photoReport->getStock() === $this) {
+                $photoReport->setStock(null);
+            }
+        }
 
         return $this;
     }

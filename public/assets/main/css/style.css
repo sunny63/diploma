@@ -11,6 +11,22 @@
     height: 70px;
 }
 
+.main-color {
+    background: rgba(215, 35, 29, 0.91) !important;
+}
+
+.main-color:not(:disabled):not(.disabled):active, .main-color:not(:disabled):not(.disabled).active,
+.show > .main-color.dropdown-toggle {
+    color: #fff;
+    background: rgb(196, 27, 21) !important;
+    border-color: rgba(146, 14, 9, 0.91) !important;
+}
+
+/*.main-color:not(:disabled):not(.disabled):active:focus, .main-color:not(:disabled):not(.disabled).active:focus,*/
+/*.show > .main-color.dropdown-toggle:focus {*/
+/*    background: rgba(215, 35, 29, 0.5) !important;*/
+/*}*/
+
 .main-content {
     width: 90%;
 }

@@ -8,6 +8,7 @@ use App\Entity\Child;
 use App\Entity\Stock;
 use App\Form\StockType;
 use App\Service\FileUploader;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -115,13 +116,22 @@ class AdminStockController extends AdminBaseController
     public function delete(int $id, Request $request)
     {
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $children = $stock->getChildren()->isEmpty();
+        $postReports = $stock->getPhotoReports()->isEmpty();
         $em = $this->getDoctrine()->getManager();
 
-        $em->remove($stock);
-        $this->addFlash('success', 'Акция удалена');
-        $em->flush();
+        if ($children && $postReports)
+        {
+            $em->remove($stock);
+            $this->addFlash('success', 'Акция удалена');
+            $em->flush();
 
-        return $this->redirectToRoute('admin_stocks');
+            return $this->redirectToRoute('admin_stocks');
+        }
+        else
+        {
+            $this->addFlash('success', 'Чтобы удалить акцию, удалите сначала элементы, относящиеся к данной акции.');
+        }
     }
 
     /**
@@ -139,6 +149,7 @@ class AdminStockController extends AdminBaseController
         $forRender['title'] = 'Список детей';
         $forRender['h1'] = 'Список всех детей, для данной акции';
         $forRender['children'] = $children;
+        $forRender['id_stock'] = $id;
         return $this->render("admin/children/index.html.twig", $forRender);
     }
 }

@@ -44,4 +44,22 @@ class MainStockController extends BaseController
         $forRender['group_names'] = $group_names;
         return $this->render("main/stock/children/index.html.twig", $forRender);
     }
+
+    /**
+     * @Route("/main/stock/{id}/photoReports", name="main_stock_photo_reports")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showPhotoReports(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $photoReports = $stock->getPhotoReports();
+//        $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
+//        $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
+
+        $forRender = parent::renderDefault();
+        $forRender['stock'] = $stock;
+        $forRender['photo_reports'] = $photoReports;
+        return $this->render("main/stock/photoReports/index.html.twig", $forRender);
+    }
 }

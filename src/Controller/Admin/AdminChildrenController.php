@@ -31,15 +31,16 @@ class AdminChildrenController extends AdminBaseController
         $forRender['h1'] = 'Список всех детей, нуждающихся в вещах (подарках)';
         $forRender['children'] = $child;
         $forRender['check_stock'] = $checkStock;
+        $forRender['id_stock'] = 0;
         return $this->render("admin/children/index.html.twig", $forRender);
     }
 
     /**
-     * @Route("/admin/child/create", name="admin_child_create")
+     * @Route("/admin/child/create/{id_stock}", name="admin_child_create", defaults = {"id_stock" = 0})
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function create(Request $request)
+    public function create(Request $request, int $id_stock)
     {
         $child = new Child();
         $form = $this->createForm(ChildType::class, $child);
@@ -64,12 +65,13 @@ class AdminChildrenController extends AdminBaseController
     }
 
     /**
-     * @Route("/admin/child/update/{id}", name="admin_child_update")
+     * @Route("/admin/child/update/{id},{id_stock}", name="admin_child_update", defaults = {"id_stock" = 0})
      * @param int $id
      * @param Request $request
+     * @param int $id_stock
      * @return RedirectResponse|Response
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request, int $id_stock)
     {
         $child = $this->getDoctrine()->getRepository(Child::class)->find($id);
         $form = $this->createForm(ChildType::class, $child);
@@ -82,29 +84,36 @@ class AdminChildrenController extends AdminBaseController
             $this->addFlash('success', 'Запись ребенка обновлена');
             $em->flush();
 
-            return $this->redirectToRoute('admin_children');
+            if ($id_stock == 0)
+                return $this->redirectToRoute('admin_children');
+            else
+                return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
         }
 
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Создание записи ребенка';
+        $forRender['title'] = 'Обновление записи ребенка';
         $forRender['form'] = $form->createView();
         return $this->render("admin/children/form.html.twig", $forRender);
     }
 
     /**
-     * @Route("/admin/child/delete/{id}", name="admin_child_delete")
+     * @Route("/admin/child/delete/{id},{id_stock}", name="admin_child_delete", defaults = {"id_stock" = 0})
      * @param int $id
+     * @param int $id_stock
      * @param Request $request
      */
-    public function delete(int $id, Request $request)
+    public function delete(int $id, Request $request, int $id_stock)
     {
         $child = $this->getDoctrine()->getRepository(Child::class)->find($id);
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($child);
-        $this->addFlash('success', 'Пост удален');
+        $this->addFlash('success', 'Запись ребенка удалена');
         $em->flush();
 
-        return $this->redirectToRoute('admin_children');
+        if ($id_stock == 0)
+            return $this->redirectToRoute('admin_children');
+        else
+            return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
     }
 }

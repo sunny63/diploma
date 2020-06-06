@@ -13,11 +13,11 @@
 
     {{ form_start(form) }}
 
+    {{ form_label(form.stock) }}
+    {{ form_widget(form.stock, { 'attr': {'class': 'form-control mb-1'} }) }}
+
     {{ form_label(form.title) }}
     {{ form_widget(form.title, { 'attr': {'class': 'form-control mb-1'} }) }}
-
-    {{ form_label(form.category) }}
-    {{ form_widget(form.category, { 'attr': {'class': 'form-control mb-1'} }) }}
 
     {{ form_label(form.description) }}
     {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1 row-min'} }) }}
