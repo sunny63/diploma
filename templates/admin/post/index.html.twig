@@ -14,6 +14,12 @@
         </div>
     {% endfor %}
 
+    {% if posts is empty %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Список постов пока что пуст. Добавьте первый пост!
+        </div>
+    {% endif %}
+
     <ul class="pl-0">
         {% for post in posts %}
             <li class="list-group-item p-3 rounded mb-3 border">

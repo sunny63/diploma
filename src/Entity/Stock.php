@@ -70,6 +70,11 @@ class Stock
      */
     private $photoReports;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $thanks;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -245,6 +250,18 @@ class Stock
                 $photoReport->setStock(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getThanks(): ?string
+    {
+        return $this->thanks;
+    }
+
+    public function setThanks(?string $thanks): self
+    {
+        $this->thanks = $thanks;
 
         return $this;
     }

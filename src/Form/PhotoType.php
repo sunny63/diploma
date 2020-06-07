@@ -41,7 +41,8 @@ class PhotoType extends AbstractType
                 'disabled' => $options['is_photo_report_photos']
             ))
             ->add('description', TextType::class, array(
-                'label' => 'Описание фото'
+                'label' => 'Описание фото',
+                'required' => false
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Сохранить'

@@ -31,18 +31,28 @@ class AdminPhotoReportController extends AdminBaseController
         $forRender['h1'] = 'Список всех фотоотчетов';
         $forRender['photo_reports'] = $photoReport;
         $forRender['check_stock'] = $checkStock;
+        $forRender['id_stock'] = 0;
         return $this->render("admin/photoReport/index.html.twig", $forRender);
     }
 
     /**
-     * @Route("/admin/photoReport/create", name="admin_photo_report_create")
+     * @Route("/admin/photoReport/create/{id_stock}", name="admin_photo_report_create", defaults = {"id_stock" = 0})
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function create(Request $request, FileUploader $fileUploader)
+    public function create(Request $request, FileUploader $fileUploader, int $id_stock)
     {
         $photoReport = new PhotoReport();
-        $form = $this->createForm(PhotoReportType::class, $photoReport);
+        if ($id_stock)
+        {
+            $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id_stock);
+            $photoReport->setStock($stock);
+            $form = $this->createForm(PhotoReportType::class, $photoReport, array('is_stock_photo_report' => true));
+        }
+        else
+            $form = $this->createForm(PhotoReportType::class, $photoReport);
+
+
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
@@ -63,7 +73,10 @@ class AdminPhotoReportController extends AdminBaseController
 
             $this->addFlash('success', 'Фотоотчет создан');
 
-            return $this->redirectToRoute('admin_photo_reports');
+            if ($id_stock)
+                return $this->redirectToRoute('admin_stock_photo_reports', array('id' => $id_stock));
+            else
+                return $this->redirectToRoute('admin_photo_reports');
         }
 
         $forRender = parent::renderDefault();
@@ -73,12 +86,12 @@ class AdminPhotoReportController extends AdminBaseController
     }
 
     /**
-     * @Route("/admin/photoReport/update/{id}", name="admin_photo_report_update")
+     * @Route("/admin/photoReport/update/{id},{id_stock}", name="admin_photo_report_update", defaults = {"id_stock" = 0})
      * @param int $id
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function update(int $id, Request $request, FileUploader $fileUploader)
+    public function update(int $id, Request $request, FileUploader $fileUploader, int $id_stock)
     {
         $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
         $form = $this->createForm(PhotoReportType::class, $photoReport);
@@ -99,7 +112,10 @@ class AdminPhotoReportController extends AdminBaseController
             $this->addFlash('success', 'Фотоотчет обновлен');
             $em->flush();
 
-            return $this->redirectToRoute('admin_photo_reports');
+            if ($id_stock)
+                return $this->redirectToRoute('admin_stock_photo_reports', array('id' => $id_stock));
+            else
+                return $this->redirectToRoute('admin_photo_reports');
         }
 
         $forRender = parent::renderDefault();
@@ -109,11 +125,11 @@ class AdminPhotoReportController extends AdminBaseController
     }
 
     /**
-     * @Route("/admin/photoReport/delete/{id}", name="admin_photo_report_delete")
+     * @Route("/admin/photoReport/delete/{id},{id_stock}", name="admin_photo_report_delete", defaults = {"id_stock" = 0})
      * @param int $id
      * @param Request $request
      */
-    public function delete(int $id, Request $request)
+    public function delete(int $id, Request $request, int $id_stock)
     {
         $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
         $em = $this->getDoctrine()->getManager();
@@ -122,7 +138,10 @@ class AdminPhotoReportController extends AdminBaseController
         $this->addFlash('success', 'Фотоотчет удален');
         $em->flush();
 
-        return $this->redirectToRoute('admin_photo_reports');
+        if ($id_stock)
+            return $this->redirectToRoute('admin_stock_photo_reports', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_photo_reports');
     }
 
     /**
@@ -134,7 +153,6 @@ class AdminPhotoReportController extends AdminBaseController
     {
         $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
         $photos = $photoReport->getPhotos();
-        $em = $this->getDoctrine()->getManager();
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Список фотографий';

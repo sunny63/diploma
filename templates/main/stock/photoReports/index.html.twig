@@ -15,10 +15,7 @@
                 <div class="form ml-5">
                     <h1>Акция «{{ stock.title }}» успешно завершилась!</h1>
                     <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
-                    <p>Спасибо всем, кто учествовал в нашей акции! В этом году все дети получили подарки благодаря вам.
-                        Отдельное спасибо Наталье Быковой за создания сайта для удобного функционирования наших акций!!!
-                        Ура!!
-                    </p>
+                    <p>{{ stock.thanks }}</p>
 
                     {% for photo_report in photo_reports %}
                     <div class="media">

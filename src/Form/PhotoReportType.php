@@ -22,7 +22,8 @@ class PhotoReportType extends AbstractType
             ->add('stock', EntityType::class, array(
                 'label' => 'Заголовок акции, к которой относится фотоотчет',
                 'class' => Stock::class,
-                'choice_label' => 'title' // какое поле из акций будет отображаться
+                'choice_label' => 'title', // какое поле из акций будет отображаться
+                'disabled' => $options['is_stock_photo_report']
             ))
             ->add('title', TextType::class, array(
                 'label' => 'Заголовок'
@@ -56,6 +57,7 @@ class PhotoReportType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PhotoReport::class,
+            'is_stock_photo_report' => false
         ]);
     }
 }

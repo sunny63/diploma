@@ -10,17 +10,17 @@
     {#    {% endfor %}#}
 
     <div class="container-fluid main-content">
-        <div class="row no-gutters mt-4">
+        <div class="row no-gutters mt-5">
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form ml-5">
                     <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"
-                         alt="Главное фото" width="600" align="left" vspace="10" hspace="0">
+                         alt="Главное фото" width="600" align="left" vspace="15" hspace="0">
                     <h1 class="mt-0">{{ stock.title }}</h1>
                     <p><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
                     <p class="pre-wrap">{{ stock.description }}</p>
                     {% if (stock.dateEnd < today) %}
                         <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>
-                        <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger mb-3">Перейти к фотоотчетам</a>
+                        <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger mb-3">Перейти к фотоотчету</a>
                     {% else %}
                         <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>
                     {% endif %}

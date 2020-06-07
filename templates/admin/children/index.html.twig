@@ -35,6 +35,7 @@
             </li>
         {% endfor %}
     </ul>
+
     {% if (id_stock) %}
         <a href="{{ path('admin_child_create', {'id_stock': id_stock}) }}" class="btn btn-success">Добавить ребенка</a>
     {% else %}

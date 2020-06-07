@@ -131,6 +131,7 @@ class AdminStockController extends AdminBaseController
         else
         {
             $this->addFlash('success', 'Чтобы удалить акцию, удалите сначала элементы, относящиеся к данной акции.');
+            return $this->redirectToRoute('admin_stocks');
         }
     }
 
@@ -143,7 +144,6 @@ class AdminStockController extends AdminBaseController
     {
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
         $children = $stock->getChildren();
-        $em = $this->getDoctrine()->getManager();
 
         $forRender = parent::renderDefault();
         $forRender['title'] = 'Список детей';
@@ -151,5 +151,23 @@ class AdminStockController extends AdminBaseController
         $forRender['children'] = $children;
         $forRender['id_stock'] = $id;
         return $this->render("admin/children/index.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/admin/stock/photoReports/{id}", name="admin_stock_photo_reports")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showPhotoReports(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $photoReports = $stock->getPhotoReports();
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Список фотоотчетов';
+        $forRender['h1'] = 'Список всех фотоотчетов, для данной акции';
+        $forRender['photo_reports'] = $photoReports;
+        $forRender['id_stock'] = $id;
+        return $this->render("admin/photoReport/index.html.twig", $forRender);
     }
 }

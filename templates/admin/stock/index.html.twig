@@ -14,12 +14,16 @@
         </div>
     {% endfor %}
 
+    {% if stocks is empty %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Список акций пока что пуст. Добавьте первую акцию!
+        </div>
+    {% endif %}
+
     <ul class="pl-0">
         {% for stock in stocks %}
             <li class="list-group-item p-3 rounded mb-3 border">
-                <div class="media">
-                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="300">
-                    <div class="media-body">
+                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
                         <b>Акция:</b> {{ stock.title }}<br>
                         <p class="pre-wrap"><b>Описание акции:</b><br>{{ stock.description }}</p>
                         <b>Сроки акции:</b> c {{ stock.dateStart|date('d.m.Y') }} по {{ stock.dateEnd|date('d.m.Y') }}<br>
@@ -29,14 +33,11 @@
                         {% endif %}
 
                         <a href="{{ path('admin_stock_update', {'id': stock.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
-                        <a href="{{ path('admin_stock_delete', {'id': stock.id}) }}" class="btn btn-danger mt-2">Удалить</a>
+                        <a href="{{ path('admin_stock_children', {'id': stock.id}) }}" class="btn btn-dark mt-2 ml-1 mr-1">Показать список детей</a>
+                        <a href="{{ path('admin_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-dark mt-2 ml-1">Показать фотоотчеты</a>
 
-                         <a href="{{ path('admin_stock_children', {'id': stock.id}) }}" class="btn btn-danger mt-2 ml-1">Показать список детей</a>
-
-                    </div>
-                </div>
+                        <a href="{{ path('admin_stock_delete', {'id': stock.id}) }}" class="btn btn-danger mt-2 pull-right">Удалить</a>
             </li>
-
         {% endfor %}
     </ul>
 

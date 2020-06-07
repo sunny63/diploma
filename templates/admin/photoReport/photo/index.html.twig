@@ -16,7 +16,7 @@
 
     {% if photos is empty %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Список фотографий пока что пуст!
+            Список фотографий пока что пуст. Добавьте первую фотографию!
         </div>
     {% endif %}
 
@@ -32,14 +32,23 @@
                         </div>
                         <figcaption class="text-center text-size-figcaption mt-1">{{ photo.description }}<br>
                             {% if (id_photo_report) %}
-                                <a href="{{ path('admin_photo_update', {'id': photo.id, 'id_photo_report': id_photo_report}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
-                                <a href="{{ path('admin_photo_delete', {'id': photo.id, 'id_photo_report': id_photo_report}) }}" class="btn btn-danger mt-2">Удалить</a>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a href="{{ path('admin_photo_update', {'id': photo.id, 'id_photo_report': id_photo_report}) }}" class="btn btn-block btn-dark btn-sm mt-1">Редактировать</a>
+                                    </div>
+                                    <div class="col-sm">
+                                        <a href="{{ path('admin_photo_delete', {'id': photo.id, 'id_photo_report': id_photo_report}) }}" class="btn btn-block btn-danger btn-sm mt-1">Удалить</a>
+                                    </div>
+                                </div>
                             {% else %}
-{#                                <div class="col-12">#}
-{#                                    <a href="{{ path('admin_photo_update', {'id': photo.id}) }}" class="btn btn-block btn-dark btn-sm mt-1 mr-1">Редактировать</a>#}
-{#                                </div>#}
-                                <a href="{{ path('admin_photo_update', {'id': photo.id}) }}" class="btn btn-block btn-dark btn-sm mt-1 mr-1">Редактировать</a>
-                                <a href="{{ path('admin_photo_delete', {'id': photo.id}) }}" class="btn btn-block btn-danger btn-sm mt-1">Удалить</a>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <a href="{{ path('admin_photo_update', {'id': photo.id}) }}" class="btn btn-block btn-dark btn-sm mt-1">Редактировать</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a href="{{ path('admin_photo_delete', {'id': photo.id}) }}" class="btn btn-block btn-danger btn-sm mt-1">Удалить</a>
+                                        </div>
+                                    </div>
                             {% endif %}
                         </figcaption>
                     </figure>
@@ -49,9 +58,9 @@
     </div>
 
     {% if (id_photo_report) %}
-        <a href="{{ path('admin_photo_create', {'id_photo_report': id_photo_report}) }}" class="btn btn-success mt-3">Добавить фотографию</a>
+        <a href="{{ path('admin_photo_create', {'id_photo_report': id_photo_report}) }}" class="btn btn-success">Добавить фотографию</a>
     {% else %}
-        <a href="{{ path('admin_photo_create') }}" class="btn btn-success mt-3">Добавить фотографию</a>
+        <a href="{{ path('admin_photo_create') }}" class="btn btn-success">Добавить фотографию</a>
     {% endif %}
 
 {#    {% if check_photo_report is not empty %}#}

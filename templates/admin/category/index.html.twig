@@ -14,6 +14,12 @@
         </div>
     {% endfor %}
 
+    {% if categories is empty %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Список категорий пока что пуст. Добавьте первую категорию!
+        </div>
+    {% endif %}
+
     <ul class="pl-0">
         {% for category in categories %}
             <li class="list-group-item p-3 rounded mb-3 border">

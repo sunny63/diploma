@@ -6,7 +6,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v16') }}">
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v17') }}">
     {% endblock %}
 </head>
 <body>
@@ -17,28 +17,28 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_home') }}">Главная<span class="sr-only">(current)</span></a>
+                <a class="nav-link ml-2" href="{{ path('admin_home') }}" >Главная<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_users') }}">Пользователи</a>
+                <a class="nav-link ml-2" href="{{ path('admin_posts') }}">Посты</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_stocks') }}">Акции</a>
+                <a class="nav-link ml-2" href="{{ path('admin_stocks') }}">Акции</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_categories') }}">Категории</a>
+                <a class="nav-link ml-2" href="{{ path('admin_children') }}">Дети</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_posts') }}">Посты</a>
+                <a class="nav-link ml-2" href="{{ path('admin_photo_reports') }}">Фотоотчеты</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_children') }}">Дети</a>
+                <a class="nav-link ml-2" href="{{ path('admin_photos') }}">Фотографии</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_photo_reports') }}">Фотоотчеты</a>
+                <a class="nav-link ml-2" href="{{ path('admin_users') }}">Пользователи</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('admin_photos') }}">Фотографии</a>
+                <a class="nav-link ml-2" href="{{ path('admin_categories') }}">Категории</a>
             </li>
         </ul>
         <form class="form-inline">
