@@ -13,20 +13,22 @@
         <div class="row no-gutters mt-3">
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form ml-5">
-                    <div class="media">
-                        <div class="pt-0 ">
-                            <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"
-                                 alt="Главное фото" width="200" align="left" vspace="15" hspace="0">
-                        </div>
-                        <div class="media-body">
-                            <h1>{{ stock.title }}</h1>
-                            <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
-                            <p>Ниже представленны списки детей из различных учреждений, а также правила проведения акции.
+                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"
+                         alt="Главное фото" width="282" align="left" vspace="10" hspace="0">
+                    <h1>{{ stock.title }}</h1>
+                    <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
+                    <p>Ниже представленны списки детей из различных учреждений, а также правила проведения акции.
                                 Чтобы скрыть или показать списки детей, нажмите на кнопку с названием подшефного учреждения.
                                 Детей, у которых отсутствует кнопка выбора, уже выбрали.
-                            </p>
-                        </div>
-                    </div>
+                                Ниже представленны списки детей из различных учреждений, а также правила проведения акции.
+                                Чтобы скрыть или показать списки д
+                                етей, нажмите на кнопку с названием подшефного учреждения.
+                                Детей, у которых отсутствует кнопка выбора, у
+                                же выбралиНиже представленны списки детей из различных учреждений, а также правила проведения акции.
+                                Чтобы скрыть или показать списки дете
+                                й, нажмите на кнопку с названием подшефного учреждения.
+                                Детей, у которых отсутствует кнопка выбора, уже выбрали
+                    </p>
 
                     <input id="showRules" data-string-text="Скрыть правила" type="button" onclick="toggle(rules_content)"
                            class="btn btn-danger active mb-3 main-color" value="Правила" aria-pressed="true" data-toggle="button"><br>

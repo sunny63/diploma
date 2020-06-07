@@ -27,9 +27,19 @@
 /*    background: rgba(215, 35, 29, 0.5) !important;*/
 /*}*/
 
+.mr-10 {
+    padding-right: 10%!important;
+}
+
 .main-content {
     width: 90%;
 }
+
+.main-content-fot {
+    width: 60%;
+}
+
+
 .form-login {
     width: 90%;
     border-radius: 5px;
@@ -56,4 +66,8 @@
 
 .row-min {
     min-height: 200px!important;
+}
+
+.text-size-figcaption {
+    font-size: 12px;
 }

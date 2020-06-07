@@ -11,95 +11,66 @@
 
     <div class="container-fluid main-content">
         <div class="row no-gutters mt-3">
-            <div class="col-12 col-lg-10 col-md-10">
+            <div class="col-10">
                 <div class="form ml-5">
-                    <div class="media">
-                        <div class="pt-0 ">
-                            <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded"
-                                 alt="Главное фото" width="600" align="left" vspace="15" hspace="0">
-                        </div>
-                        <div class="media-body">
-                            <h1>«{{ photo_report.title }}»</h1>
-                            <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
-                            <p class="pre-wrap part-description">{{ photo_report.description }}</p>
-                        </div>
-                    </div>
+                    <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded-lg"
+                         alt="Главное фото" width="500" align="left" vspace="10" hspace="0">
+                    <h1>{{ photo_report.title }}</h1>
+                    <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
+                    <p class="pre-wrap">{{ photo_report.description }}</p>
 
-                    {% for photo in photos %}
-                    <div class="media">
-                        <div class="pt-0 ">
-                            <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="mr-3 rounded"
-                                 alt="Главное фото" width="400" align="left" vspace="15" hspace="0">
-                        </div>
-                        <div class="media-body">
-                            <p class="pre-wrap part-description">{{ photo.description }}</p>
-{#                            <a href="{{ path('main_stock', {'id': photo_report.id}) }}" class="btn btn-danger">Подробнее</a>#}
-                        </div>
-                    </div>
-                    {% endfor %}
 
                     {#                    <input id="showRules" data-string-text="Скрыть правила" type="button" onclick="toggle(rules_content)"#}
 {#                           class="btn btn-danger active mb-3 main-color" value="Правила" aria-pressed="true" data-toggle="button"><br>#}
 {#                    <p id="rules_content"  class="pre-wrap">{{ stock.rules }}</p>#}
 
-
-{#                    {% for institution_n in institution_names %}#}
-{#                        {% if loop.index == 1 %}#}
-{#                            <input type="button" onclick="toggle(id_group_{{ loop.index }})" class="btn btn-danger main-color active mb-2 mt-0"#}
-{#                                   value="{{ institution_n.institution_name }}" data-toggle="button" aria-pressed="true"><br>#}
-{#                             <ol id="id_group_{{ loop.index }}" class="list-unstyled mb-0">#}
-{#                        {% else %}#}
-{#                            <input type="button" onclick="toggle(id_group_{{ loop.index }})" class="btn btn-danger main-color mb-2"#}
-{#                                   value="{{ institution_n.institution_name }}" data-toggle="button"><br>#}
-{#                            <ol id="id_group_{{ loop.index }}" class="list-unstyled mb-0" style="display: none">#}
-{#                        {% endif %}#}
-{#                        {% for group_n in group_names %}#}
-{#                            {% if (group_n.institution_name == institution_n.institution_name) and (group_n.group_name != '') %}#}
-{#                                {% if loop.index == 1 %}#}
-{#                                    <li>#}
-{#                                        <input type="button" onclick="toggle(id_group_children_{{ loop.index }})" class="btn btn-danger main-color active mb-2 ml-3"#}
-{#                                               value="Группа «{{ group_n.group_name }}»" data-toggle="button" aria-pressed="true"><br>#}
-{#                                    </li>#}
-{#                                    <ol id="id_group_children_{{ loop.index }}" class="list-unstyled">#}
-{#                                {% else %}#}
-{#                                    <li>#}
-{#                                        <input type="button" onclick="toggle(id_group_children_{{ loop.index }})" class="btn btn-danger main-color mb-2 ml-3"#}
-{#                                              value="Группа «{{ group_n.group_name }}»" data-toggle="button"><br>#}
-{#                                    </li>#}
-{#                                    <ol id="id_group_children_{{ loop.index }}" class="list-unstyled" style="display: none">#}
-{#                                {% endif %}#}
-{#                            {% for child in children %}#}
-{#                                {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}#}
-{#                                    <li>#}
-{#                                        <input type="button" class="btn btn-dark mb-2 btn-sm ml-5" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>#}
-{#                                    </li>#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                        </ol>#}
-{#                            {% elseif (group_n.institution_name == institution_n.institution_name) %}#}
-{#                                {% for child in children %}#}
-{#                                    {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}#}
-{#                                        <li>#}
-{#                                            <input type="button" class="btn btn-dark mb-2 btn-sm ml-3" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>#}
-{#                                        </li>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                                </ol>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                            </ol>#}
-{#                    {% endfor %}#}
-
-{#                                class="list-unstyled">#}
-{#                    {% if (stock.dateEnd < today) %}#}
-{#                        <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>#}
-{#                        <a href="#" class="btn btn-danger mb-3">Перейти к фотоотчету</a>#}
-{#                    {% else %}#}
-{#                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>#}
-{#                    {% endif %}#}
                 </div>
+            </div>
+{#            <div class="col-sm-1 offset-sm-1 blog-sidebar" style="width: 100%">#}
+{#                <div class="sidebar-module sidebar-module-inset">#}
+{#                    <h4>About</h4>#}
+{#                    <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>#}
+{#                </div>#}
+{#                <div class="sidebar-module">#}
+{#                    <h4>Archives</h4>#}
+{#                    <ol class="list-unstyled">#}
+{#                        <li><a href="#">March 2014</a></li>#}
+{#                        <li><a href="#">February 2014</a></li>#}
+{#                        <li><a href="#">January 2014</a></li>#}
+{#                        <li><a href="#">December 2013</a></li>#}
+{#                        <li><a href="#">November 2013</a></li>#}
+{#                        <li><a href="#">October 2013</a></li>#}
+{#                        <li><a href="#">September 2013</a></li>#}
+{#                        <li><a href="#">August 2013</a></li>#}
+{#                        <li><a href="#">July 2013</a></li>#}
+{#                        <li><a href="#">June 2013</a></li>#}
+{#                        <li><a href="#">May 2013</a></li>#}
+{#                        <li><a href="#">April 2013</a></li>#}
+{#                    </ol>#}
+{#                </div>#}
+{#                <div class="sidebar-module">#}
+{#                    <h4>Elsewhere</h4>#}
+{#                    <ol class="list-unstyled">#}
+{#                        <li><a href="#">GitHub</a></li>#}
+{#                        <li><a href="#">Twitter</a></li>#}
+{#                        <li><a href="#">Facebook</a></li>#}
+{#                    </ol>#}
+{#                </div>#}
             </div>
         </div>
     </div>
-
+    <div class="container-fluid main-content">
+        <div class="row form ml-5 mt-4 col-10 mr-10">
+            {% for photo in photos %}
+                <div class="col-sm-4">
+                    <figure>
+                        <div>
+                            <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="rounded img-fluid">
+                        </div>
+                        <figcaption class="text-center text-size-figcaption">{{ photo.description }}</figcaption>
+                    </figure>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
