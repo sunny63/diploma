@@ -37,7 +37,8 @@ class PhotoType extends AbstractType
             ->add('photoReport', EntityType::class, array(
                 'label' => 'Заголовок фотоотчета, к которой относится фотография',
                 'class' => PhotoReport::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
+                'disabled' => $options['is_photo_report_photos']
             ))
             ->add('description', TextType::class, array(
                 'label' => 'Описание фото'
@@ -52,6 +53,7 @@ class PhotoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Photo::class,
+            'is_photo_report_photos' => false
         ]);
     }
 }

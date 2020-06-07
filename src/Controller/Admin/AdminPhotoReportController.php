@@ -124,4 +124,23 @@ class AdminPhotoReportController extends AdminBaseController
 
         return $this->redirectToRoute('admin_photo_reports');
     }
+
+    /**
+     * @Route("/admin/photoReport/photos/{id}", name="admin_photo_report_photos")
+     * @param int $id
+     * @param Request $request
+     */
+    public function showPhotos(int $id, Request $request)
+    {
+        $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
+        $photos = $photoReport->getPhotos();
+        $em = $this->getDoctrine()->getManager();
+
+        $forRender = parent::renderDefault();
+        $forRender['title'] = 'Список фотографий';
+        $forRender['h1'] = 'Все фотографии для данного фотоотчета';
+        $forRender['photos'] = $photos;
+        $forRender['id_photo_report'] = $id;
+        return $this->render("admin/photoReport/photo/index.html.twig", $forRender);
+    }
 }

@@ -26,48 +26,20 @@
 
                 </div>
             </div>
-{#            <div class="col-sm-1 offset-sm-1 blog-sidebar" style="width: 100%">#}
-{#                <div class="sidebar-module sidebar-module-inset">#}
-{#                    <h4>About</h4>#}
-{#                    <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>#}
-{#                </div>#}
-{#                <div class="sidebar-module">#}
-{#                    <h4>Archives</h4>#}
-{#                    <ol class="list-unstyled">#}
-{#                        <li><a href="#">March 2014</a></li>#}
-{#                        <li><a href="#">February 2014</a></li>#}
-{#                        <li><a href="#">January 2014</a></li>#}
-{#                        <li><a href="#">December 2013</a></li>#}
-{#                        <li><a href="#">November 2013</a></li>#}
-{#                        <li><a href="#">October 2013</a></li>#}
-{#                        <li><a href="#">September 2013</a></li>#}
-{#                        <li><a href="#">August 2013</a></li>#}
-{#                        <li><a href="#">July 2013</a></li>#}
-{#                        <li><a href="#">June 2013</a></li>#}
-{#                        <li><a href="#">May 2013</a></li>#}
-{#                        <li><a href="#">April 2013</a></li>#}
-{#                    </ol>#}
-{#                </div>#}
-{#                <div class="sidebar-module">#}
-{#                    <h4>Elsewhere</h4>#}
-{#                    <ol class="list-unstyled">#}
-{#                        <li><a href="#">GitHub</a></li>#}
-{#                        <li><a href="#">Twitter</a></li>#}
-{#                        <li><a href="#">Facebook</a></li>#}
-{#                    </ol>#}
-{#                </div>#}
-            </div>
         </div>
     </div>
+    </div>
     <div class="container-fluid main-content">
-        <div class="row form ml-5 mt-4 col-10 mr-10">
+        <div class="row form ml-5 mt-4 col-10 pr-10">
             {% for photo in photos %}
                 <div class="col-sm-4">
                     <figure>
-                        <div>
-                            <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="rounded img-fluid">
+                        <div class="thumb">
+                            <a data-fancybox="gallery" href="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}">
+                                <img src="{{ asset('uploads/images/photoReport/photo/' ~ photo.image) }}" class="rounded img-fluid">
+                            </a>
                         </div>
-                        <figcaption class="text-center text-size-figcaption">{{ photo.description }}</figcaption>
+                        <figcaption class="text-center text-size-figcaption mt-1">{{ photo.description }}</figcaption>
                     </figure>
                 </div>
             {% endfor %}
