@@ -31,17 +31,6 @@
                                 </div>
                             </li>
                         {% endfor %}
-                        {% for post in posts %}
-                            <li class="list-group-item p-3 mb-3 border-0">
-                                <div class="media">
-                                    <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
-                                    <div class="media-body">
-                                        <h2>{{ post.title }}</h2>
-                                        <p class="pre-wrap part-description">{{ post.description }}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
                     </ul>
                 </div>
             </div>

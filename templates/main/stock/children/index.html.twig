@@ -62,18 +62,56 @@
                                 {% endif %}
                             {% for child in children %}
                                 {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}
-                                    <li>
-                                        <input type="button" class="btn btn-dark mb-2 btn-sm ml-5" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>
-                                    </li>
+                                    {% if child.reservationNickname != NULL %}
+                                        <li>
+                                            <div class="row col-10">
+                                                <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-5 text-left">
+                                                    {{ child.serialNumber }}. {{ child.information }} </a>
+                                                <div class="col-sm position-absolute ml-0">
+                                                    <l class="ml-4 btn-sm btn btn-block btn-outline-success btn-reservation disabled">{{ child.reservationNickname }}</l>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <div class="row col-10">
+                                                <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-5">
+                                                    {{ child.serialNumber }}. {{ child.information }}</a>
+                                                <div class="col-sm position-absolute">
+                                                    <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                       class="btn-sm btn btn-block btn-outline-dark btn-reservation">Ребенка еще не выбрали</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </ol>
                             {% elseif (group_n.institution_name == institution_n.institution_name) %}
                                 {% for child in children %}
                                     {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}
-                                        <li>
-                                            <input type="button" class="btn btn-dark mb-2 btn-sm ml-3" value="Выбрать"> {{ child.serialNumber }}. {{ child.information }}<br>
-                                        </li>
+                                        {% if child.reservationNickname != NULL %}
+                                            <li>
+                                                <div class="row col-10">
+                                                    <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-3 text-left">
+                                                        {{ child.serialNumber }}. {{ child.information }} </a>
+                                                    <div class="col-sm position-absolute ml-0">
+                                                        <l class="ml-4 btn-sm btn btn-block btn-outline-success btn-reservation2 disabled">{{ child.reservationNickname }}</l>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <div class="row col-10">
+                                                    <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-3">
+                                                        {{ child.serialNumber }}. {{ child.information }}</a>
+                                                    <div class="col-sm position-absolute">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                           class="btn-sm btn btn-block btn-outline-dark btn-reservation2">Ребенка еще не выбрали</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                                 </ol>
@@ -82,6 +120,30 @@
                             </ol>
                     {% endfor %}
 
+                                 <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                     Запустить модальное окно
+                                 <a>
+                                 <!-- Modal -->
+                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                     <div class="modal-dialog modal-dialog-centered" role="document">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                     <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                             </div>
+                                             <div class="modal-body">
+                                                 Вы хотите забронировать данного ребенка?
+                                             </div>
+                                             <div class="modal-footer">
+                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                 <button type="button" class="btn btn-primary">Save changes</button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
 {#                                class="list-unstyled">#}
 {#                    {% if (stock.dateEnd < today) %}#}
 {#                        <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>#}
@@ -89,6 +151,7 @@
 {#                    {% else %}#}
 {#                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>#}
 {#                    {% endif %}#}
+
                 </div>
             </div>
         </div>

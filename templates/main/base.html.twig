@@ -6,16 +6,17 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v33') }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
+            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v39') }}">
         {% endblock %}
     </head>
     <body>
     <header>
 
     <nav class="navbar navbar-current navbar-expand-lg navbar-dark">
-        <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" width="260px" class="logo"></a>
+        <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo"></a>
 
-        <a class="navbar-brand" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">
+        <a class="navbar-brand nav-link-style" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">
             <i class="fa fa-microchip" aria-hidden="true"></i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,19 +25,19 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
+                    <a class="nav-link nav-link-style" href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">События</a>
+{#                    <a class="nav-link nav-link-style" href="{{ path('main_stocks'}}">Наши акции</a>#}
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Фотогалерея</a>
+                    <a class="nav-link nav-link-style" href="{{ path('main_photo_reports') }}">Фотоотчеты</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Отчеты</a>
+                    <a class="nav-link nav-link-style" href="#">Статистика</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Блог</a>
+                    <a class="nav-link nav-link-style" href="#">Блог</a>
                 </li>
             </ul>
             <form class="form-inline">
@@ -44,7 +45,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_home') }}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Админ панель</a>
                     {% else %}
-                        <a href="{{ path('app_logout') }}" class="btn btn-outline-dark my-2 my-sm-0 ml-2" type="submit">Выход</a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-light my-2 my-sm-0 ml-2" type="submit">Выход</a>
                     {% endif %}
                 {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Войти</a>
@@ -56,20 +57,34 @@
 
     {% block body %}{% endblock %}
 
-    {% block javascripts %}
+    <footer class="footer">
+        <div class="row">
+            <div class="col-sm m-3 pl-5 text-left text-white"> © 2014–2020
+                <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
+                <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
+                Все права защищены.
+            </div>
+            <div class="col-sm m-3 pr-10 text-right text-white">
+                <a href="{{ path('home') }}" class="mr-4 nav-link-style">Главная страница</a>
+                <a href="#" class="mr-4 nav-link-style">Наши акции</a>
+                <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style">Фотоотчеты</a>
+                <a href="#" class="mr-4 nav-link-style">Статистика</a>
+                <a href="#" class="mr-4 nav-link-style">Блог</a>
+            </div>
+        </div>
+    </footer>
 
+    {% block javascripts %}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/framework/bootstrap-4.5.0/js/bootstrap.min.js') }}"></script>
-{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>#}
-        <script src="{{ asset('assets/main/js/style.js?v1') }}"></script>
+        <script src="{{ asset('assets/main/js/style.js') }}"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
         <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
         {% endblock %}
     </body>
 </html>

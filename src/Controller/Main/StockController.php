@@ -10,7 +10,7 @@ use App\Entity\Child;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class MainStockController extends BaseController
+class StockController extends BaseController
 {
     /**
      * @Route("/main/stock/{id}", name="main_stock")
@@ -82,4 +82,6 @@ class MainStockController extends BaseController
         $forRender['photos'] = $photos;
         return $this->render("main/stock/photoReports/photo/index.html.twig", $forRender);
     }
+
+
 }

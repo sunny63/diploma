@@ -1,6 +1,6 @@
 {% extends 'main/base.html.twig' %}
 
-{% block title %}{{ stock.title }} (списки детей){% endblock %}
+{% block title %}{{ stock.title }}{% endblock %}
 {% block h1 %}{{ h1 }}{% endblock %}
 
 {% block body %}
@@ -9,6 +9,8 @@
     {#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
     {#    {% endfor %}#}
 
+{#    mx-auto d-block #}
+
     <div class="container-fluid main-content">
         <div class="row no-gutters mt-3">
             <div class="col-12 col-lg-10 col-md-10">
@@ -16,6 +18,13 @@
                     <h1>Акция «{{ stock.title }}» успешно завершилась!</h1>
                     <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
                     <p>{{ stock.thanks }}</p>
+                    {{ user.nickname }}
+
+                    {% if photo_reports is empty %}
+                        <p>По мере проведения утренников ниже появятся фотоотчеты, где вы сможете посмотреть на детей, которым покупали подарки и порадоваться вместе с ними!</p>
+                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"
+                             alt="Главное фото" width="700" vspace="0" hspace="0">
+                    {% endif %}
 
                     {% for photo_report in photo_reports %}
                     <div class="media">
@@ -27,7 +36,7 @@
                             <h2>{{ photo_report.title }}</h2>
                             <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
                             <p class="pre-wrap part-description">{{ photo_report.description }}</p>
-                            <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn btn-danger">Подробнее</a>
+                            <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn btn-danger main-color">Подробнее</a>
                         </div>
                     </div>
                     {% endfor %}

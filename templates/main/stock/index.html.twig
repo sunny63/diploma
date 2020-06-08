@@ -20,9 +20,9 @@
                     <p class="pre-wrap">{{ stock.description }}</p>
                     {% if (stock.dateEnd < today) %}
                         <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>
-                        <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger mb-3">Перейти к фотоотчету</a>
+                        <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3">Перейти к фотоотчету</a>
                     {% else %}
-                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>
+                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3">Списки детей</a>
                     {% endif %}
                 </div>
             </div>
