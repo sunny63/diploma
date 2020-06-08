@@ -39,9 +39,13 @@ class StockController extends BaseController
         $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
         $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
 
+        $user = $this->getUser();
+
+
         $forRender = parent::renderDefault();
         $forRender['stock'] = $stock;
         $forRender['children'] = $children;
+        $forRender['user'] = $user;
         $forRender['institution_names'] = $institution_names;
         $forRender['group_names'] = $group_names;
         return $this->render("main/stock/children/index.html.twig", $forRender);

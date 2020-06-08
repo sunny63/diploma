@@ -17,23 +17,21 @@
                          alt="Главное фото" width="282" align="left" vspace="10" hspace="0">
                     <h1>{{ stock.title }}</h1>
                     <p class="mb-2"><b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b></p>
-                    <p>Ниже представленны списки детей из различных учреждений, а также правила проведения акции.
-                                Чтобы скрыть или показать списки детей, нажмите на кнопку с названием подшефного учреждения.
-                                Детей, у которых отсутствует кнопка выбора, уже выбрали.
-                                Ниже представленны списки детей из различных учреждений, а также правила проведения акции.
-                                Чтобы скрыть или показать списки д
-                                етей, нажмите на кнопку с названием подшефного учреждения.
-                                Детей, у которых отсутствует кнопка выбора, у
-                                же выбралиНиже представленны списки детей из различных учреждений, а также правила проведения акции.
-                                Чтобы скрыть или показать списки дете
-                                й, нажмите на кнопку с названием подшефного учреждения.
-                                Детей, у которых отсутствует кнопка выбора, уже выбрали
+                    <p>Ниже представленны списки детей из различных учреждений, а также правила проведения акции.<br>
+                        Чтобы скрыть или показать списки детей (или правила), нажмите на кнопку с названием подшефного учреждения.<br>
+                        Чтобы выбрать ребенка, которому хотите купить подарок, нужно нажать на запись ребенка в списке. Чтобы отменить - нажать еще раз.
+                        Выбирать детей могут только <strong>зарегистрированные</strong> пользователи.<br>
+                        Пожалуйста, если понимаете, что не успеете купить подарок, отмените выбор ребенка, чтобы он нашел своего дарителя!<br>
+                        После проведения акции мы публикуем фотоотчеты, там вы сможете посмотреть как проходят утренники с вручением подарков!
                     </p>
 
                     <input id="showRules" data-string-text="Скрыть правила" type="button" onclick="toggle(rules_content)"
                            class="btn btn-danger active mb-3 main-color" value="Правила" aria-pressed="true" data-toggle="button"><br>
                     <p id="rules_content"  class="pre-wrap">{{ stock.rules }}</p>
 
+                    {% if user is not empty %}
+                    {% else %}
+                    {% endif %}
 
                     {% for institution_n in institution_names %}
                         {% if loop.index == 1 %}
@@ -63,95 +61,144 @@
                             {% for child in children %}
                                 {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}
                                     {% if child.reservationNickname != NULL %}
-                                        <li>
-                                            <div class="row col-10">
-                                                <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-5 text-left">
-                                                    {{ child.serialNumber }}. {{ child.information }} </a>
-                                                <div class="col-sm position-absolute ml-0">
-                                                    <l class="ml-4 btn-sm btn btn-block btn-outline-success btn-reservation disabled">{{ child.reservationNickname }}</l>
+                                        {% if user is not empty %}
+                                            {% if child.reservationNickname == user.nickname %}
+                                                <li>
+                                                    <div class="row col-10">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-success mb-2 btn-sm ml-5 text-left">
+                                                            {{ child.serialNumber }}. {{ child.information }} </a>
+                                                        <div class="col-sm position-absolute">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                               class="btn-sm btn btn-block btn-outline-success btn-reservation">{{ child.reservationNickname }}</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% else %}
+                                                <li>
+                                                    <div class="row col-10">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-5 text-left">
+                                                            {{ child.serialNumber }}. {{ child.information }} </a>
+                                                        <div class="col-sm position-absolute">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                               class="btn-sm btn btn-block btn-outline-success btn-reservation disabled">{{ child.reservationNickname }}</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endif %}
+                                        {% else %}
+                                            <li>
+                                                <div class="row col-10">
+                                                    <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-5 text-left">
+                                                        {{ child.serialNumber }}. {{ child.information }} </a>
+                                                    <div class="col-sm position-absolute">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                           class="btn-sm btn btn-block btn-outline-success btn-reservation disabled">{{ child.reservationNickname }}</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                            {% endif %}
                                     {% else %}
+                                        {% if user is not empty %}
                                         <li>
                                             <div class="row col-10">
                                                 <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-5">
                                                     {{ child.serialNumber }}. {{ child.information }}</a>
                                                 <div class="col-sm position-absolute">
                                                     <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
-                                                       class="btn-sm btn btn-block btn-outline-dark btn-reservation">Ребенка еще не выбрали</a>
+                                                       class="btn-sm btn btn-block btn-outline-dark btn-reservation">не выбрали</a>
                                                 </div>
                                             </div>
                                         </li>
+                                            {% else %}
+                                                <li>
+                                                    <div class="row col-10">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-5 disabled">
+                                                            {{ child.serialNumber }}. {{ child.information }}</a>
+                                                        <div class="col-sm position-absolute">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                               class="btn-sm btn btn-block btn-outline-dark btn-reservation disabled">не выбрали</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endif %}
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
+
                         </ol>
                             {% elseif (group_n.institution_name == institution_n.institution_name) %}
                                 {% for child in children %}
                                     {% if (child.institutionName == institution_n.institution_name) and (child.groupName == group_n.group_name)  %}
                                         {% if child.reservationNickname != NULL %}
-                                            <li>
-                                                <div class="row col-10">
-                                                    <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm ml-3 text-left">
-                                                        {{ child.serialNumber }}. {{ child.information }} </a>
-                                                    <div class="col-sm position-absolute ml-0">
-                                                        <l class="ml-4 btn-sm btn btn-block btn-outline-success btn-reservation2 disabled">{{ child.reservationNickname }}</l>
+                                            {% if user is not empty %}
+                                            {% if child.reservationNickname == user.nickname %}
+                                                <li>
+                                                    <div class="row col-10">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-success mb-2 btn-sm text-left">
+                                                            {{ child.serialNumber }}. {{ child.information }} </a>
+                                                        <div class="col-sm position-absolute">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                               class="btn-sm btn btn-block btn-outline-success btn-reservation2">{{ child.reservationNickname }}</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            {% else %}
+                                                <li>
+                                                    <div class="row col-10">
+                                                        <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm text-left">
+                                                            {{ child.serialNumber }}. {{ child.information }} </a>
+                                                        <div class="col-sm position-absolute">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                               class="btn-sm btn btn-block btn-outline-success btn-reservation2 disabled">{{ child.reservationNickname }}</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endif %}
+                                                {% else%}
+                                                    <li>
+                                                        <div class="row col-10">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" class="disabled btn btn-success mb-2 btn-sm text-left">
+                                                                {{ child.serialNumber }}. {{ child.information }} </a>
+                                                            <div class="col-sm position-absolute">
+                                                                <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                                   class="btn-sm btn btn-block btn-outline-success btn-reservation2 disabled">{{ child.reservationNickname }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endif %}
                                         {% else %}
+                                            {% if user is not empty %}
                                             <li>
                                                 <div class="row col-10">
                                                     <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-3">
                                                         {{ child.serialNumber }}. {{ child.information }}</a>
                                                     <div class="col-sm position-absolute">
                                                         <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
-                                                           class="btn-sm btn btn-block btn-outline-dark btn-reservation2">Ребенка еще не выбрали</a>
+                                                           class="btn-sm btn btn-block btn-outline-dark btn-reservation2">не выбрали</a>
                                                     </div>
                                                 </div>
                                             </li>
+                                                {% else %}
+                                                    <li>
+                                                        <div class="row col-10">
+                                                            <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}" style="z-index: 2;" class="btn btn-dark mb-2 btn-sm ml-3">
+                                                                {{ child.serialNumber }}. {{ child.information }}</a>
+                                                            <div class="col-sm position-absolute">
+                                                                <a href="{{ path('main_stock_children_select', {'id_stock': stock.id, 'id_child': child.id}) }}"
+                                                                   class="btn-sm btn btn-block btn-outline-dark btn-reservation2">не выбрали</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
                                 </ol>
                             {% endif %}
                         {% endfor %}
-                            </ol>
+                        </ol>
                     {% endfor %}
-
-                                 <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                     Запустить модальное окно
-                                 <a>
-                                 <!-- Modal -->
-                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                         <div class="modal-content">
-                                             <div class="modal-header">
-                                                 <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">&times;</span>
-                                                 </button>
-                                             </div>
-                                             <div class="modal-body">
-                                                 Вы хотите забронировать данного ребенка?
-                                             </div>
-                                             <div class="modal-footer">
-                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                 <button type="button" class="btn btn-primary">Save changes</button>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-
-{#                                class="list-unstyled">#}
-{#                    {% if (stock.dateEnd < today) %}#}
-{#                        <p><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>#}
-{#                        <a href="#" class="btn btn-danger mb-3">Перейти к фотоотчету</a>#}
-{#                    {% else %}#}
-{#                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger mb-3">Списки детей</a>#}
-{#                    {% endif %}#}
-
+                    </ol>
                 </div>
             </div>
         </div>

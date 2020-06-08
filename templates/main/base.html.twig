@@ -17,7 +17,7 @@
         <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo"></a>
 
         <a class="navbar-brand nav-link-style" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">
-            <i class="fa fa-microchip" aria-hidden="true"></i>
+            <i class="fa-gift fa" aria-hidden="true"></i>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,19 +25,19 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style" href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
+                    <a class="nav-link nav-link-style ml-2" href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-{#                    <a class="nav-link nav-link-style" href="{{ path('main_stocks'}}">Наши акции</a>#}
+{#                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_stocks'}}">Наши акции</a>#}
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style" href="{{ path('main_photo_reports') }}">Фотоотчеты</a>
+                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_photo_reports') }}">Фотоотчеты</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style" href="#">Статистика</a>
+                    <a class="nav-link nav-link-style ml-2" href="#">Статистика</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style" href="#">Блог</a>
+                    <a class="nav-link nav-link-style ml-2" href="#">Блог</a>
                 </li>
             </ul>
             <form class="form-inline">
@@ -54,6 +54,16 @@
         </div>
     </nav>
     </header>
+
+{#        <div class="row" >#}
+{#            <div class=" col-lg-10 col-md-10">#}
+{#                {% block body %}{% endblock %}#}
+{#            </div>#}
+            <div class="col-lg-2 mt-5" style=" margin-left: auto; position: absolute; right: 3%;">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium blanditiis consectetur consequuntur debitis dolores dolorum fugiat in iure nostrum obcaecati perferendis perspiciatis quibusdam quos rem repellendus repudiandae, rerum sunt velit?
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusamus atque ex iure maxime placeat? At consectetur distinctio dolorem doloribus ipsam maxime modi quae quasi. Perspiciatis recusandae sed suscipit vero.
+            </div>
+{#        </div>#}
 
     {% block body %}{% endblock %}
 
