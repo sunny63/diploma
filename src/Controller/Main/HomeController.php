@@ -25,16 +25,17 @@ class HomeController extends BaseController
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
-        $date = new \DateTime('now');
+        $today = new \DateTime('now');
 
         $categoriesNow = $this->getDoctrine()
             ->getRepository(Stock::class)
-            ->findAllPastStock($date);
+            ->findAllPastStock($today);
 
         $forRender = parent::renderDefault();
         $forRender['h1'] = 'Новости';
         $forRender['stocks'] = $stocks;
         $forRender['posts'] = $posts;
+        $forRender['today'] = $today;
         $forRender['categories'] = $categories;
         $forRender['categoriesNow'] = $categoriesNow;
         return $this->render("main/index.html.twig", $forRender);

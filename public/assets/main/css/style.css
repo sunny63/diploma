@@ -19,6 +19,7 @@
 .copyright {
     color: #ffffff;
     text-decoration: underline;
+    /*font-family: 'Amatic SC', cursive;!important;*/
 }
 
 .copyright:hover {
@@ -49,11 +50,33 @@
 .nav-link-style {
     text-decoration: none;
     color: white;
+    font-family: 'Open Sans Condensed', sans-serif;!important;
+    /*font-family: 'Amatic SC', cursive;!important;*/
+    font-size: 23px!important;
 }
 
 .nav-link-style:hover {
-    color: #440b0f!important;
+    color: #5a2e1a !important;
     text-decoration: none;
+}
+
+.orange-color {
+    color: #ffffff;
+    background: #fd7e14;
+    border: none!important;
+}
+
+.orange-color:hover {
+    background: #dc6505;
+    border: none!important;
+}
+
+.nav-bottom-size {
+    font-size: 18px!important;
+}
+
+.font-open-sans {
+    font-family: 'Open Sans Condensed', sans-serif;!important;
 }
 
 html {

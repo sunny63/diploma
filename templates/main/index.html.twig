@@ -15,18 +15,22 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center">
-                        <h1 class="pl-5 pt-3">Новости</h1>
                             {% for stock in stocks %}
                             <li class="list-group-item mb-2 border-0">
+                                {% if (today < stock.dateEnd) %}
+                                    <h2 style="font-family: 'Amatic SC', cursive; font-size: 60px;" class="mb-3"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
+                                {% else %}
+                                    <h2 style="font-family: 'Amatic SC', cursive; font-size: 60px;" class="mb-3"><b>Акция «{{ stock.title }}» прошла...</b></h2>
+                                {% endif %}
+
                                 <div class="media">
-                                    <div class="pt-2">
-                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
+                                    <div class="">
+                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" style="border-radius: 2%!important;" class="mr-3 rounded" alt="Главное фото" width="500px">
                                     </div>
                                     <div class="media-body pb-1">
-                                        <h2>{{ stock.title }}</h2>
-                                        <b>{{ stock.dateStart|date('d.m.Y') }} 一 {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap part-description">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color">Подробнее</a>
+                                        <b style="font-family: 'Amatic SC', cursive; font-size: 30px;">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
+                                        <p class="pre-wrap part-description" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 20px;">{{ stock.description }}</p>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color" style="font-family: 'Amatic SC', cursive; font-size: 25px;">Подробнее</a>
                                     </div>
                                 </div>
                             </li>

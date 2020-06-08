@@ -7,14 +7,15 @@
             <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
-            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v39') }}">
+            <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Open+Sans+Condensed:wght@300&family=Poiret+One&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v40') }}">
         {% endblock %}
     </head>
     <body>
     <header>
 
     <nav class="navbar navbar-current navbar-expand-lg navbar-dark">
-        <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo"></a>
+        <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo" style="z-index: 3;"></a>
 
         <a class="navbar-brand nav-link-style" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">
             <i class="fa-gift fa" aria-hidden="true"></i>
@@ -25,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style ml-2" href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
+                    <a class="nav-link nav-link-style ml-2"  href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
 {#                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_stocks'}}">Наши акции</a>#}
@@ -43,12 +44,12 @@
             <form class="form-inline">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('admin_home') }}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Админ панель</a>
+                        <a href="{{ path('admin_home') }}" class="btn btn-outline-light my-2 my-sm-0 nav-link-style" type="submit">Админ панель</a>
                     {% else %}
-                        <a href="{{ path('app_logout') }}" class="btn btn-outline-light my-2 my-sm-0 ml-2" type="submit">Выход</a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-light my-2 my-sm-0 ml-2 nav-link-style" type="submit">Выход</a>
                     {% endif %}
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="btn btn-outline-light my-2 my-sm-0" type="submit">Войти</a>
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-light my-2 my-sm-0 nav-link-style" type="submit">Войти</a>
                 {% endif %}
             </form>
         </div>
@@ -59,9 +60,14 @@
 {#            <div class=" col-lg-10 col-md-10">#}
 {#                {% block body %}{% endblock %}#}
 {#            </div>#}
-            <div class="col-lg-2 mt-5" style=" margin-left: auto; position: absolute; right: 3%;">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium blanditiis consectetur consequuntur debitis dolores dolorum fugiat in iure nostrum obcaecati perferendis perspiciatis quibusdam quos rem repellendus repudiandae, rerum sunt velit?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusamus atque ex iure maxime placeat? At consectetur distinctio dolorem doloribus ipsam maxime modi quae quasi. Perspiciatis recusandae sed suscipit vero.
+            <div class="mt-5" style=" margin-left: auto; width: 17%; position: absolute; right: 4%; font-family: 'Amatic SC', cursive;">
+                <p class="text-justify" style="font-size: 22px;">
+                    Если у вас совсем нет времени выбирать, покупать, упаковывать подарок, то<l class="pre-wrap"> </l> вы можете помочь нам <l class="pre-wrap"> </l>и
+                <a class="btn btn-block btn-success orange-color" style="font-size: 30px" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">Поддержать фонд
+                    <i class="fa-gift fa" aria-hidden="true"></i></a>
+                    всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. С миру по нитке!
+                <l style="color: white;">ГЫ</l>
+                </p>
             </div>
 {#        </div>#}
 
@@ -69,17 +75,17 @@
 
     <footer class="footer">
         <div class="row">
-            <div class="col-sm m-3 pl-5 text-left text-white"> © 2014–2020
+            <div class="col-sm m-3 pl-5 text-left text-white font-open-sans nav-bottom-size"> © 2014–2020
                 <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
                 <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
                 Все права защищены.
             </div>
             <div class="col-sm m-3 pr-10 text-right text-white">
-                <a href="{{ path('home') }}" class="mr-4 nav-link-style">Главная страница</a>
-                <a href="#" class="mr-4 nav-link-style">Наши акции</a>
-                <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style">Фотоотчеты</a>
-                <a href="#" class="mr-4 nav-link-style">Статистика</a>
-                <a href="#" class="mr-4 nav-link-style">Блог</a>
+                <a href="{{ path('home') }}" class="mr-4 nav-link-style nav-bottom-size">Главная страница</a>
+                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Наши акции</a>
+                <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size">Фотоотчеты</a>
+                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Статистика</a>
+                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Блог</a>
             </div>
         </div>
     </footer>
