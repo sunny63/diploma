@@ -1,5 +1,5 @@
 .form {
-    width: 90%;
+    width: 93%;
     border-radius: 5px;
     margin-top: 0px;
 }
@@ -52,7 +52,7 @@
     color: white;
     font-family: 'Open Sans Condensed', sans-serif;!important;
     /*font-family: 'Amatic SC', cursive;!important;*/
-    font-size: 23px!important;
+    font-size: 23px;
 }
 
 .nav-link-style:hover {
@@ -62,12 +62,52 @@
 
 .orange-color {
     color: #ffffff;
-    background: #fd7e14;
+    background: #fa9821;
     border: none!important;
 }
 
+.red-color:hover {
+    background: rgba(215, 35, 29, 1) !important;
+}
+
 .orange-color:hover {
-    background: #dc6505;
+    background: #ff6600;
+    color: #ffffff;
+    border: none!important;
+}
+
+.orange-color:active {
+    /*color: #000000!important;*/
+    background: #ff6600;!important;
+    border: none!important;
+}
+
+.orange-color:focus {
+    border: none!important;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(253, 126, 20, 0.55);!important;
+}
+
+.border-orange {
+    border-color: rgba(227, 125, 25, 0.23) !important;
+}
+
+.orange-shadow:focus {
+    border: none!important;
+    outline: 0!important;
+    box-shadow: 0 0 0 0.2rem rgba(253, 126, 20, 0.55);!important;
+}
+
+.orange-color:after {
+    /*color: #000000!important;*/
+    background: #ff6600;!important;
+    border: none!important;
+}
+
+.orange-color:not(:disabled):not(.disabled):active, .orange-color:not(:disabled):not(.disabled).active,
+.show > .orange-color.dropdown-toggle {
+    background: #ff6600;
+    color: #ffffff;
     border: none!important;
 }
 
@@ -75,8 +115,33 @@
     font-size: 18px!important;
 }
 
+.btn-size {
+    font-size: 25px;
+    /*font-weight: bold;*/
+}
+
+.title-size {
+    font-size: 60px;
+}
+
+.description-size {
+    font-size: 20px;
+}
+
+.date-size {
+    font-size: 30px;
+}
+
 .font-open-sans {
     font-family: 'Open Sans Condensed', sans-serif;!important;
+}
+
+.font-amatic {
+    font-family: 'Amatic SC', cursive;!important;
+}
+
+.img-rounded {
+    border-radius: 2%!important;
 }
 
 html {
@@ -169,6 +234,6 @@ footer {
     min-height: 200px!important;
 }
 
-.text-size-figcaption {
-    font-size: 12px;
+.figcaption-size {
+    font-size: 18px;
 }

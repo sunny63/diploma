@@ -18,7 +18,8 @@ class PhotoReportController extends BaseController
      */
     public function index( Request $request)
     {
-        $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findAll();
+        $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findAllPhotoReportsOrderByDate();
+
 
         $forRender = parent::renderDefault();
         $forRender['today'] = new \DateTime('now');

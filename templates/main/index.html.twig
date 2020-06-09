@@ -5,46 +5,43 @@
 
 {% block body %}
 
-{#    {% for stockNOW in categoriesNow %}#}
-{#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
-{#    {% endfor %}#}
-
-
     <div class="container-fluid main-content">
         <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
-                    <ul class="justify-content-center">
-                            {% for stock in stocks %}
+                    <ul class="justify-content-center font-amatic">
+                        {% for stock in stocks %}
                             <li class="list-group-item mb-2 border-0">
                                 {% if (today < stock.dateEnd) %}
-                                    <h2 style="font-family: 'Amatic SC', cursive; font-size: 60px;" class="mb-3"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
+                                    <h2 class="mb-3 title-size"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
                                 {% else %}
-                                    <h2 style="font-family: 'Amatic SC', cursive; font-size: 60px;" class="mb-3"><b>Акция «{{ stock.title }}» прошла...</b></h2>
+                                    <h2 class="mb-3 title-size"><b>Акция «{{ stock.title }}» прошла...</b></h2>
                                 {% endif %}
 
                                 <div class="media">
-                                    <div class="">
-                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" style="border-radius: 2%!important;" class="mr-3 rounded" alt="Главное фото" width="500px">
+                                    <div>
+                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500">
                                     </div>
                                     <div class="media-body pb-1">
-                                        <b style="font-family: 'Amatic SC', cursive; font-size: 30px;">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap part-description" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 20px;">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color" style="font-family: 'Amatic SC', cursive; font-size: 25px;">Подробнее</a>
+                                        <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
+                                        <p class="pre-wrap part-description font-open-sans description-size">{{ stock.description }}</p>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
                                     </div>
                                 </div>
                             </li>
-                        {% endfor %}
-                        {% for post in posts %}
-                            <li class="list-group-item p-3 mb-3 border-0">
-                                <div class="media">
-                                    <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">
-                                    <div class="media-body">
-                                        <h2>{{ post.title }}</h2>
-                                        <p class="pre-wrap part-description">{{ post.description }}</p>
+                            {% set lop = loop.index %}
+                            {% for post in posts if lop == 1%}
+                                <li class="list-group-item p-3 mb-3 border-0">
+                                    <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                    <div class="media">
+                                        <img src="{{ asset('uploads/images/post/' ~ post.image) }}"class="mr-3 img-rounded" alt="Главное фото" width="500">
+                                        <div class="media-body">
+                                            <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
+                                            <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endfor %}
                         {% endfor %}
                     </ul>
                 </div>

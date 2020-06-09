@@ -1,0 +1,26 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid main-content">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-10 col-md-10">
+                <div class="form ml-5 font-amatic">
+                    <h2 class="mb-4 mt-4 title-size"><b>«{{ post.title }}»</b></h2>
+
+                    <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded"
+                         alt="Главное фото" width="600" align="left">
+
+                    <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
+                    <p class="pre-wrap font-open-sans description-size">{{ post.description }}</p>
+
+                    <a href="{{ path('main_post', {'id': post.id}) }}" class="btn btn-danger main-color mb-3 btn-size">Поучаствовать в акции</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

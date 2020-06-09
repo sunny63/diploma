@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Stock;
+use App\Entity\Post;
+use App\Entity\PhotoReport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -36,6 +38,41 @@ class StockRepository extends ServiceEntityRepository
         // returns an array of Product objects
         return $query->getResult();
     }
+
+    /**
+     * @return Stock[]
+     */
+    public function findAllStocksOrderByDate(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\Stock s
+            ORDER BY s.date_end DESC'
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+//    /**
+//     * @return Stock[]
+//     */
+//    public function findAllOrderByDate(): array
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT stocks, posts, photoReports
+//            FROM App\Entity\Stock stocks INNER JOIN App\Entity\Post posts INNER JOIN App\Entity\PhotoReport photoReports
+//            ORDER BY photoReports.create_at, posts.create_at, stocks.create_at ASC'
+//        );
+//
+//        // returns an array of Product objects
+//        return $query->getResult();
+//    }
 
 
     // /**

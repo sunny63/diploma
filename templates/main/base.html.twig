@@ -7,12 +7,14 @@
             <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
-            <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Open+Sans+Condensed:wght@300&family=Poiret+One&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v40') }}">
+            <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Open+Sans+Condensed:wght@300&family=PT+Sans&family=Poiret+One&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v49') }}">
         {% endblock %}
     </head>
     <body>
     <header>
+
+
 
     <nav class="navbar navbar-current navbar-expand-lg navbar-dark">
         <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo" style="z-index: 3;"></a>
@@ -29,10 +31,13 @@
                     <a class="nav-link nav-link-style ml-2"  href="{{ path('home') }}">Главная страница<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-{#                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_stocks'}}">Наши акции</a>#}
+                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_stocks')}}">Наши акции</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link nav-link-style ml-2" href="{{ path('main_photo_reports') }}">Фотоотчеты</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_posts') }}">Посты</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link nav-link-style ml-2" href="#">Статистика</a>
@@ -43,6 +48,7 @@
             </ul>
             <form class="form-inline">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="nav-link-style font-amatic mr-3" style="font-size: 40px;!important;">{{ app.user.nickname }}</div>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('admin_home') }}" class="btn btn-outline-light my-2 my-sm-0 nav-link-style" type="submit">Админ панель</a>
                     {% else %}
@@ -56,20 +62,15 @@
     </nav>
     </header>
 
-{#        <div class="row" >#}
-{#            <div class=" col-lg-10 col-md-10">#}
-{#                {% block body %}{% endblock %}#}
-{#            </div>#}
-            <div class="mt-5" style=" margin-left: auto; width: 17%; position: absolute; right: 4%; font-family: 'Amatic SC', cursive;">
-                <p class="text-justify" style="font-size: 22px;">
-                    Если у вас совсем нет времени выбирать, покупать, упаковывать подарок, то<l class="pre-wrap"> </l> вы можете помочь нам <l class="pre-wrap"> </l>и
-                <a class="btn btn-block btn-success orange-color" style="font-size: 30px" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">Поддержать фонд
-                    <i class="fa-gift fa" aria-hidden="true"></i></a>
-                    всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. С миру по нитке!
-                <l style="color: white;">ГЫ</l>
-                </p>
-            </div>
-{#        </div>#}
+    <div class="mt-5" style=" margin-left: auto; width: 17%; position: absolute; right: 4%; font-family: 'Amatic SC', cursive;">
+        <p class="text-justify" style="font-size: 22px;">
+            Если у вас совсем нет времени выбирать, покупать, упаковывать подарок, то<l class="pre-wrap"> </l> вы можете помочь нам <l class="pre-wrap"> </l>и
+            <a class="btn btn-block orange-color" style="font-size: 30px" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">Поддержать фонд
+                <i class="fa-gift fa" aria-hidden="true"></i></a>
+            всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. С миру по нитке!
+            <l style="color: white;">ГЫ</l>
+        </p>
+    </div>
 
     {% block body %}{% endblock %}
 

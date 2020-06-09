@@ -10,22 +10,22 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
-                        {% for stock in stocks %}
+                        {% for post in posts %}
                             <li class="list-group-item mb-2 border-0">
-                                {% if (today < stock.dateEnd) %}
-                                    <h2 class="mb-3 title-size"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
+                                {% if (date_without_days < post.createAt) %}
+                                    <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
                                 {% else %}
-                                    <h2 class="mb-3 title-size"><b>Акция «{{ stock.title }}» прошла...</b></h2>
+                                    <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
                                 {% endif %}
 
                                 <div class="media">
                                     <div>
-                                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
+                                        <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
                                     </div>
                                     <div class="media-body pb-1">
-                                        <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap part-description font-open-sans description-size">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                        <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
+                                        <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
+                                        <a href="{{ path('main_post', {'id': post.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
                                     </div>
                                 </div>
                             </li>
@@ -35,5 +35,6 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 

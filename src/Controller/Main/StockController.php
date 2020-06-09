@@ -60,8 +60,6 @@ class StockController extends BaseController
     {
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
         $photoReports = $stock->getPhotoReports();
-//        $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
-//        $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
 
         $forRender = parent::renderDefault();
         $forRender['stock'] = $stock;
@@ -78,12 +76,13 @@ class StockController extends BaseController
     {
         $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
         $photos = $photoReport->getPhotos();
-//        $institution_names = $this->getDoctrine()->getRepository(Child::class)->findInstitutionNames($id);
-//        $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
+
+        $referer = $request->headers->get('referer');
 
         $forRender = parent::renderDefault();
         $forRender['photo_report'] = $photoReport;
         $forRender['photos'] = $photos;
+        $forRender['referer'] = $referer;
         return $this->render("main/stock/photoReports/photo/index.html.twig", $forRender);
     }
 

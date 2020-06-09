@@ -4,32 +4,27 @@
 
 {% block body %}
 
-    {#    {% for stockNOW in categoriesNow %}#}
-    {#        <img src="{{ asset('uploads/images/stock/' ~ stockNOW.image) }}" class="mr-3 rounded" alt="Главное фото" width="500">#}
-    {#    {% endfor %}#}
-
-{#    mx-auto d-block #}
-
-    <h1 class="pl-5 pl-10 pt-3">Здесь вы можете посмотреть наши фотоотчеты за все время!</h1>
-
     <div class="container-fluid main-content">
-        <div class="row no-gutters mt-3">
+        <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-md-10">
-                <div class="form ml-5">
-                    {% for photo_report in photo_reports %}
-                    <div class="media">
-                        <div class="pt-0 ">
-                            <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded"
-                                 alt="Главное фото" width="500" align="left" vspace="15" hspace="0">
-                        </div>
-                        <div class="media-body">
-                            <h2>{{ photo_report.title }}</h2>
-                            <p class="mb-2"><b>{{ photo_report.createAt|date('d.m.Y') }}</b></p>
-                            <p class="pre-wrap part-description">{{ photo_report.description }}</p>
-                            <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn btn-danger main-color">Подробнее</a>
-                        </div>
-                    </div>
-                    {% endfor %}
+                <div class="form">
+                    <ul class="justify-content-center font-amatic">
+                        {% for photo_report in photo_reports %}
+                            <li class="list-group-item mb-2 border-0">
+                                <h2 class="title-size mb-3"><b>{{ photo_report.title }}</b></h2>
+                                <div class="media">
+                                    <div>
+                                        <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
+                                    </div>
+                                    <div class="media-body pb-1">
+                                        <b class="date-size">{{ photo_report.createAt|date('d.m.Y') }}</b>
+                                        <p class="pre-wrap part-description font-open-sans description-size">{{ photo_report.description }}</p>
+                                        <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

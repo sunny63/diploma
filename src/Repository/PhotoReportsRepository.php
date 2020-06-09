@@ -19,6 +19,23 @@ class PhotoReportsRepository extends ServiceEntityRepository
         parent::__construct($registry, PhotoReport::class);
     }
 
+    /**
+     * @return PhotoReport[]
+     */
+    public function findAllPhotoReportsOrderByDate(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\PhotoReport p
+            ORDER BY p.create_at DESC'
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     // /**
     //  * @return PhotoReport[] Returns an array of PhotoReport objects
     //  */

@@ -12,7 +12,7 @@
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                        <h1 class="h3 mb-3 font-weight-normal text-center">Регистрация пользователя</h1>
+                        <h1 class="h3 mb-3 font-weight-normal text-center font-open-sans" style="font-size: 40px;">Регистрация пользователя</h1>
 {#                        {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
 
                         {% if not form.vars.valid %}
@@ -23,19 +23,19 @@
 
                         {{ form_start(form) }}
 
-                        {{ form_label(form.nickname) }}
-                        {{ form_widget(form.nickname, { 'attr': {'class': 'form-control mb-1'} }) }}
+                        {{ form_label(form.nickname, 'Имя пользователя', {'label_attr': {'class': ' font-open-sans description-size'}} )}}
+                        {{ form_widget(form.nickname, { 'attr': {'class': 'form-control orange-shadow border-orange mb-1 autofocus'} }) }}
 
-                        {{ form_label(form.email) }}
-                        {{ form_widget(form.email, { 'attr': {'class': 'form-control mb-1'} }) }}
+                        {{ form_label(form.email, 'Адрес электронной почты', {'label_attr': {'class': ' font-open-sans description-size'}} )}}
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control orange-shadow border-orange mb-1'} }) }}
 
-                        {{ form_label(form.plainPassword.first) }}
-                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control mb-1'} }) }}
+                        {{ form_label(form.plainPassword.first, 'Пароль', {'label_attr': {'class': ' font-open-sans description-size'}} )}}
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control border-orange orange-shadow mb-1'} }) }}
 
-                        {{ form_label(form.plainPassword.second) }}
-                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control mb-1'} }) }}
+                        {{ form_label(form.plainPassword.second, 'Повторите пароль', {'label_attr': {'class': ' font-open-sans description-size'}} )}}
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control border-orange orange-shadow mb-1'} }) }}
 
-                        {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
+                        {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block orange-color mt-2 font-amatic btn-size'} }) }}
 
                         {{ form_end(form) }}
 
