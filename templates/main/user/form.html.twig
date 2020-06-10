@@ -9,11 +9,8 @@
             <div class="col-12 col-lg-4 col-md-4">
                 <div class="form-login">
                     <form method="post">
-
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
                         <h1 class="h3 mb-3 font-weight-normal text-center font-open-sans" style="font-size: 40px;">Регистрация пользователя</h1>
-{#                        {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
 
                         {% if not form.vars.valid %}
                             {% for error in form.vars.errors.form.getErrors(true) %}
@@ -38,7 +35,6 @@
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block orange-color mt-2 font-amatic btn-size'} }) }}
 
                         {{ form_end(form) }}
-
                     </form>
                 </div>
             </div>

@@ -1,0 +1,42 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block h1 %}{{ h1 }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid main-content">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-10 col-md-10">
+                <div class="form ml-5 font-amatic">
+                    {% for past12 in past1 %}
+                        {{ past12.groupName }}
+                    {{ past12.id }}
+                    {% endfor %}
+                    {% for past12 in past_stocks %}
+                        <h2>{{ past12.title }}
+                        {{ past12.id }}</h2>
+                    {% endfor %}
+{#                    {% if (today < stock.dateEnd) %}#}
+{#                        <h2 class="mb-4 mt-4 title-size"><b>Стартовала акция «{{ stock.title }}»!</b></h2>#}
+{#                    {% else %}#}
+{#                        <h2 class="mb-4 mt-4 title-size"><b>Акция «{{ stock.title }}» прошла...</b></h2>#}
+{#                    {% endif %}#}
+
+{#                    <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 rounded"#}
+{#                         alt="Главное фото" width="600" align="left">#}
+
+{#                    <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>#}
+{#                    <p class="pre-wrap font-open-sans description-size">{{ stock.description }}</p>#}
+{#                    {% if (stock.dateEnd < today) %}#}
+{#                        <p class="btn-size"><strong>Акция завершилась! Когда появятся фотоотчет, вы сможете посмотреть его, нажав на кнопку ниже.</strong></p>#}
+{#                        <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3 btn-size">Перейти к фотоотчетам</a>#}
+{#                    {% else %}#}
+{#                        <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3 btn-size">Списки детей</a>#}
+{#                    {% endif %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
