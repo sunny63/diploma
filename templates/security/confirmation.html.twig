@@ -1,0 +1,18 @@
+{#{% extends 'main/base.html.twig' %}#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Подтверждение регистрации!</title>
+</head>
+<body>
+<div class="container">
+    <p>Добро пожаловать на благотворительный портал фонда "Владмама", {{ username }}!</p>
+    <p>Чтобы завершить регистрацию, подтвердите свой <a href="http://ex-symfony2/emailConfirmation/{{ token }}">электронный адрес</a>.</p>
+</div>
+</body>
+</html>

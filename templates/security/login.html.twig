@@ -9,11 +9,13 @@
             <div class="col-12 col-lg-4 col-md-4">
                 <div class="form-login">
                     <form method="post">
+
+                        <h1 class="h3 mb-4 font-weight-normal text-center font-open-sans" style="font-size: 40px;">Вход в систему</h1>
+
                         {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            <div class="alert alert-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
-                        <h1 class="h3 mb-3 font-weight-normal text-center font-open-sans" style="font-size: 40px;">Вход в систему</h1>
                         <label for="inputEmail" class="font-open-sans description-size">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control orange-shadow mb-1 border-orange" required autofocus>
                         <label for="inputPassword" class="font-open-sans description-size">Пароль</label>

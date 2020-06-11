@@ -10,16 +10,17 @@ use App\Entity\Stock;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Service\CodeGenerator;
+use Symfony\Bridge\Twig\Mime\BodyRenderer;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class HomeController extends BaseController
 {
@@ -31,11 +32,9 @@ class HomeController extends BaseController
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAllStocksOrderByDate();
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAllPostsOrderByDate();
         $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findAllPhotoReportsOrderByDate();
-
 //        $news = $this->getDoctrine()->getRepository(Stock::class)->findAllOrderByDate();
 
         $today = new \DateTime('now');
-
 //        $categoriesNow = $this->getDoctrine()
 //            ->getRepository(Stock::class)
 //            ->findAllPastStock($today);
@@ -58,9 +57,6 @@ class HomeController extends BaseController
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAllStocksOrderByDate();
 
-
-
-
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
@@ -80,6 +76,8 @@ class HomeController extends BaseController
         return $this->render("main/stocks/index.html.twig", $forRender);
     }
 
+
+
     /**
      * @Route("/user/create", name="user_create")
      * @param Request $request
@@ -87,7 +85,7 @@ class HomeController extends BaseController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response
+    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder, CodeGenerator $codeGenerator) : Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -99,26 +97,32 @@ class HomeController extends BaseController
 
         if (($form->isSubmitted()) && ($form->isValid()))
         {
-            $email = (new Email())
-                ->from('fondvladmama@gmail.com')
-                ->to('hataiiia1999@mail.ru')
-//                ->cc('bar@example.com')
-//                ->bcc('baz@example.com')
-//                ->replyTo('fabien@symfony.com')
-//                ->priority(Email::PRIORITY_HIGH)
-                ->subject('Important Notification')
-                ->text('L222orem ipsum...')
-                ->html('<h1>Lorem ipsum</h1> <p>...</p>');
-            $mailer->send($email);
+            $verifyToken = $codeGenerator->getConfirmationCode();
+            $user->setVerifyToken($verifyToken);
 
             $password = $passwordEncoder->encodePassword($user,  $user->getPlainPassword());
             $user->setPassword($password);
+            $user->setStatus(false);
+
             $user->setRoles(["ROLE_USER"]);
             $em->persist($user);
             $em->flush();
 
-//            $mailer->send();
-//            $user->setConfirmationCode($codeGenerator->getConfirmationCode());
+            $email = (new TemplatedEmail())
+                ->from('fondvladmama@gmail.com')
+                ->to($user->getEmail())
+                ->subject('Активация аккаунта на благотворительном сайте "Подари празник"')
+                ->htmlTemplate('confirmation.html.twig')
+                ->context([
+                    'username' => $user->getNickname(),
+                    'token' => $user->getVerifyToken(),
+                ]);
+
+            $loader =  new FilesystemLoader('C:\openserver\domains\ex-symfony2\templates\security');
+            $twig =  new Environment($loader);
+            $renderer =  new BodyRenderer($twig);
+            $renderer->render($email);
+            $mailer->send($email);
 
             return $this->redirectToRoute("app_login");
         }
@@ -128,4 +132,5 @@ class HomeController extends BaseController
         $forRender['form'] = $form->createView();
         return $this->render("main/user/form.html.twig", $forRender);
     }
+
 }
