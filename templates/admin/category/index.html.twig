@@ -23,20 +23,22 @@
     <ul class="pl-0">
         {% for category in categories %}
             <li class="list-group-item p-3 rounded mb-3 border">
-                <div class="media">
-                    <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 rounded" alt="Главное фото" width="300">
-                    <div class="media-body">
-                        <b>Категория:</b> {{ category.title }}<br>
-                        <p class="pre-wrap"><b>Описание категории:</b> {{ category.description }}</p>
-                        <b>Дата создания:</b> {{ category.createAt|date('d.m.Y в H:i') }}<br>
-                        {% if (category.updateAt != NULL) %}
-                            <b>Дата изменения:</b> {{ category.updateAt|date('d.m.Y в H:i') }}<br>
-                        {% endif %}
+                <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
+                <b>Категория:</b> {{ category.title }}<br>
+                <p class="pre-wrap"><b>Описание категории:</b> {{ category.description }}</p>
+                <b>Дата создания:</b> {{ category.createAt|date('d.m.Y в H:i') }}<br>
+                {% if (category.updateAt != NULL) %}
+                    <b>Дата изменения:</b> {{ category.updateAt|date('d.m.Y в H:i') }}<br>
+                {% endif %}
 
-                        <a href="{{ path('admin_category_update', {'id': category.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
-                        <a href="{{ path('admin_category_delete', {'id': category.id}) }}" class="btn btn-danger mt-2">Удалить</a>
-                    </div>
-                </div>
+                <a href="{{ path('admin_category_update', {'id': category.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
+                {% if category.isPublished == true %}
+                    <a href="{{ path('admin_category_do_draft', {'id': category.id}) }}" class="btn btn-dark mt-2 ml-1">Скрыть</a>
+                {% else %}
+                    <a href="{{ path('admin_category_do_published', {'id': category.id}) }}" class="btn btn-dark mt-2 ml-1">Опубликовать</a>
+                {% endif %}
+
+                <a href="{{ path('admin_category_delete', {'id': category.id}) }}" class="btn btn-danger mt-2 pull-right">Удалить</a>
             </li>
         {% endfor %}
     </ul>

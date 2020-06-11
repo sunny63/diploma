@@ -86,6 +86,47 @@ class AdminPhotoReportController extends AdminBaseController
     }
 
     /**
+     * @Route("/admin/photoReport/doPublished/{id},{id_stock}", name="admin_photo_report_do_published", defaults = {"id_stock" = 0})
+     * @param int $id
+     * @param Request $request
+     */
+    public function doPublished(int $id, Request $request, int $id_stock)
+    {
+        $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $photoReport->setIsPublished();
+
+        $this->addFlash('success', 'Фотоотчет опубликован!');
+        $em->flush();
+
+        if ($id_stock)
+            return $this->redirectToRoute('admin_stock_photo_reports', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_photo_reports');
+    }
+
+
+    /**
+     * @Route("/admin/photoReport/doDraft/{id},{id_stock}", name="admin_photo_report_do_draft", defaults = {"id_stock" = 0})
+     * @param int $id
+     * @param Request $request
+     */
+    public function doDraft(int $id, Request $request, int $id_stock)
+    {
+        $photoReport = $this->getDoctrine()->getRepository(PhotoReport::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $photoReport->setIsDraft();
+
+        $this->addFlash('success', 'Фотоотчет скрыт!');
+        $em->flush();
+
+        if ($id_stock)
+            return $this->redirectToRoute('admin_stock_photo_reports', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_photo_reports');
+    }
+
+    /**
      * @Route("/admin/photoReport/update/{id},{id_stock}", name="admin_photo_report_update", defaults = {"id_stock" = 0})
      * @param int $id
      * @param Request $request

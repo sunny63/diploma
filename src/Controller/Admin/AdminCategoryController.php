@@ -42,7 +42,7 @@ class AdminCategoryController extends AdminBaseController
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $category->setCreateAtValue();
-            $category->setIsPublished();
+            $category->setIsDraft();
 
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
@@ -63,6 +63,41 @@ class AdminCategoryController extends AdminBaseController
         $forRender['title'] = 'Создание категории';
         $forRender['form'] = $form->createView();
         return $this->render("admin/category/form.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/admin/category/doPublished/{id}", name="admin_category_do_published")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doPublished(int $id, Request $request)
+    {
+        $category = $this->getDoctrine()->getRepository(CategoryType::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $category->setIsPublished();
+
+        $this->addFlash('success', 'Категория опубликована!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_categories');
+    }
+
+
+    /**
+     * @Route("/admin/category/doDraft/{id}", name="admin_category_do_draft")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doDraft(int $id, Request $request)
+    {
+        $category = $this->getDoctrine()->getRepository(CategoryType::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $category->setIsDraft();
+
+        $this->addFlash('success', 'Категория скрыта!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_categories');
     }
 
     /**

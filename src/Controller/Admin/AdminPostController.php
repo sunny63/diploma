@@ -48,7 +48,7 @@ class AdminPostController extends AdminBaseController
         if (($form->isSubmitted()) && ($form->isValid()))
         {
             $post->setCreateAtValue();
-            $post->setIsPublished();
+            $post->setIsDraft();
 
             /** @var UploadedFile $image */
             $image = $form['image']->getData();
@@ -71,6 +71,42 @@ class AdminPostController extends AdminBaseController
         $forRender['form'] = $form->createView();
         return $this->render("admin/post/form.html.twig", $forRender);
     }
+
+    /**
+     * @Route("/admin/post/doPublished/{id}", name="admin_post_do_published")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doPublished(int $id, Request $request)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $post->setIsPublished();
+
+        $this->addFlash('success', 'Пост опубликован!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_posts');
+    }
+
+
+    /**
+     * @Route("/admin/post/doDraft/{id}", name="admin_post_do_draft")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doDraft(int $id, Request $request)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $post->setIsDraft();
+
+        $this->addFlash('success', 'Пост скрыт!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_posts');
+    }
+
 
     /**
      * @Route("/admin/post/update/{id}", name="admin_post_update")

@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PhotoReport
 {
+    private const PUBLISHED = 1;
+    private const DRAFT = 0;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -49,6 +52,11 @@ class PhotoReport
      * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="photoReport")
      */
     private $photos;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_published;
 
     public function __construct()
     {
@@ -154,6 +162,21 @@ class PhotoReport
         }
 
         return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->is_published;
+    }
+
+    public function setIsPublished()
+    {
+        $this->is_published = self::PUBLISHED;
+    }
+
+    public function setIsDraft()
+    {
+        $this->is_published = self::DRAFT;
     }
 
 }
