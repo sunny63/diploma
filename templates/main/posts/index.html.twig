@@ -11,24 +11,26 @@
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
                         {% for post in posts %}
-                            <li class="list-group-item mb-2 border-0">
-                                {% if (date_without_days < post.createAt) %}
-                                    <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
-                                {% else %}
-                                    <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
-                                {% endif %}
+                            {% if post.isPublished %}
+                                <li class="list-group-item mb-2 border-0">
+                                    {% if (date_without_days < post.createAt) %}
+                                        <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
+                                    {% else %}
+                                        <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                    {% endif %}
 
-                                <div class="media">
-                                    <div>
-                                        <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
+                                    <div class="media">
+                                        <div>
+                                            <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
+                                        </div>
+                                        <div class="media-body pb-1">
+                                            <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
+                                            <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
+                                            <a href="{{ path('main_post', {'id': post.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                        </div>
                                     </div>
-                                    <div class="media-body pb-1">
-                                        <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
-                                        <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
-                                        <a href="{{ path('main_post', {'id': post.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

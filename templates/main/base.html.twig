@@ -75,20 +75,22 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 {% for new_photo_report in new_photo_reports %}
-                {% if loop.index == 1 %}
-                <div class="carousel-item active">
-                    {% else %}
-                    <div class="carousel-item">
+                    {% if new_photo_report.isPublished %}
+                        {% if loop.index == 1 %}
+                            <div class="carousel-item active">
+                        {% else %}
+                            <div class="carousel-item">
                         {% endif %}
                         <a href="{{ path('main_stock_photos', {'id': new_photo_report.id}) }}" style="text-decoration: none!important;">
                             <img src="{{ asset('uploads/images/photoReport/' ~ new_photo_report.image) }}" class="d-block w-100  rounded-top" alt="{{ new_photo_report.title }}">
-                        <div class="d-none d-md-block text-center">
-                            <h5 class="orange-color rounded-bottom" >{{ new_photo_report.title }}</h5>
-                        </div>
+                            <div class="d-none d-md-block text-center">
+                                <h5 class="orange-color rounded-bottom" >{{ new_photo_report.title }}</h5>
+                            </div>
                         </a>
-                    </div>
-                    {% endfor %}
-                </div>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -97,7 +99,7 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+        </div>
         {% endblock %}
     </div>
 
