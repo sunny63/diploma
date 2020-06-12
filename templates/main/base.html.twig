@@ -71,6 +71,8 @@
             всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. Помогать просто!
             <l style="color: white;">ГЫ</l>
         </p>
+
+
         {% block sidebar %}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -101,6 +103,12 @@
                 </a>
         </div>
         {% endblock %}
+            <div class="text-center">
+            <a href="https://www.facebook.com/fond.vladmama.ru/"><img style="color: #00FFFF" class="m-3 ьд-4" src="{{ asset('assets/main/imges/facebook.jpg') }}" alt="facebook-icon" width="50px"></a>
+            <a href="https://vk.com/fond.vladmama"><img class="" src="{{ asset('assets/main/imges/vk.jpg') }}" alt="vk-icon" width="50px"></a>
+            <a href="https://www.instagram.com/fond.vladmama/"><img class="" src="{{ asset('assets/main/imges/instagram.png') }}" alt="instagram-icon" width="100px"></a>
+            <a href="https://ok.ru/group/52774842400998"><img class="mr-3" src="{{ asset('assets/main/imges/odnoklassniki.svg') }}" alt="ok-icon" width="50px"></a>
+            </div>
     </div>
 
     {% block body %}{% endblock %}
@@ -111,8 +119,12 @@
                 <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
                 <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
                 Все права защищены.
+                <a href="https://vk.com/fond.vladmama" style="color:white; text-decoration: none;" class="fa fa-2x fa-vk mr-3 text-center ml-4"></a>
+                <a href="https://www.facebook.com/fond.vladmama.ru/" style="color:white; text-decoration: none;" class="fa fa-2x fa-facebook mr-3"></a>
+                <a href="https://www.instagram.com/fond.vladmama/" style="color:white; text-decoration: none;" class="fa fa-2x fa-instagram mr-3"></a>
+                <a href="https://ok.ru/group/52774842400998" style="color:white; text-decoration: none;" class="fa fa-2x fa-odnoklassniki mr-2"></a>
             </div>
-            <div class="col-sm m-3 pr-10 text-right text-white">
+            <div class="col-sm m-3 pr-10 text-right text-white mt-4">
                 <a href="{{ path('home') }}" class="mr-4 nav-link-style nav-bottom-size">Главная страница</a>
                 <a href="#" class="mr-4 nav-link-style nav-bottom-size">Наши акции</a>
                 <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size">Фотоотчеты</a>
