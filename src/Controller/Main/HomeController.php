@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
@@ -31,22 +30,21 @@ class HomeController extends BaseController
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAllStocksOrderByDate();
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAllPostsOrderByDate();
-        $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findAllPhotoReportsOrderByDate();
-//        $news = $this->getDoctrine()->getRepository(Stock::class)->findAllOrderByDate();
 
+        $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
+        $newPhotoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
+
+//        $news = $this->getDoctrine()->getRepository(Stock::class)->findAllOrderByDate();
         $today = new \DateTime('now');
-//        $categoriesNow = $this->getDoctrine()
-//            ->getRepository(Stock::class)
-//            ->findAllPastStock($today);
+        $dateWithoutDays = (new \DateTime('now'))->modify('- 10 days');
 
         $forRender = parent::renderDefault();
         $forRender['h1'] = 'Новости';
         $forRender['stocks'] = $stocks;
         $forRender['posts'] = $posts;
-        $forRender['photo_reports'] = $photoReports;
+        $forRender['date_without_days'] = $dateWithoutDays;
+        $forRender['new_photo_reports'] = $newPhotoReports;
         $forRender['today'] = $today;
-
-//        $forRender['categoriesNow'] = $categoriesNow;
         return $this->render("main/index.html.twig", $forRender);
     }
 
@@ -56,26 +54,18 @@ class HomeController extends BaseController
     public function showStocks()
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAllStocksOrderByDate();
-
-        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-
         $today = new \DateTime('now');
 
-        $categoriesNow = $this->getDoctrine()
-            ->getRepository(Stock::class)
-            ->findAllPastStock($today);
+        $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
+        $newPhotoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
 
         $forRender = parent::renderDefault();
         $forRender['h1'] = 'Новости';
         $forRender['stocks'] = $stocks;
-//        $forRender['posts'] = $posts;
         $forRender['today'] = $today;
-//        $forRender['categories'] = $categories;
-//        $forRender['categoriesNow'] = $categoriesNow;
+        $forRender['new_photo_reports'] = $newPhotoReports;
         return $this->render("main/stocks/index.html.twig", $forRender);
     }
-
 
 
     /**

@@ -62,14 +62,43 @@
     </nav>
     </header>
 
+
     <div class="mt-5" style=" margin-left: auto; width: 17%; position: absolute; right: 4%; font-family: 'Amatic SC', cursive;">
         <p class="text-justify" style="font-size: 22px;">
             Если у вас совсем нет времени выбирать, покупать, упаковывать подарок, то<l class="pre-wrap"> </l> вы можете помочь нам <l class="pre-wrap"> </l>и
             <a class="btn btn-block orange-color" style="font-size: 30px" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">Поддержать фонд
                 <i class="fa-gift fa" aria-hidden="true"></i></a>
-            всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. С миру по нитке!
+            всего лишь кликнув по кнопке. Наши помощники купят и упакуют подарок за вас. Помогать просто!
             <l style="color: white;">ГЫ</l>
         </p>
+        {% block sidebar %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for new_photo_report in new_photo_reports %}
+                {% if loop.index == 1 %}
+                <div class="carousel-item active">
+                    {% else %}
+                    <div class="carousel-item">
+                        {% endif %}
+                        <a href="{{ path('main_stock_photos', {'id': new_photo_report.id}) }}" style="text-decoration: none!important;">
+                            <img src="{{ asset('uploads/images/photoReport/' ~ new_photo_report.image) }}" class="d-block w-100  rounded-top" alt="{{ new_photo_report.title }}">
+                        <div class="d-none d-md-block text-center">
+                            <h5 class="orange-color rounded-bottom" >{{ new_photo_report.title }}</h5>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        {% endblock %}
     </div>
 
     {% block body %}{% endblock %}
@@ -85,7 +114,8 @@
                 <a href="{{ path('home') }}" class="mr-4 nav-link-style nav-bottom-size">Главная страница</a>
                 <a href="#" class="mr-4 nav-link-style nav-bottom-size">Наши акции</a>
                 <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size">Фотоотчеты</a>
-                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Статистика</a>
+                <a href="{{ path('main_posts') }}" class="mr-4 nav-link-style nav-bottom-size">Посты</a>
+                <a href="{{ path('main_statistic') }}" class="mr-4 nav-link-style nav-bottom-size">Статистика</a>
                 <a href="#" class="mr-4 nav-link-style nav-bottom-size">Блог</a>
             </div>
         </div>

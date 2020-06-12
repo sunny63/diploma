@@ -22,6 +22,10 @@ class StaticticController extends BaseController
 
         $past1 = $past_stocks[1]->getChildren();
 
+        $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
+        $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
+        $forRender['photo_reports'] = $photoReports;
+
 
         $forRender = parent::renderDefault();
         $forRender['today'] = new \DateTime('now');
@@ -45,6 +49,10 @@ class StaticticController extends BaseController
         $group_names = $this->getDoctrine()->getRepository(Child::class)->findGroupNames($id);
 
         $user = $this->getUser();
+
+        $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
+        $photoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
+        $forRender['photo_reports'] = $photoReports;
 
 
         $forRender = parent::renderDefault();

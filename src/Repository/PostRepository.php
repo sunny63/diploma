@@ -36,6 +36,24 @@ class PostRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /**
+     * @return Post[]
+     */
+    public function findNewPosts($dateWithout20Days): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Post p
+            WHERE p.create_at > :date_end
+            ORDER BY p.create_at DESC'
+        )->setParameter('date_end', $dateWithout20Days);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

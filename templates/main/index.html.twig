@@ -5,8 +5,6 @@
 
 {% block body %}
 
-{#    <p>Чтобы завершить регистрацию, подтвердите свой <a href="{{ path('') }}"> {{ token }}электронный адрес.</a></p>#}
-
     <div class="container-fluid main-content">
         <div class="row no-gutters">
             <div class="col-12 col-lg-10 col-md-10">
@@ -27,19 +25,24 @@
                                     <div class="media-body pb-1">
                                         <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
                                         <p class="pre-wrap part-description font-open-sans description-size">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn orange-color btn-size">Подробнее</a>
                                     </div>
                                 </div>
                             </li>
                             {% set lop = loop.index %}
                             {% for post in posts if lop == 1%}
                                 <li class="list-group-item p-3 mb-3 border-0">
-                                    <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                    {% if (date_without_days < post.createAt) %}
+                                        <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
+                                    {% else %}
+                                        <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                    {% endif %}
                                     <div class="media">
                                         <img src="{{ asset('uploads/images/post/' ~ post.image) }}"class="mr-3 img-rounded" alt="Главное фото" width="500">
                                         <div class="media-body">
                                             <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
                                             <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
+                                            <a href="{{ path('main_post', {'id': post.id}) }}" class="btn orange-color btn-size">Подробнее</a>
                                         </div>
                                     </div>
                                 </li>

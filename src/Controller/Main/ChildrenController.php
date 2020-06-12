@@ -5,6 +5,7 @@ namespace App\Controller\Main;
 
 
 use App\Entity\Child;
+use App\Entity\PhotoReport;
 use App\Entity\Stock;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,9 @@ class ChildrenController extends BaseController
     {
         $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id_stock);
         $child = $this->getDoctrine()->getRepository(Child::class)->find($id_child);
+
+        $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
+        $newPhotoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
 
         $user = $this->getUser();
         $nickname = $user->getNickname();
@@ -47,7 +51,7 @@ class ChildrenController extends BaseController
         $forRender['children'] = $children;
         $forRender['institution_names'] = $institution_names;
         $forRender['group_names'] = $group_names;
-//        $forRender['photo_reports'] = $photoReports;
+        $forRender['new_photo_reports'] = $newPhotoReports;
         return $this->render("main/stock/children/index.html.twig", $forRender);
     }
 }
