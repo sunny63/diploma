@@ -30,6 +30,7 @@ class HomeController extends BaseController
     {
         $stocks = $this->getDoctrine()->getRepository(Stock::class)->findAllStocksOrderByDate();
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAllPostsOrderByDate();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         $dateWithout15Days = (new \DateTime('now'))->modify('- 20 days');
         $newPhotoReports = $this->getDoctrine()->getRepository(PhotoReport::class)->findNewPhotoReports($dateWithout15Days);
@@ -42,6 +43,7 @@ class HomeController extends BaseController
         $forRender['h1'] = 'Новости';
         $forRender['stocks'] = $stocks;
         $forRender['posts'] = $posts;
+        $forRender['categories'] = $categories;
         $forRender['date_without_days'] = $dateWithoutDays;
         $forRender['new_photo_reports'] = $newPhotoReports;
         $forRender['today'] = $today;

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Stock;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -19,6 +21,12 @@ class StockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('category', EntityType::class, array(
+                'label' => 'Заголовок категории, к которой относится акция',
+                'class' => Category::class,
+                'choice_label' => 'title', // какое поле из акций будет отображаться
+                'disabled' => $options['is_category_stock']
+            ))
             ->add('title', TextType::class, array(
                 'label' => 'Название акции'
             ))
@@ -64,6 +72,7 @@ class StockType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Stock::class,
+            'is_category_stock' => false
         ]);
     }
 }

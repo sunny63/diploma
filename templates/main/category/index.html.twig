@@ -41,24 +41,21 @@
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
                     <h2 class="title-size m-3 ml-5 pb-3 border-bottom" style="border-width: 3px!important;
-                        border-color: #fa9821!important;"><strong>Наши фотоотчеты</strong></h2>
-                        {% for photo_report in photo_reports %}
-                            {% if photo_report.isPublished %}
+                        border-color: #fa9821!important;"><strong>В чем суть программы «{{ category.title }}»?</strong></h2>
+                            {% if category.isPublished %}
                                 <li class="list-group-item mb-2 border-0">
-                                    <h2 class="title-size-50 mb-3"><b>{{ photo_report.title }}</b></h2>
                                     <div class="media">
                                         <div>
-                                            <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="500" align="left">
+                                            <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 img-rounded" alt="Главное фото" width="600" align="left">
                                         </div>
                                         <div class="media-body pb-1">
-                                            <b class="date-size">{{ photo_report.createAt|date('d.m.Y') }}</b>
-                                            <p class="pre-wrap part-description font-open-sans description-size">{{ photo_report.description }}</p>
-                                            <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn orange-color btn-size">Подробнее</a>
+                                            <b class="date-size">{{ category.createAt|date('d.m.Y') }}</b>
+                                            <p class="pre-wrap part-description font-open-sans description-size">{{ category.description }}</p>
+                                            <a href="{{ path('main_category_stocks', {'id': category.id}) }}" class="btn orange-color btn-size">Показать акции для данной программы</a>
                                         </div>
                                     </div>
                                 </li>
                             {% endif %}
-                        {% endfor %}
                     </ul>
                 </div>
             </div>

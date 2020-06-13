@@ -72,7 +72,7 @@ class AdminCategoryController extends AdminBaseController
      */
     public function doPublished(int $id, Request $request)
     {
-        $category = $this->getDoctrine()->getRepository(CategoryType::class)->find($id);
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $category->setIsPublished();
 
@@ -90,7 +90,7 @@ class AdminCategoryController extends AdminBaseController
      */
     public function doDraft(int $id, Request $request)
     {
-        $category = $this->getDoctrine()->getRepository(CategoryType::class)->find($id);
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $category->setIsDraft();
 

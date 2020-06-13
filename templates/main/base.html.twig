@@ -8,7 +8,7 @@
             <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
             <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Open+Sans+Condensed:wght@300&family=PT+Sans&family=Poiret+One&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v49') }}">
+            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v50') }}">
         {% endblock %}
     </head>
     <body>
@@ -16,7 +16,7 @@
 
 
 
-    <nav class="navbar navbar-current navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-current navbar-expand-lg navbar-dark" style="background-color: rgba(214,44,0,0.91)!important;">
         <a href="{{ path('home') }}"><img src="{{ asset('uploads/images/logo.png') }}" alt="logo" class="logo" style="z-index: 3;"></a>
 
         <a class="navbar-brand nav-link-style" href="https://fond.vladmama.ru/campaign/ustavnoj-deyatelnost/#leyka-payment-form">
@@ -118,7 +118,7 @@
     {% block body %}{% endblock %}
 
     <footer class="footer">
-        <div class="row">
+        <div class="row" style=" background-color: rgba(214,44,0,0.91)!important;">
             <div class="col-sm m-3 pl-5 text-left text-white font-open-sans nav-bottom-size"> © 2014–2020
                 <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
                 <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
@@ -134,7 +134,7 @@
                 <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size">Фотоотчеты</a>
                 <a href="{{ path('main_posts') }}" class="mr-4 nav-link-style nav-bottom-size">Посты</a>
                 <a href="{{ path('main_feedbacks') }}" class="mr-4 nav-link-style nav-bottom-size">Отзывы о нас</a>
-                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Блог</a>
+{#                <a href="#" class="mr-4 nav-link-style nav-bottom-size">Блог</a>#}
             </div>
         </div>
     </footer>

@@ -83,6 +83,12 @@ class Stock
      */
     private $is_published;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="stocks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -287,6 +293,18 @@ class Stock
     public function setIsDraft()
     {
         $this->is_published = self::DRAFT;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
 }

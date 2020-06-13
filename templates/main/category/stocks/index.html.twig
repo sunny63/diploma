@@ -1,6 +1,6 @@
 {% extends 'main/base.html.twig' %}
 
-{% block title %}{{ stock.title }}{% endblock %}
+{% block title %}{{ category.title }}{% endblock %}
 {% block h1 %}{{ h1 }}{% endblock %}
 
 {% block sidebar %}
@@ -40,30 +40,27 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form ml-5 font-amatic">
                 <h2 class="title-size m-3 ml-5 pb-3 border-bottom" style="border-width: 3px!important;
-                        border-color: #fa9821!important;"><strong>Акция «{{ stock.title }}» успешно завершилась!</strong></h2>
-                    <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
-                    <p class="pre-wrap font-open-sans description-size">{{ stock.thanks }}</p>
+                        border-color: #fa9821!important;"><strong>Все акции для программы «{{ category.title }}»</strong></h2>
 
-                    {% if photo_reports is empty %}
-                        <p class="font-open-sans description-size">По мере проведения утренников ниже появятся фотоотчеты, где вы сможете посмотреть на детей,
-                            которым покупали подарки и порадоваться вместе с ними!</p>
-                        <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 img-rounded"
+                    {% if stocks is empty %}
+                        <p class="font-open-sans description-size">Пока что не прошло ни одной акции по данной программе! Можете посмотреть другие акции, которые уже прошли, а также фотоотчеты к ним!</p>
+                        <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 img-rounded"
                              alt="Главное фото" width="600" align="left">
-                        <a href="{{ path('main_photo_reports') }}" class="btn btn-size orange-color">Фотоотчеты к другим акциям</a>
+                        <a href="{{ path('main_stocks') }}" class="btn btn-size orange-color">Посмотреть другие акции</a>
                     {% endif %}
 
-                    {% for photo_report in photo_reports %}
-                        {% if photo_report.isPublished %}
-                            <h2 class="mb-3 mt-3" style="font-size: 40px;"><b>{{ photo_report.title }}</b></h2>
+                    {% for stock in stocks %}
+                        {% if stock.isPublished %}
+                            <h2 class="mb-3 mt-3" style="font-size: 40px;"><b>{{ stock.title }}</b></h2>
                             <div class="media">
                             <div>
-                                <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 img-rounded"
+                                <img src="{{ asset('uploads/images/stock/' ~ stock.image) }}" class="mr-3 img-rounded"
                                      alt="Главное фото" width="500" align="left">
                             </div>
                             <div class="media-body">
-                                <b class="date-size">{{ photo_report.createAt|date('d.m.Y') }}</b>
-                                <p class="pre-wrap part-description font-open-sans description-size">{{ photo_report.description }}</p>
-                                <a href="{{ path('main_stock_photos', {'id': photo_report.id}) }}" class="btn orange-color btn-size">Подробнее</a>
+                                <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
+                                <p class="pre-wrap part-description font-open-sans description-size">{{ stock.description }}</p>
+                                <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn orange-color btn-size">Подробнее</a>
                             </div>
                         </div>
                     {% endif %}

@@ -10,13 +10,15 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
+                        <h2 class="title-size m-3 ml-5 pb-3 border-bottom" style="border-width: 3px!important;
+                        border-color: #fa9821!important;"><strong>Интересные посты</strong></h2>
                         {% for post in posts %}
                             {% if post.isPublished %}
                                 <li class="list-group-item mb-2 border-0">
                                     {% if (date_without_days < post.createAt) %}
-                                        <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
+                                        <h2 class="mb-3 title-size-50"><b>Новый пост «{{ post.title }}»</b></h2>
                                     {% else %}
-                                        <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                        <h2 class="mb-3 title-size-50"><b>«{{ post.title }}»</b></h2>
                                     {% endif %}
 
                                     <div class="media">
@@ -26,7 +28,7 @@
                                         <div class="media-body pb-1">
                                             <b class="date-size">{{ post.createAt|date('d.m.Y') }}</b>
                                             <p class="pre-wrap part-description font-open-sans description-size">{{ post.description }}</p>
-                                            <a href="{{ path('main_post', {'id': post.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                            <a href="{{ path('main_post', {'id': post.id}) }}" class="btn orange-color btn-size">Подробнее</a>
                                         </div>
                                     </div>
                                 </li>
