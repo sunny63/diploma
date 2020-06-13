@@ -22,16 +22,23 @@
 
     <ul class="pl-0">
         {% for child in children %}
-            <li class="list-group-item rounded mb-1 border p-2">
+            {% if child.isGifted == true %}
+                <li class="list-group-item rounded mb-1 border p-2" style="background-color: rgba(130,210,134,0.25)">
+            {% else %}
+                <li class="list-group-item rounded mb-1 border p-2">
+            {% endif %}
+            {% if not (id_stock) %}
                 <b>Акция:</b> {{ child.stock.title }}<br>
-                <b>Информация о ребенке:</b> {{ child.information }} ({{ child.institutionName}}{% if (child.groupName != NULL) %}, Группа «{{ child.groupName }}»{% endif %})<br>
+                <b>Информация о ребенке:</b>
+            {% endif %}
+                {{ child.information }} ({{ child.institutionName}}{% if (child.groupName != NULL) %}, Группа «{{ child.groupName }}»{% endif %})<br>
                 {% if (id_stock) %}
                     <a href="{{ path('admin_child_update', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
 
                     {% if child.isGifted == true %}
-                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок не на складе</a>
+                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-outline-danger mt-1 ml-1 btn-sm">Подарок не на складе</a>
                     {% else %}
-                        <a href="{{ path('admin_child_do_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок на складе</a>
+                        <a href="{{ path('admin_child_do_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-outline-success mt-1 ml-1 btn-sm">Подарок на складе</a>
                     {% endif %}
 
                     <a href="{{ path('admin_child_delete', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-danger btn-sm mt-1 pull-right">Удалить</a>
@@ -39,9 +46,9 @@
                     <a href="{{ path('admin_child_update', {'id': child.id}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
 
                     {% if child.isGifted == true %}
-                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок не на складе</a>
+                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id}) }}" class="btn btn-outline-danger mt-1 ml-1 btn-sm">Подарок не на складе</a>
                     {% else %}
-                        <a href="{{ path('admin_child_do_gifted', {'id': child.id}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок на складе</a>
+                        <a href="{{ path('admin_child_do_gifted', {'id': child.id}) }}" class="btn btn-outline-success mt-1 ml-1 btn-sm">Подарок на складе</a>
                     {% endif %}
 
                     <a href="{{ path('admin_child_delete', {'id': child.id}) }}" class="btn btn-danger btn-sm mt-1 pull-right">Удалить</a>

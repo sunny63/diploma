@@ -41,7 +41,6 @@ class SecurityController extends AbstractController
         $em->flush();
 
         $this->addFlash('success', 'Регистрация успешно завершена!');
-        $forRender = parent::renderDefault();
 
         return $this->render('security/confrmationEnd.html.twig');
     }

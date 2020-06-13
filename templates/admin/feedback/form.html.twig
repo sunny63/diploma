@@ -1,0 +1,29 @@
+{% extends 'admin/adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block title_form %}{{ title }}{% endblock %}
+
+{% block form %}
+
+    {% if not form.vars.valid %}
+        {% for error in form.vars.errors.form.getErrors(true) %}
+            <div class="alert alert-warning" role="alert">{{ error.message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    {{ form_label(form.nickname) }}
+    {{ form_widget(form.nickname, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { 'attr': {'class': 'form-control mb-1'} }) }}
+
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { 'attr': {'class': 'form-control mb-1 row-min'} }) }}
+
+    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-block btn-primary mt-2'} }) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

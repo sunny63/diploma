@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotoReportController extends BaseController
 {
     /**
-     * @Route("/main/photoReports/", name="main_photo_reports")
+     * @Route("/photoReports/", name="main_photo_reports")
      * @param int $id
      * @param Request $request
      */

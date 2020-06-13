@@ -22,7 +22,11 @@
 
     <ul class="pl-0">
         {% for post in posts %}
-            <li class="list-group-item p-3 rounded mb-3 border">
+            {% if post.isPublished == true %}
+                <li class="list-group-item p-3 rounded mb-3 border" style="background-color: rgba(130,210,134,0.25)">
+            {% else %}
+                <li class="list-group-item p-3 rounded mb-3 border">
+            {% endif %}
                 <img src="{{ asset('uploads/images/post/' ~ post.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
                 <b>Заголовок поста: </b>{{ post.title }}<br>
                 <b>Заголовок категории поста: </b>{{ post.category.title }}<br>
@@ -34,9 +38,9 @@
                  <a href="{{ path('admin_post_update', {'id': post.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
 
                 {% if post.isPublished == true %}
-                    <a href="{{ path('admin_post_do_draft', {'id': post.id}) }}" class="btn btn-dark mt-2 ml-1">Скрыть</a>
+                    <a href="{{ path('admin_post_do_draft', {'id': post.id}) }}" class="btn btn-outline-danger mt-2 ml-1">Скрыть</a>
                 {% else %}
-                    <a href="{{ path('admin_post_do_published', {'id': post.id}) }}" class="btn btn-dark mt-2 ml-1">Опубликовать</a>
+                    <a href="{{ path('admin_post_do_published', {'id': post.id}) }}" class="btn btn-outline-success mt-2 ml-1">Опубликовать</a>
                 {% endif %}
 
                 <a href="{{ path('admin_post_delete', {'id': post.id}) }}" class="btn btn-danger mt-2 pull-right">Удалить</a>

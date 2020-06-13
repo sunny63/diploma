@@ -5,12 +5,24 @@
 
 {% block entity_list %}
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
     <ul class="pl-0">
         {% for user in users %}
             {% if ((user.roles | json_encode) == '["ROLE_USER"]') %}
                 <li class="list-group-item p-1 rounded mb-1 border">Пользователь: {{ user.email }}</li>
             {% else %}
-                <li class="list-group-item list-group-item-success p-1 rounded mb-1 border">Администратор: {{ user.email }}</li>
+                <li class="list-group-item list-group-item-success p-2 rounded mb-1 border">
+                    Администратор: {{ user.email }}
+                    <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="btn btn-danger mt-0 pt-0 btn-sm pull-right">Удалить</a>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>

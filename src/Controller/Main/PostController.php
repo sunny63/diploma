@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends BaseController
 {
     /**
-     * @Route("/main/posts/", name="main_posts")
+     * @Route("/posts/", name="main_posts")
      * @param Request $request
      */
     public function index( Request $request)
@@ -32,7 +32,7 @@ class PostController extends BaseController
     }
 
     /**
-     * @Route("/main/post/{id}", name="main_post")
+     * @Route("/post/{id}", name="main_post")
      * @param int $id
      * @param Request $request
      */

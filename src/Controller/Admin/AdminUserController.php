@@ -50,6 +50,7 @@ class AdminUserController extends AdminBaseController
             $password = $passwordEncoder->encodePassword($user,  $user->getPlainPassword());
             $user->setPassword($password);
             $user->setRoles(["ROLE_ADMIN"]);
+            $user->setStatus(true);
             $em->persist($user);
             $em->flush();
 
@@ -60,5 +61,22 @@ class AdminUserController extends AdminBaseController
         $forRender['title'] = 'Создание нового администратора';
         $forRender['form'] = $form->createView();
         return $this->render("admin/user/form.html.twig", $forRender);
+    }
+
+    /**
+     * @Route("/admin/user/delete/{id}", name="admin_user_delete")
+     * @param int $id
+     * @param Request $request
+     */
+    public function delete(int $id, Request $request)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($user);
+        $this->addFlash('success', 'Администратор удален');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_users');
     }
 }
