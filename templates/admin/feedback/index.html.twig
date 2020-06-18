@@ -27,10 +27,10 @@
             {% else %}
                 <li class="list-group-item p-3 rounded mb-3 border">
             {% endif %}
-                {% if feedback.nickname != NULL %}
-                    <b>Автор:</b> {{ feedback.nickname }}<br>
-                {% endif %}
-                <b>Тема отзыва:</b> {{ feedback.title }}<br>
+                <b style="font-size: 25px">{{ feedback.title }}</b><br>
+            {% if feedback.nickname != NULL %}
+                <b>Автор:</b> {{ feedback.nickname }}<br>
+            {% endif %}
                 <p class="pre-wrap"><b>Сообщение отзыва:</b> {{ feedback.description }}</p>
                 <b>Дата создания:</b> {{ feedback.createAt|date('d.m.Y в H:i') }}<br>
 

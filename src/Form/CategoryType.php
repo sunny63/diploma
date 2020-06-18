@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class CategoryType extends AbstractType
 {
@@ -31,7 +32,18 @@ class CategoryType extends AbstractType
             ->add('image', FileType::class, array(
                 'label' => 'Главное изображение',
                 'required' => false,
-                'mapped' => false
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/pjpeg',
+                            'image/png',
+                            'image/tiff'
+                        ],
+                        'mimeTypesMessage' => 'Доступны форматы JPEG, PNG, TIFF',
+                    ])]
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Сохранить',

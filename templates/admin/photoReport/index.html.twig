@@ -28,7 +28,7 @@
                 <li class="list-group-item p-3 rounded mb-3 border">
             {% endif %}
                 <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
-                <b>Название фотоотчета:</b> {{ photo_report.title }}<br>
+                <b style="font-size: 25px">{{ photo_report.title }}</b><br>
                 <b>Название акции, к которой относится фотоотчет:</b> {{ photo_report.stock.title }}<br>
                 <p class="pre-wrap"><b>Описание фотоотчета:</b><br>{{ photo_report.description }}</p>
                 <b>Дата создания:</b> {{ photo_report.createAt|date('d.m.Y в H:i') }}<br>

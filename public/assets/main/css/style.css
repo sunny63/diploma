@@ -7,40 +7,30 @@
 .navbar-current {
     margin-top: 40px;
     padding-left: 440px;
-    background: rgba(215, 35, 29, 0.91) !important;
     height: 70px;
 }
 
-/*.navbar-current:hover,*/
-/*.navbar-current:focus {*/
-/*    background: rgba(226, 67, 62, 0.91);*/
-/*}*/
+header {
+    background: rgba(215, 35, 29, 1) !important;
+    width: 100%;
+}
+
+footer {
+    background: rgba(215, 35, 29, 1) !important;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /*height: 7vh; !*высота футера будет зависеть от высоты экрана*!*/
+}
 
 .copyright {
     color: #ffffff;
     text-decoration: underline;
-    /*font-family: 'Amatic SC', cursive;!important;*/
 }
 
 .copyright:hover {
     color: #440b0f;
 }
-
-.main-color {
-    background: rgba(215, 35, 29, 1) !important;
-}
-
-.main-color:not(:disabled):not(.disabled):active, .main-color:not(:disabled):not(.disabled).active,
-.show > .main-color.dropdown-toggle {
-    color: #fff;
-    background: rgb(196, 27, 21) !important;
-    border-color: rgba(201, 14, 8, 1) !important;
-}
-
-/*.main-color:not(:disabled):not(.disabled):active:focus, .main-color:not(:disabled):not(.disabled).active:focus,*/
-/*.show > .main-color.dropdown-toggle:focus {*/
-/*    background: rgba(215, 35, 29, 0.5) !important;*/
-/*}*/
 
 .thumb img {
     -webkit-filter: grayscale(0);
@@ -119,6 +109,10 @@
     font-size: 18px!important;
 }
 
+.nav-bottom-size-2 {
+    font-size: 15px!important;
+}
+
 .btn-size {
     font-size: 25px;
     /*font-weight: bold;*/
@@ -155,14 +149,6 @@ html {
 body {
     margin-bottom: 10vh;
 }
-footer {
-    background: rgba(215, 35, 29, 1) !important;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /*height: 7vh; !*высота футера будет зависеть от высоты экрана*!*/
-}
-
 
 .btn-reservation {
     z-index: 1;
@@ -223,15 +209,21 @@ footer {
 }
 .logo {
     position:absolute;
-    top: -40px;
-    left: 70px;
-    width: 270px;
+    top: -35px;
+    left: 40px;
+    width: 150px;
+}
+
+.logotext {
+    position:absolute;
+    top: 5px;
+    left: 200px;
 }
 
 .logo:hover {
-    top: -37px;
-    left: 66px;
-    width: 280px;
+    top: -40px;
+    left: 35px;
+    width: 160px;
 }
 
 .row-min {

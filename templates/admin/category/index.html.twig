@@ -28,7 +28,7 @@
                 <li class="list-group-item p-3 rounded mb-3 border">
             {% endif %}
                 <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
-                <b>Категория:</b> {{ category.title }}<br>
+                <b style="font-size: 25px">{{ category.title }}</b><br>
                 <p class="pre-wrap"><b>Описание категории:</b> {{ category.description }}</p>
                 <b>Дата создания:</b> {{ category.createAt|date('d.m.Y в H:i') }}<br>
                 {% if (category.updateAt != NULL) %}
