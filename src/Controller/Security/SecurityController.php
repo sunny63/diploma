@@ -2,6 +2,7 @@
 
 namespace App\Controller\Security;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,17 +15,36 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
 
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        // get the login error if there is one
+
+//        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('email' => $token));
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+    /**
+     * @Route("/emailConfirmation/{token}", name="email_confirmation")
+     */
+    public function emailConfirmation(string $token)
+    {
+
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('verify_token' => $token));
+        $user->setStatus(true);
+        $user->setVerifyToken(NULL);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $this->addFlash('success', 'Регистрация успешно завершена!');
+
+        return $this->render('security/confrmationEnd.html.twig');
+    }
+
 
     /**
      * @Route("/logout", name="app_logout")

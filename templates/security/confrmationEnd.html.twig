@@ -1,0 +1,30 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Регистрация завершена!{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center">
+            <div class="col-12 col-lg-4 col-md-4">
+                <div class="form-login">
+                    <form method="post">
+                        <h1 class="h3 mb-4 font-weight-normal text-center font-open-sans" style="font-size: 40px;">Регистрация завершена!</h1>
+
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+
+                        <a class="btn btn-block btn-block orange-color btn-size font-amatic mt-3 registration" href="{{ path('app_login') }}">Войти</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

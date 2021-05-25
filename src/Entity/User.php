@@ -73,6 +73,16 @@ class User implements UserInterface
      */
     private $nickname;
 
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $verify_token;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +181,33 @@ class User implements UserInterface
     public function setNickname(string $nickname): self
     {
         $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function getVerifyToken(): ?string
+    {
+        return $this->verify_token;
+    }
+
+    public function setVerifyToken(?string $verify_token): self
+    {
+        $this->verify_token = $verify_token;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
