@@ -77,6 +77,47 @@ class AdminChildrenController extends AdminBaseController
     }
 
     /**
+     * @Route("/admin/child/doGifted/{id},{id_stock}", name="admin_child_do_gifted", defaults = {"id_stock" = 0})
+     * @param int $id
+     * @param Request $request
+     */
+    public function doGifted(int $id, Request $request, int $id_stock)
+    {
+        $child = $this->getDoctrine()->getRepository(Child::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $child->setIsGifted();
+
+        $this->addFlash('success', 'Подарок для данного ребенка на нашем складе!');
+        $em->flush();
+
+        if ($id_stock)
+            return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_children');
+    }
+
+
+    /**
+     * @Route("/admin/child/doNotGifted/{id},{id_stock}", name="admin_child_do_not_gifted", defaults = {"id_stock" = 0})
+     * @param int $id
+     * @param Request $request
+     */
+    public function doNotGifted(int $id, Request $request, int $id_stock)
+    {
+        $child = $this->getDoctrine()->getRepository(Child::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $child->setIsNotGifted();
+
+        $this->addFlash('success', 'Подарок для данного ребенка еще не передали на склад!');
+        $em->flush();
+
+        if ($id_stock)
+            return $this->redirectToRoute('admin_stock_children', array('id' => $id_stock));
+        else
+            return $this->redirectToRoute('admin_children');
+    }
+
+    /**
      * @Route("/admin/child/update/{id},{id_stock}", name="admin_child_update", defaults = {"id_stock" = 0})
      * @param int $id
      * @param Request $request

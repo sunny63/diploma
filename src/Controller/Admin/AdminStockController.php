@@ -49,6 +49,7 @@ class AdminStockController extends AdminBaseController
 
         if (($form->isSubmitted()) && ($form->isValid()))
         {
+            $stock->setIsDraft();
             $stock->setCreateAtValue();
 
             /** @var UploadedFile $image */
@@ -70,6 +71,43 @@ class AdminStockController extends AdminBaseController
         $forRender['form'] = $form->createView();
         return $this->render("admin/stock/form.html.twig", $forRender);
     }
+
+
+    /**
+     * @Route("/admin/stock/doPublished/{id}", name="admin_stock_do_published")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doPublished(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $stock->setIsPublished();
+
+        $this->addFlash('success', 'Акция опубликована!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_stocks');
+    }
+
+
+    /**
+     * @Route("/admin/stock/doDraft/{id}", name="admin_stock_do_draft")
+     * @param int $id
+     * @param Request $request
+     */
+    public function doDraft(int $id, Request $request)
+    {
+        $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $stock->setIsDraft();
+
+        $this->addFlash('success', 'Акция скрыта!');
+        $em->flush();
+
+        return $this->redirectToRoute('admin_stocks');
+    }
+
 
     /**
      * @Route("/admin/stock/update/{id}", name="admin_stock_update")

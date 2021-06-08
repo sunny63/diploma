@@ -27,10 +27,24 @@
                 <b>Информация о ребенке:</b> {{ child.information }} ({{ child.institutionName}}{% if (child.groupName != NULL) %}, Группа «{{ child.groupName }}»{% endif %})<br>
                 {% if (id_stock) %}
                     <a href="{{ path('admin_child_update', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
-                    <a href="{{ path('admin_child_delete', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-danger btn-sm mt-1">Удалить</a>
+
+                    {% if child.isGifted == true %}
+                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок не на складе</a>
+                    {% else %}
+                        <a href="{{ path('admin_child_do_gifted', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок на складе</a>
+                    {% endif %}
+
+                    <a href="{{ path('admin_child_delete', {'id': child.id, 'id_stock': id_stock}) }}" class="btn btn-danger btn-sm mt-1 pull-right">Удалить</a>
                 {% else %}
                     <a href="{{ path('admin_child_update', {'id': child.id}) }}" class="btn btn-dark btn-sm mt-1 mr-1">Редактировать</a>
-                    <a href="{{ path('admin_child_delete', {'id': child.id}) }}" class="btn btn-danger btn-sm mt-1">Удалить</a>
+
+                    {% if child.isGifted == true %}
+                        <a href="{{ path('admin_child_do_not_gifted', {'id': child.id}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок не на складе</a>
+                    {% else %}
+                        <a href="{{ path('admin_child_do_gifted', {'id': child.id}) }}" class="btn btn-dark mt-1 ml-1 btn-sm">Отметить что подарок на складе</a>
+                    {% endif %}
+
+                    <a href="{{ path('admin_child_delete', {'id': child.id}) }}" class="btn btn-danger btn-sm mt-1 pull-right">Удалить</a>
                 {% endif %}
             </li>
         {% endfor %}

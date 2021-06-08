@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Stock
 {
+    private const PUBLISHED = 1;
+    private const DRAFT = 0;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -74,6 +77,11 @@ class Stock
      * @ORM\Column(type="text", nullable=true)
      */
     private $thanks;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_published;
 
     public function __construct()
     {
@@ -264,6 +272,21 @@ class Stock
         $this->thanks = $thanks;
 
         return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->is_published;
+    }
+
+    public function setIsPublished()
+    {
+        $this->is_published = self::PUBLISHED;
+    }
+
+    public function setIsDraft()
+    {
+        $this->is_published = self::DRAFT;
     }
 
 }
