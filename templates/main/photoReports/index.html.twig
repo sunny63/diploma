@@ -2,6 +2,35 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block sidebar %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for new_post in new_posts %}
+                {% if loop.index == 1 %}
+                <div class="carousel-item active">
+                    {% else %}
+                    <div class="carousel-item">
+                        {% endif %}
+                        <a href="{{ path('main_post', {'id': new_post.id}) }}" style="text-decoration: none!important;">
+                            <img src="{{ asset('uploads/images/post/' ~ new_post.image) }}" class="d-block w-100  rounded-top" alt="{{ new_post.title }}">
+                        <div class="d-none d-md-block text-center">
+                            <h5 class="orange-color rounded-bottom" >{{ new_post.title }}</h5>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+{% endblock %}
+
 {% block body %}
 
     <div class="container-fluid main-content">

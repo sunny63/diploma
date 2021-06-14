@@ -36,6 +36,24 @@ class PhotoReportsRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /**
+     * @return PhotoReport[]
+     */
+    public function findNewPhotoReports($dateWithout20Days): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\PhotoReport p
+            WHERE p.create_at > :date_end
+            ORDER BY p.create_at DESC'
+        )->setParameter('date_end', $dateWithout20Days);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     // /**
     //  * @return PhotoReport[] Returns an array of PhotoReport objects
     //  */

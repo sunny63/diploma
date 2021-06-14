@@ -48,10 +48,12 @@ class StockType extends AbstractType
                 'label' => 'Дата конца акции'
             ))
             ->add('rules', TextareaType::class, array(
-                'label' => 'Правила проведения акции'
+                'label' => 'Правила проведения акции',
+                'required' => false,
             ))
             ->add('thanks', TextareaType::class, array(
-                'label' => 'Благодарности после окончания акции'
+                'label' => 'Благодарности после окончания акции',
+                'required' => false,
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Сохранить'
