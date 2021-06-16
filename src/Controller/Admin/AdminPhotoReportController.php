@@ -43,6 +43,8 @@ class AdminPhotoReportController extends AdminBaseController
     public function create(Request $request, FileUploader $fileUploader, int $id_stock)
     {
         $photoReport = new PhotoReport();
+        $photoReport->setIsDraft();
+
         if ($id_stock)
         {
             $stock = $this->getDoctrine()->getRepository(Stock::class)->find($id_stock);
