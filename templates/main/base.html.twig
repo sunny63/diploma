@@ -40,11 +40,11 @@
                     <a class="nav-link nav-link-style ml-2" href="{{ path('main_posts') }}">Посты</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_statistic') }}">Статистика</a>
+                    <a class="nav-link nav-link-style ml-2" href="{{ path('main_feedbacks') }}">Отзывы о нас</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link nav-link-style ml-2" href="#">Блог</a>
-                </li>
+{#                <li class="nav-item active">#}
+{#                    <a class="nav-link nav-link-style ml-2" href="#">Блог</a>#}
+{#                </li>#}
             </ul>
             <form class="form-inline">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -72,6 +72,9 @@
             <l style="color: white;">ГЫ</l>
         </p>
 
+        <p class="mb-4">
+            <a class="btn btn-block btn-outline-danger" style="font-size: 30px" href="{{ path('main_feedback_create') }}">Сказать спасибо</a>
+        </p>
 
         {% block sidebar %}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -103,11 +106,12 @@
                 </a>
         </div>
         {% endblock %}
+
             <div class="text-center">
-            <a href="https://www.facebook.com/fond.vladmama.ru/"><img style="color: #00FFFF" class="m-3 ьд-4" src="{{ asset('assets/main/imges/facebook.jpg') }}" alt="facebook-icon" width="50px"></a>
-            <a href="https://vk.com/fond.vladmama"><img class="" src="{{ asset('assets/main/imges/vk.jpg') }}" alt="vk-icon" width="50px"></a>
+            <a href="https://www.facebook.com/fond.vladmama.ru/"><img style="color: #00FFFF" class="m-2" src="{{ asset('assets/main/imges/facebook.jpg') }}" alt="facebook-icon" width="50px"></a>
+            <a href="https://vk.com/fond.vladmama"><img class="ml-3" src="{{ asset('assets/main/imges/vk.jpg') }}" alt="vk-icon" width="50px"></a>
             <a href="https://www.instagram.com/fond.vladmama/"><img class="" src="{{ asset('assets/main/imges/instagram.png') }}" alt="instagram-icon" width="100px"></a>
-            <a href="https://ok.ru/group/52774842400998"><img class="mr-3" src="{{ asset('assets/main/imges/odnoklassniki.svg') }}" alt="ok-icon" width="50px"></a>
+            <a href="https://ok.ru/group/52774842400998"><img class="ml-0" src="{{ asset('assets/main/imges/odnoklassniki.svg') }}" alt="ok-icon" width="50px"></a>
             </div>
     </div>
 
@@ -119,17 +123,17 @@
                 <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
                 <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
                 Все права защищены.
-                <a href="https://vk.com/fond.vladmama" style="color:white; text-decoration: none;" class="fa fa-2x fa-vk mr-3 text-center ml-4"></a>
-                <a href="https://www.facebook.com/fond.vladmama.ru/" style="color:white; text-decoration: none;" class="fa fa-2x fa-facebook mr-3"></a>
-                <a href="https://www.instagram.com/fond.vladmama/" style="color:white; text-decoration: none;" class="fa fa-2x fa-instagram mr-3"></a>
-                <a href="https://ok.ru/group/52774842400998" style="color:white; text-decoration: none;" class="fa fa-2x fa-odnoklassniki mr-2"></a>
+                <a href="https://vk.com/fond.vladmama" style="color:white; text-decoration: none;" class="fa fa-2x fa-vk mr-2 text-center ml-2"></a>
+                <a href="https://www.facebook.com/fond.vladmama.ru/" style="color:white; text-decoration: none;" class="fa fa-2x fa-facebook mr-2"></a>
+                <a href="https://www.instagram.com/fond.vladmama/" style="color:white; text-decoration: none;" class="fa fa-2x fa-instagram mr-2"></a>
+                <a href="https://ok.ru/group/52774842400998" style="color:white; text-decoration: none;" class="fa fa-2x fa-odnoklassniki"></a>
             </div>
             <div class="col-sm m-3 pr-10 text-right text-white mt-4">
                 <a href="{{ path('home') }}" class="mr-4 nav-link-style nav-bottom-size">Главная страница</a>
                 <a href="#" class="mr-4 nav-link-style nav-bottom-size">Наши акции</a>
                 <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size">Фотоотчеты</a>
                 <a href="{{ path('main_posts') }}" class="mr-4 nav-link-style nav-bottom-size">Посты</a>
-                <a href="{{ path('main_statistic') }}" class="mr-4 nav-link-style nav-bottom-size">Статистика</a>
+                <a href="{{ path('main_feedbacks') }}" class="mr-4 nav-link-style nav-bottom-size">Отзывы о нас</a>
                 <a href="#" class="mr-4 nav-link-style nav-bottom-size">Блог</a>
             </div>
         </div>

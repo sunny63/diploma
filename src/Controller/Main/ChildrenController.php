@@ -12,9 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ChildrenController extends BaseController
 {
-//{id_children},{id_user}
+
     /**
-     * @Route("/main/stock/{id_stock}/childrenss/{id_child}", name="main_stock_children_select")
+     * @Route("/stock/{id_stock}/childrenss/{id_child}", name="main_stock_children_select")
      * @param int $id
      * @param Request $request
      */

@@ -22,7 +22,11 @@
 
     <ul class="pl-0">
         {% for photo_report in photo_reports %}
-            <li class="list-group-item p-3 rounded mb-3 border">
+            {% if photo_report.isPublished == true %}
+                <li class="list-group-item p-3 rounded mb-3 border" style="background-color: rgba(130,210,134,0.25)">
+            {% else %}
+                <li class="list-group-item p-3 rounded mb-3 border">
+            {% endif %}
                 <img src="{{ asset('uploads/images/photoReport/' ~ photo_report.image) }}" class="mr-3 rounded" alt="Главное фото" width="300" align="left">
                 <b>Название фотоотчета:</b> {{ photo_report.title }}<br>
                 <b>Название акции, к которой относится фотоотчет:</b> {{ photo_report.stock.title }}<br>
@@ -32,17 +36,17 @@
                 {% if (id_stock) %}
                     <a href="{{ path('admin_photo_report_update', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
                     {% if photo_report.isPublished == true %}
-                        <a href="{{ path('admin_photo_report_do_draft', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-2 mr-1 ml-1">Скрыть</a>
+                        <a href="{{ path('admin_photo_report_do_draft', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-outline-danger mt-2 mr-1 ml-1">Скрыть</a>
                     {% else %}
-                        <a href="{{ path('admin_photo_report_do_published', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-dark mt-2 mr-1 ml-1">Опубликовать</a>
+                        <a href="{{ path('admin_photo_report_do_published', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-outline-success mt-2 mr-1 ml-1">Опубликовать</a>
                     {% endif %}
                     <a href="{{ path('admin_photo_report_delete', {'id': photo_report.id, 'id_stock': id_stock}) }}" class="btn btn-danger pull-right mt-2">Удалить</a>
                 {% else %}
                     <a href="{{ path('admin_photo_report_update', {'id': photo_report.id}) }}" class="btn btn-dark mt-2 mr-1">Редактировать</a>
                     {% if photo_report.isPublished == true %}
-                        <a href="{{ path('admin_photo_report_do_draft', {'id': photo_report.id}) }}" class="btn btn-dark mt-2 mr-1 ml-1">Скрыть</a>
+                        <a href="{{ path('admin_photo_report_do_draft', {'id': photo_report.id}) }}" class="btn btn-outline-danger mt-2 mr-1 ml-1">Скрыть</a>
                     {% else %}
-                        <a href="{{ path('admin_photo_report_do_published', {'id': photo_report.id}) }}" class="btn btn-dark mt-2 mr-1 ml-1">Опубликовать</a>
+                        <a href="{{ path('admin_photo_report_do_published', {'id': photo_report.id}) }}" class="btn btn-outline-success mt-2 mr-1 ml-1">Опубликовать</a>
                     {% endif %}
                     <a href="{{ path('admin_photo_report_delete', {'id': photo_report.id}) }}" class="btn btn-danger mt-2 pull-right">Удалить</a>
                 {% endif %}

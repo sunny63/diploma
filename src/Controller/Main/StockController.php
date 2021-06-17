@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class StockController extends BaseController
 {
     /**
-     * @Route("/main/stock/{id}", name="main_stock")
+     * @Route("/stock/{id}", name="main_stock")
      * @param int $id
      * @param Request $request
      */
@@ -33,7 +33,7 @@ class StockController extends BaseController
     }
 
     /**
-     * @Route("/main/stock/{id}/children", name="main_stock_children")
+     * @Route("/stock/{id}/children", name="main_stock_children")
      * @param int $id
      * @param Request $request
      */
@@ -61,7 +61,7 @@ class StockController extends BaseController
     }
 
     /**
-     * @Route("/main/stock/{id}/photoReports", name="main_stock_photo_reports")
+     * @Route("/stock/{id}/photoReports", name="main_stock_photo_reports")
      * @param int $id
      * @param Request $request
      */
@@ -81,7 +81,7 @@ class StockController extends BaseController
     }
 
     /**
-     * @Route("/main/stock/photoReports/{id}/photos", name="main_stock_photos")
+     * @Route("/stock/photoReports/{id}/photos", name="main_stock_photos")
      * @param int $id
      * @param Request $request
      */
