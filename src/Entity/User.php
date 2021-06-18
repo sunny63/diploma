@@ -50,7 +50,7 @@ class User implements UserInterface
 
     /**
      * @Assert\Length(
-     *      min = 3,
+     *      min = 8,
      *      max = 40,
      *      minMessage = "Пароль не может быть короче {{ limit }} символов",
      *      maxMessage = "Пароль не может быть длиннее {{ limit }} символов",

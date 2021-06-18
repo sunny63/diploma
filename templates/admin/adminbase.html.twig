@@ -6,7 +6,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/framework/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/framework/bootstrap-4.5.0/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v17') }}">
+        <link rel="stylesheet" href="{{ asset('assets/main/css/style.css?v19') }}">
     {% endblock %}
 </head>
 <body>
@@ -20,6 +20,9 @@
                 <a class="nav-link ml-2" href="{{ path('admin_home') }}" >Главная<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
+                <a class="nav-link ml-2" href="{{ path('admin_categories') }}">Категории</a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link ml-2" href="{{ path('admin_posts') }}">Посты</a>
             </li>
             <li class="nav-item active">
@@ -31,17 +34,14 @@
             <li class="nav-item active">
                 <a class="nav-link ml-2" href="{{ path('admin_photo_reports') }}">Фотоотчеты</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link ml-2" href="{{ path('admin_photos') }}">Фотографии</a>
-            </li>
+{#            <li class="nav-item active">#}
+{#                <a class="nav-link ml-2" href="{{ path('admin_photos') }}">Фотографии</a>#}
+{#            </li>#}
             <li class="nav-item active">
                 <a class="nav-link ml-2" href="{{ path('admin_feedbacks') }}">Отзывы</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link ml-2" href="{{ path('admin_users') }}">Пользователи</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link ml-2" href="{{ path('admin_categories') }}">Категории</a>
             </li>
         </ul>
         <form class="form-inline">
@@ -82,6 +82,23 @@
         </div>
     </div>
 </div>
+
+<footer class="footer navbar-dark bg-dark">
+    <div class="row">
+        <div class="col-sm m-3 pl-5 pt-2 text-left text-white" > © 2014–2020
+            <a href="https://fond.vladmama.ru/" class="copyright">Благотворительный фонд «Владмама»</a>,
+            <a href="https://vladmama.ru/" class="copyright">ООО «Владмама».</a>
+        </div>
+        <div class="col-sm m-3 pr-10 text-right text-white mt-4">
+            <a href="{{ path('home') }}" class="mr-4 nav-link-style nav-bottom-size-2">Главная страница</a>
+            <a href="#" class="mr-4 nav-link-style nav-bottom-size-2">Наши акции</a>
+            <a href="{{ path('main_photo_reports') }}" class="mr-4 nav-link-style nav-bottom-size-2">Фотоотчеты</a>
+            <a href="{{ path('main_posts') }}" class="mr-4 nav-link-style nav-bottom-size-2">Посты</a>
+            <a href="{{ path('main_feedbacks') }}" class="mr-4 nav-link-style nav-bottom-size-2">Отзывы о нас</a>
+        </div>
+    </div>
+</footer>
+
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
