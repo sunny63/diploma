@@ -60,6 +60,10 @@
     text-decoration: none;
 }
 
+.title-size-50 {
+    font-size: 50px!important;
+}
+
 .orange-color {
     color: #ffffff;
     background: #fa9821;

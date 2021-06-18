@@ -10,13 +10,15 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
+                        <h2 class="title-size m-3 ml-5 pb-3 border-bottom" style="border-width: 3px!important;
+                        border-color: #fa9821!important;"><strong>Наши акции</strong></h2>
                         {% for stock in stocks %}
                             {% if stock.isPublished %}
                             <li class="list-group-item mb-2 border-0">
                                 {% if (today < stock.dateEnd) %}
-                                    <h2 class="mb-3 title-size"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
+                                    <h2 class="mb-3 title-size-50"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
                                 {% else %}
-                                    <h2 class="mb-3 title-size"><b>Акция «{{ stock.title }}» прошла...</b></h2>
+                                    <h2 class="mb-3 title-size-50"><b>Акция «{{ stock.title }}» прошла...</b></h2>
                                 {% endif %}
 
                                 <div class="media">
@@ -26,7 +28,7 @@
                                     <div class="media-body pb-1">
                                         <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
                                         <p class="pre-wrap part-description font-open-sans description-size">{{ stock.description }}</p>
-                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn btn-danger main-color btn-size">Подробнее</a>
+                                        <a href="{{ path('main_stock', {'id': stock.id}) }}" class="btn orange-color btn-size">Подробнее</a>
                                     </div>
                                 </div>
                             </li>

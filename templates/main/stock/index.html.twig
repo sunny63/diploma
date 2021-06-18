@@ -22,9 +22,9 @@
                         <b class="date-size">{{ stock.dateStart|date('d.m.Y') }} — {{ stock.dateEnd|date('d.m.Y') }}</b>
                         <p class="pre-wrap font-open-sans description-size">{{ stock.description }}</p>
                         {% if (stock.dateEnd < today) %}
-                            <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3 btn-size">Перейти к фотоотчетам</a>
+                            <a href="{{ path('main_stock_photo_reports', {'id': stock.id}) }}" class="btn orange-color mb-3 btn-size">Перейти к фотоотчетам</a>
                         {% else %}
-                            <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn btn-danger main-color mb-3 btn-size">Списки детей</a>
+                            <a href="{{ path('main_stock_children', {'id': stock.id}) }}" class="btn orange-color mb-3 btn-size">Списки детей</a>
                         {% endif %}
                     {% endif %}
                 </div>

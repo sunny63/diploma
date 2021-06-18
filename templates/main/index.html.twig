@@ -10,13 +10,31 @@
             <div class="col-12 col-lg-10 col-md-10">
                 <div class="form">
                     <ul class="justify-content-center font-amatic">
+                        <h2 class="title-size m-3 ml-5 pl-5 pb-3 border-bottom" style="border-width: 3px!important;
+                        border-color: #fa9821!important;"><strong>Наши программы</strong></h2>
+
+                        <div class="row ml-2">
+                            {% for category in categories %}
+                                {% if category.isPublished %}
+                                    <div class="col-sm text-left text-white mr-0 pr-0 pl-3">
+                                        <a href="{{ path('main_category', {'id': category.id}) }}" style="text-decoration: none!important;">
+                                            <img src="{{ asset('uploads/images/category/' ~ category.image) }}" class="d-block w-100 rounded-top" alt="{{ category.title }}">
+                                            <div class="d-none d-md-block text-center">
+                                                <h2 class="rounded-bottom" style="background-color: rgba(214,44,0,0.91)!important;  color:white; text-decoration: none;">{{ category.title }}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
                         {% for stock in stocks %}
                             {% if stock.isPublished %}
                             <li class="list-group-item mb-2 border-0">
                                 {% if (today < stock.dateEnd) %}
-                                    <h2 class="mb-3 title-size"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
+                                    <h2 class="mb-3 title-size-50"><b>Стартовала акция «{{ stock.title }}»!</b></h2>
                                 {% else %}
-                                    <h2 class="mb-3 title-size"><b>Акция «{{ stock.title }}» прошла...</b></h2>
+                                    <h2 class="mb-3 title-size-50"><b>Акция «{{ stock.title }}» прошла...</b></h2>
                                 {% endif %}
 
                                 <div class="media">
@@ -36,9 +54,9 @@
                                 {% if post.isPublished %}
                                 <li class="list-group-item p-3 mb-3 border-0">
                                     {% if (date_without_days < post.createAt) %}
-                                        <h2 class="mb-3 title-size"><b>Новый пост «{{ post.title }}»</b></h2>
+                                        <h2 class="mb-3 title-size-50"><b>Новый пост «{{ post.title }}»</b></h2>
                                     {% else %}
-                                        <h2 class="mb-3 title-size"><b>«{{ post.title }}»</b></h2>
+                                        <h2 class="mb-3 title-size-50"><b>«{{ post.title }}»</b></h2>
                                     {% endif %}
                                     <div class="media">
                                         <img src="{{ asset('uploads/images/post/' ~ post.image) }}"class="mr-3 img-rounded" alt="Главное фото" width="500">
